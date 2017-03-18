@@ -6,24 +6,21 @@ import com.aston.group24.vehicles.Vehicle;
 
 public abstract class Person {
 	
-	private Vehicle vehicle;				//The vehicle they own
+	protected Vehicle vehicle;				//The vehicle they own
 	private int timeAtStation;				//Time they have spend at the station (will start from 0 and update)
-	private int shopTime;					//Time they will spend at the shop
+	protected int shopTime;					//Time they will spend at the shop
 	private int tillTime;					//Time they will spend at the till
-	private BigDecimal spendingMoney;		//Money they will spend in the shop
+	protected BigDecimal spendingMoney;		//Money they will spend in the shop
 	private Boolean refuelled;				//If they have refuelled or not
 	private Boolean visitedShop;			//If they have visited the shop or not
 	
 	
-	public Person(Vehicle vehicle, int shopTime, int tillTime, BigDecimal spendingMoney)
+	public Person()
 	{
-		this.vehicle = vehicle;
-		this.shopTime = shopTime;
-		this.tillTime = tillTime;
-		this.spendingMoney = spendingMoney;
 		timeAtStation = 0;
 		refuelled = false;
 		visitedShop = false;
+		tillTime = 10; 						//Needs to be randomly generated (till time does not depend on type of person)
 	}
 	
 	public BigDecimal getMoneySpent()
