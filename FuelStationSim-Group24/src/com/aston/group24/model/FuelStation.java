@@ -1,5 +1,6 @@
 package com.aston.group24.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,10 +12,16 @@ import com.aston.group24.vehicles.Vehicle;
  * 
  * @version 0.0.2
  * 
+ * Changes - 08/03/2017
+ * 	- Add fuel amount counter
+ * 
  */
 public class FuelStation {
 	
-	private ArrayList<FuelPump> pumps;
+	private ArrayList<FuelPump> pumps;					// Fuel pumps in the station
+	
+	private int gallonsFueled;							// How much fuel has been pumped total
+	private final int pumpSupplyRate = 1;				// How many gallons do the pumps fuel per tick
 
 	public FuelStation(int numOfPumps) 
 	{
@@ -31,7 +38,7 @@ public class FuelStation {
 		for(int i = 0; i < amountOfPumps; i++)
 		{
 			//Pumps with 3.0 space and can pump 1 gallon at a time
-			pumps.add(new FuelPump(i, 3, 1));
+			pumps.add(new FuelPump(i, 3, pumpSupplyRate));
 		}
 	}
 	
@@ -43,6 +50,8 @@ public class FuelStation {
 		for(FuelPump fp : pumps)
 		{
 			fp.supplyFuel();
+			gallonsFueled += (fp.carsFuelThisTick() * pumpSupplyRate);
+			fp.resetFuelTickCounter();
 		}
 	}
 	

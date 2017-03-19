@@ -1,5 +1,7 @@
 package com.aston.group24.model;
 
+import java.math.BigDecimal;
+
 /*
  * Main Simulation class
  * 
@@ -10,7 +12,9 @@ package com.aston.group24.model;
  */
 public class Simulation {
 	
+	@SuppressWarnings("unused")
 	private boolean finished; 							// Whether the simulation has finished or not
+	@SuppressWarnings("unused")
 	private int tick; 									// Current simulation tick
 	
 	public static void main(String[] args)
@@ -18,6 +22,7 @@ public class Simulation {
 		
 	}
 	
+	//Constructor
 	public Simulation()
 	{
 		finished = false;
@@ -45,6 +50,34 @@ public class Simulation {
 	private void simulate() 
 	{
 		
+	}
+	
+	/*
+	 *Check whether simulation has finished running 
+	 */
+	public boolean isFinished()
+	{
+		if(finished)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/*
+	 * To execute when the simulation has finished running (May not be needed)
+	 */
+	public void postSimulationRun()
+	{
+
+	}
+	
+	//GUI Integration
+	
+	public int getCurrentTick()
+	{
+		return tick;
 	}
 	
 

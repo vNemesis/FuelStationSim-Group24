@@ -11,6 +11,7 @@ public class FuelPump {
 	private int fuelSupply;
 	private int pumpID;
 	private ArrayList<Vehicle> currentCars;
+	private int fueledThisTick;
 	
 	public FuelPump(int pumpID, double space, int fuelSupply)
 	{
@@ -58,10 +59,30 @@ public class FuelPump {
 	 */
 	protected void supplyFuel()
 	{
-		for(Vehicle v : currentCars)
+		if (currentCars.size() != 0)
 		{
-			v.fillCar(fuelSupply);
+			for(Vehicle v : currentCars)
+			{
+				v.fillCar(fuelSupply);
+				fueledThisTick++;
+			}
 		}
+	}
+	
+	/*
+	 * How many vehicles has this pump fuel this tick
+	 */
+	protected int carsFuelThisTick()
+	{
+		return fueledThisTick;
+	}
+	
+	/*
+	 * resets the counter ready for next tick
+	 */
+	protected void resetFuelTickCounter()
+	{
+		fueledThisTick = 0;
 	}
 
 }
