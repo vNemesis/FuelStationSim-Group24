@@ -5,6 +5,13 @@ import java.util.Collections;
 
 import com.aston.group24.vehicles.Vehicle;
 
+/*
+ * Fuel Station
+ * - Will contain fuel pumps and manager these pumps
+ * 
+ * @version 0.0.2
+ * 
+ */
 public class FuelStation {
 	
 	private ArrayList<FuelPump> pumps;
@@ -39,18 +46,6 @@ public class FuelStation {
 		}
 	}
 	
-	protected void testing(Vehicle v1, Vehicle v2, Vehicle v3)
-	{
-		
-		pumps.get(0).addVehicle(v1); //1.5
-		pumps.get(2).addVehicle(v2); //1
-		pumps.get(2).addVehicle(v3); //1.5
-		
-		//pump 0 = 1.5 free space
-		//pump 1 = 0.5 free space
-		//pump 2 - 3.0 free space
-	}
-	
 	/*
 	 * Add a vehicle to the station at a pump
 	 */
@@ -61,6 +56,8 @@ public class FuelStation {
 	
 	/*
 	 * Sort Pumps with space in Descending order
+	 * 
+	 * TODO - Revise this method,  possibly use custom container
 	 */
 	protected FuelPump pumpWithShortestLine(Vehicle v)
 	{
@@ -117,7 +114,23 @@ public class FuelStation {
 		
 	}
 	
-	//DEBUGGING
+	//------------------------------------------------------------------DEBUGGING--------------------------------------------------------------------
+	
+	/*
+	 * For testing purposes
+	 * 
+	 */
+	protected void testing(Vehicle v1, Vehicle v2, Vehicle v3)
+	{
+		
+		pumps.get(0).addVehicle(v1); //1.5
+		pumps.get(2).addVehicle(v2); //1
+		pumps.get(2).addVehicle(v3); //1.5
+		
+		//pump 0 = 1.5 free space
+		//pump 1 = 0.5 free space
+		//pump 2 - 3.0 free space
+	}
 	
 	public int numberOfPumps()
 	{

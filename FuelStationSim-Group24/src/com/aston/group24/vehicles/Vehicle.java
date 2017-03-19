@@ -1,5 +1,12 @@
 package com.aston.group24.vehicles;
 
+import java.math.BigDecimal;
+
+/*
+ * Vehicle library Super class
+ * @version - 0.0.2  
+ * 
+ */
 public abstract class Vehicle {
 	
 	private String model;
@@ -20,6 +27,12 @@ public abstract class Vehicle {
 	}
 	
 	//Getter methods
+	
+	public BigDecimal getRefuelCost()
+	{
+		BigDecimal bd = new BigDecimal("fuelTankSize * 1.20"); //Added Method
+		return bd;
+	}
 	
 	public String getmodel()
 	{
@@ -52,7 +65,7 @@ public abstract class Vehicle {
 	}
 	
 	/*
-	 * Fill the car with fuel
+	 * Fill the vehicle with fuel
 	 * 	@param amount the amount of fuel to fill at one time
 	 */
 	public void fillCar(int amount)
