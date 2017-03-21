@@ -2,6 +2,8 @@ package com.aston.group24.vehicles;
 
 import java.math.BigDecimal;
 
+import com.aston.group24.people.Person;
+
 /*
  * Vehicle library Super class
  * @version - 0.0.2  
@@ -15,6 +17,7 @@ public abstract class Vehicle {
 	private double size;
 	private double probOfOccurance;
 	private double probOfShop;
+	private Person driver;
 	
 	public Vehicle(String model, int tankSize, int AOF, double pSize, double probO, double probS)
 	{
