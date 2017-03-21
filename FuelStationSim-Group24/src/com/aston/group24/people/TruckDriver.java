@@ -1,10 +1,9 @@
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
-
-import com.aston.group24.vehicles.SmallCar;
-import com.aston.group24.vehicles.Vehicle;
 import java.util.Random;
+
+import com.aston.group24.vehicles.Truck;
 
 public class TruckDriver extends Person{
 	private static double happiness = 0.02;	//Global happiness of all truck drivers
@@ -14,7 +13,7 @@ public class TruckDriver extends Person{
 	{
 		super();
 		vehicle = new Truck();
-		shopTime = 10;						//Needs to be randomly generated
+		shopTime = 10; 						//Needs to be randomly generated
 		spendingMoney = new BigDecimal(10); //Needs to be randomly generated
 	}
 	
