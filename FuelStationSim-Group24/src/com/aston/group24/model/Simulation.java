@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * 
  * all code to run the Simulation including time and variables will go here
  * 
- * @version 0.0.1
+ * @version 0.0.2
  * 
  */
 public class Simulation {
@@ -17,14 +17,14 @@ public class Simulation {
 	@SuppressWarnings("unused")
 	private int tick; 									// Current simulation tick
 	
-	public static void main(String[] args)
-	{
-		
-	}
+	private FuelStation fs;								// Fuel Station for simulation
+	//private Shop shop;								// Shop for simulation
 	
 	//Constructor
-	public Simulation()
+	public Simulation(int numOfPumps, int numOfTills)
 	{
+		fs = new FuelStation(numOfPumps);
+		
 		finished = false;
 	}
 	
