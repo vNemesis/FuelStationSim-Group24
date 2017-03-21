@@ -12,7 +12,7 @@ public abstract class Person {
 	private int tillTime;					//Time they will spend at the till
 	protected BigDecimal spendingMoney;		//Money they will spend in the shop
 	private Boolean refuelled;				//If they have refuelled or not
-	private Boolean visitedShop;			//If they have visited the shop or not
+	private Boolean visitedShop;			//If they have visited the shop or not (to make an additional purchase)
 	
 	
 	public Person()
