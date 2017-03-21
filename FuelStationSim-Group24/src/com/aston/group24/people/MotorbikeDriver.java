@@ -9,12 +9,12 @@ public class MotorbikeDriver extends Person{
 	{
 		super();
 		vehicle = new Motorbike();
-		shopTime = 10; 						//Needs to be randomly generated
-		spendingMoney = new BigDecimal(10); //Needs to be randomly generated
+		shopTime = 0; 						//Motorbike drivers never visit the shop
+		spendingMoney = new BigDecimal(0); 	//Motorbike drivers never visit the shop
 	}
 
 	@Override
 	public boolean wantsToShop() {
-		return false;
+		return false;		//Always false
 	}
 }
