@@ -7,34 +7,37 @@ import com.aston.group24.vehicles.Truck;
 
 public class TruckDriver extends Person{
 	private Random rnd;
-	private static double happiness = 0.02;	//Global happiness of all truck drivers
+	private static final double INITIAL_HAPPINESS = 0.02;
+	private static double happiness = INITIAL_HAPPINESS;	//Global happiness of all truck drivers
 	
 	
 	public TruckDriver()
 	{
 		super();
 		vehicle = new Truck();
-		shopTime = 10; 						//TODO Needs to be randomly generated (4-6 minutes (24-36 ticks))
-		spendingMoney = new BigDecimal(10); //TODO Needs to be randomly generated (£15 - £20)
+		shopTime = rnd.nextInt(13) + 24; 	//Needs to be randomly generated (4-6 minutes (24-36 ticks))
+		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00); //Needs to be randomly generated (£15 - £20)
 	}
 	
 	@Override
 	public boolean wantsToShop()
 	{
-		//TODO
-		//Will always shop if the refill took 8 minutes or less
-		return true;
+		//Will always shop if the refill took 8 minutes or less (48 ticks)
+		if(timeAtStation <= 48) return true;
+		else return false;
 	}
 	
 	//Static methods
 	public static void increaseHappiness()
 	{
-		
+		//Happy truck driver increases happiness by 5%, up to the original value
+		happiness = Math.min((happiness * 1.05), INITIAL_HAPPINESS);
 	}
 	
 	public static void decreaseHappiness()
 	{
-		
+		//Unhappy truck driver reduces happiness by 20%
+		happiness = happiness * 0.8;
 	}
 	
 	public static double getHappiness()

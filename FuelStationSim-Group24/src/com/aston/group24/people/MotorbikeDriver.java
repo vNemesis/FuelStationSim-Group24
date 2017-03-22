@@ -14,7 +14,9 @@ public class MotorbikeDriver extends Person{
 	}
 
 	@Override
-	public boolean wantsToShop() {
-		return false;		//Always false
+	public boolean wantsToShop()
+	{
+		//Always false
+		return false;
 	}
 }

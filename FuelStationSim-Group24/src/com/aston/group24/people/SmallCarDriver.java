@@ -21,7 +21,7 @@ public class SmallCarDriver extends Person{
 	public boolean wantsToShop()
 	{
 		//Probability of 0.3 if the refill is done is <5 minutes (30 ticks)
-		if(timeAtStation < 30 && rnd.nextInt(10) < 3) return true; //[0 1 2] 3 4 5 6 7 8 9
+		if(timeAtStation < 30 && rnd.nextInt(10) < 3) return true;
 		else return false;
 		
 	}
