@@ -7,7 +7,7 @@ import com.aston.group24.vehicles.Vehicle;
 public abstract class Person {
 	
 	protected Vehicle vehicle;				//The vehicle they own
-	private int timeAtStation;				//Time they have spend at the station (will start from 0 and update)
+	protected int timeAtStation;				//Time they have spend at the station (will start from 0 and update)
 	protected int shopTime;					//Time they will spend at the shop
 	private int tillTime;					//Time they will spend at the till
 	protected BigDecimal spendingMoney;		//Money they will spend in the shop

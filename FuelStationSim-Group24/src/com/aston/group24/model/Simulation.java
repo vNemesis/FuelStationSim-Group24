@@ -19,13 +19,16 @@ public class Simulation {
 	
 	private FuelStation fs;								// Fuel Station for simulation
 	//private Shop shop;								// Shop for simulation
+	public static long seed;
 	
 	//Constructor
-	public Simulation(int numOfPumps, int numOfTills)
+	public Simulation(int numOfPumps, int numOfTills, int seed)
 	{
 		fs = new FuelStation(numOfPumps);
 		
 		finished = false;
+		
+		this.seed = seed;
 	}
 	
 	/*

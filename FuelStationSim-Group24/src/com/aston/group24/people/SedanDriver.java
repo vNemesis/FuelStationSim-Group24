@@ -7,6 +7,7 @@ import com.aston.group24.vehicles.Sedan;
 
 public class SedanDriver extends Person{
 	private Random rnd;
+	private static 
 
 	public SedanDriver() 
 	{
