@@ -141,7 +141,7 @@ public class FuelStation {
 		//pump 2 - 3.0 free space
 	}
 	
-	public int numberOfPumps()
+	protected int numberOfPumps()
 	{
 		return pumps.size();
 		
