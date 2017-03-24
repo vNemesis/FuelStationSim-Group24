@@ -17,7 +17,6 @@ public abstract class Vehicle {
 	private double size;
 	private double probOfOccurance;
 	private double probOfShop;
-	private Person driver;
 	
 	public Vehicle(String model, int tankSize, int AOF, double pSize, double probO, double probS)
 	{
