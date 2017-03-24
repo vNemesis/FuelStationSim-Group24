@@ -1,7 +1,5 @@
 package com.aston.group24.model;
 
-import org.xml.sax.Parser;
-
 /*
  * Class to run simulation and display GUI
  * 
@@ -17,7 +15,10 @@ public class SimulationApplication {
 	 */
 	public static void main(String[] args)
 	{ 
-		@SuppressWarnings("unused") FuelStationSimGUI fsg = new FuelStationSimGUI();
+		// create sim with default values
+		Simulation s = new Simulation(3, 2, 10);
+		
+		@SuppressWarnings("unused") FuelStationSimGUI fsg = new FuelStationSimGUI(s);
 	}
 
 }
