@@ -7,11 +7,10 @@ import com.aston.group24.model.Simulation;
 import com.aston.group24.vehicles.SmallCar;
 
 public class SmallCarDriver extends Person{
-	private static Random rnd = new Random(Simulation.seed);
 	
-	public SmallCarDriver()
+	public SmallCarDriver(long seed)
 	{
-		super();
+		super(seed);
 		vehicle = new SmallCar();
 		shopTime = rnd.nextInt(13) + 12;	//2-4 minutes (12-24 ticks)
 		spendingMoney = new BigDecimal((rnd.nextInt(501) + 500) / 100.00); //£5.00-£10.00

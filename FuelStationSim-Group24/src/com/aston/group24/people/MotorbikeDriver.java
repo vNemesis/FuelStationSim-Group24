@@ -5,9 +5,9 @@ import com.aston.group24.vehicles.Motorbike;
 
 public class MotorbikeDriver extends Person{
 
-	public MotorbikeDriver()
+	public MotorbikeDriver(long seed)
 	{
-		super();
+		super(seed);
 		vehicle = new Motorbike();
 		shopTime = 0; 						//Motorbike drivers never visit the shop
 		spendingMoney = new BigDecimal(0); 	//Motorbike drivers never visit the shop

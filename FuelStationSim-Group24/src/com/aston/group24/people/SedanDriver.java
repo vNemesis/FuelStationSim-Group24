@@ -7,11 +7,10 @@ import com.aston.group24.model.Simulation;
 import com.aston.group24.vehicles.Sedan;
 
 public class SedanDriver extends Person{
-	private static Random rnd = new Random(Simulation.seed);
 
-	public SedanDriver() 
+	public SedanDriver(long seed) 
 	{
-		super();
+		super(seed);
 		vehicle = new Sedan();
 		shopTime = rnd.nextInt(19) + 12;	//2-5 minutes (12-30 ticks)
 		spendingMoney = new BigDecimal((rnd.nextInt(801) + 800) / 100.00);	//(£8-£16)

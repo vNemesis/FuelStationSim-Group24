@@ -11,9 +11,9 @@ public class TruckDriver extends Person{
 	private static double happiness = INITIAL_HAPPINESS;	//Global happiness of all truck drivers
 	
 	
-	public TruckDriver()
+	public TruckDriver(long seed)
 	{
-		super();
+		super(seed);
 		vehicle = new Truck();
 		shopTime = rnd.nextInt(13) + 24; 	//Needs to be randomly generated (4-6 minutes (24-36 ticks))
 		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00); //Needs to be randomly generated (£15 - £20)
