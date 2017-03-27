@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.aston.group24.people.Person;
 import com.aston.group24.vehicles.Vehicle;
 
 /*
@@ -19,6 +20,8 @@ import com.aston.group24.vehicles.Vehicle;
 public class FuelStation {
 	
 	private ArrayList<FuelPump> pumps;					// Fuel pumps in the station
+	private ArrayList<Person> people;					// List of all people in station (ONLY used for incrementing time in simulation each tick)
+	private Shop shop;
 	
 	private int gallonsFueled;							// How much fuel has been pumped total
 	private final int pumpSupplyRate = 1;				// How many gallons do the pumps fuel per tick
@@ -26,6 +29,8 @@ public class FuelStation {
 	public FuelStation(int numOfPumps) 
 	{
 		pumps = new ArrayList<FuelPump>();
+		people = new ArrayList<Person>();
+		shop = new Shop();
 		
 		createPumps(numOfPumps);
 	}
@@ -122,6 +127,92 @@ public class FuelStation {
 		
 		
 	}
+	
+	/*
+	 * Returns people that finished refuelling on the last tick
+	 */
+	private ArrayList<Person> getPeopleJustRefulled()
+	{
+		ArrayList<Person> returnPeople = new ArrayList<Person>();
+		
+		for(FuelPump fp : pumps)
+		{
+			for(Person p : fp.getPeople())
+			{
+				//Check if vehicle is refulled but not yet marked as refulled
+				if(p.getVehicle().getCurrentFuel() == p.getVehicle().getFuelTankSize() && !p.getRefuelled())
+				{
+					p.setRefuelled(true);
+					returnPeople.add(p);
+				}
+			}
+		}
+		return returnPeople;
+	}
+	
+	/*
+	 * Move people between stages and return people that need removing from the simulation
+	 */
+	public ArrayList<Person> movePeople(){
+		
+		ArrayList<Person> removeList;
+		
+		//Add refuelled people to shop (Keeping them at the pump as they are still "using" the space)
+		ArrayList<Person> refulled = getPeopleJustRefulled();
+		for(Person p : refulled)
+		{
+			if(p.wantsToShop())
+			{
+				shop.addPersonToFloor();
+			}
+			else
+			{
+				removeList.add(p);
+				fp.removePerson(p);
+			}	
+		}
+		
+		//Move people finished browsing to tills queue
+		ArrayList<Person> shopFinished = shop.getFinishedBrowsing();
+		for(Person p : shopFinished)
+		{
+			shop.removePersonBrowsing(p);
+			shop.addPersonToTills(p);
+		}
+		
+		//Remove people finished paying from tills queue
+		ArrayList<Person> tillsFinished = shop.getFinishedPaying();
+		for(Person p : tillsFinished)
+		{
+			shop.removePersonFromTills(p);
+			fp.removePerson(p);
+			removeList.add(p);
+		}
+		
+		return removeList;
+			
+	}
+	
+	/*
+	 * Remove a person from the arraylist of all people
+	 */
+	public void removePerson(Person p)
+	{
+		people.remove(p);
+	}
+	
+	public void simulate(){
+		//Pump fuel to cars
+		//Add time to people in shop
+		//Add time to people paying at till
+		
+		//Increment time of each person
+		for(Person p : people)
+		{
+			p.incrementTime();
+		}
+	}
+	
 	
 	//------------------------------------------------------------------DEBUGGING--------------------------------------------------------------------
 	

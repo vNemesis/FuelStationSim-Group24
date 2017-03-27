@@ -73,7 +73,7 @@ public abstract class Person {
 		return spendingMoney;
 	}
 	
-	public boolean getrefuelled()
+	public boolean getRefuelled()
 	{
 		return refuelled;
 	}
@@ -84,12 +84,12 @@ public abstract class Person {
 	}
 	
 	//Setter methods
-	public void setrefuelled(){
-		refuelled = true;
+	public void setRefuelled(boolean bool){
+		refuelled = bool;
 	}
 	
-	public void setVisitedShop(){
-		visitedShop = true;
+	public void setVisitedShop(boolean bool){
+		visitedShop = bool;
 	}
 	
 	public void incrementTime(){

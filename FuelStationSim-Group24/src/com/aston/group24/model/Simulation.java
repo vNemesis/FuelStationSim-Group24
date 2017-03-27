@@ -1,5 +1,16 @@
 package com.aston.group24.model;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Random;
+
+import com.aston.group24.people.MotorbikeDriver;
+import com.aston.group24.people.Person;
+import com.aston.group24.people.SedanDriver;
+import com.aston.group24.people.SmallCarDriver;
+import com.aston.group24.people.TruckDriver;
+import com.aston.group24.vehicles.Vehicle;
+
 /*
  * Main Simulation class
  * 
@@ -15,21 +26,30 @@ public class Simulation {
 	
 	private FuelStation fs;								// Fuel Station for simulation
 	//private Shop shop;								// Shop for simulation
-	public static long seed;
+	public long seed;
 	
 	private int numOfPumps;								// Number of pumps
 	private int numOfTills;								// Number of tills
 	
+	private double probabilityP;						// Probability for small cars and motorbikes
+	private double probabilityQ;						// Probability for sedans
+	private BigDecimal profit;
+	private BigDecimal loss;
+	
+	private Random rnd;
+	
 	//Constructor
-	public Simulation(int numOfPumps, int numOfTills, int seed)
+	public Simulation(int numOfPumps, int numOfTills, double probabilityP, double probabilityQ, long seed)
 	{
-		
 		this.numOfPumps = numOfPumps;
 		this.numOfTills = numOfTills;
-		
-		finished = false;
-		
+		this.probabilityP = probabilityP;
+		this.probabilityQ = probabilityQ;
 		this.seed = seed;
+		rnd = new Random(seed);
+		finished = false;
+		profit = new BigDecimal(0);
+		loss = new BigDecimal(0);
 	}
 	
 	/*
@@ -43,19 +63,89 @@ public class Simulation {
 		for (int i = 0; i < ticks; i++)
 		{
 			simulate();
-			tick++;;
 		}
 		
 		finished = true;
 	}
 
 	/*
-	 * What to do per tick
-	 * TODO - discuss implementation
+	 * Runs one tick of the simulation 
 	 * 
 	 */
 	private void simulate() 
 	{
+		//Create list of people to be removed from the simulation
+		ArrayList<Person> removeList = new ArrayList<Person>();
+		
+		//Move people between stages and get list of people to remove
+		ArrayList<Person> peopleToRemove = fs.movePeople();
+		
+		//Add these people to remove list
+		for(Person p: peopleToRemove)
+		{
+			removeList.add(p);
+		}
+		
+		//Run simulation
+		fs.simulate();
+
+		//Generate new person
+		Person newPerson = generatePerson();
+		
+		//Add new person to simulation
+		if(newPerson != null)
+		{
+			//If station has space, add person
+			if(fs.hasSpaceFor(newPerson))
+			{
+				fs.addPerson(newPerson);
+			}
+			else
+			{
+				//If not, add them to the list for removal
+				removeList.add(newPerson);
+			}
+		}
+		
+		//Remove people in removeList
+		for(Person p : removeList)
+		{
+			//Add person's profit and loss to total
+			profit = profit.add(p.getMoneySpent());
+			loss = loss.add(p.getMoneyLost());
+			
+			//Remove from simulation
+			fs.removePerson(p);			
+		}
+		
+		//Increment tick number
+		tick++;
+	}
+	
+	private Person generatePerson(){
+		double num = rnd.nextDouble();
+		long personSeed = rnd.nextLong(); //Generate unique seed for each person from main seed
+		
+		if(num <= probabilityP)
+		{
+			return new MotorbikeDriver(personSeed);
+		}
+		else if(num > probabilityP && num <= 2*probabilityP)
+		{
+			return new SmallCarDriver(personSeed);
+		}
+		else if(num > 2*probabilityP && num <= 2*probabilityP + probabilityQ)
+		{
+			return new SedanDriver(personSeed);
+		}
+		else if(num > 2*probabilityP + probabilityQ && num <= 2*probabilityP + probabilityQ + TruckDriver.getHappiness())
+		{
+			return new TruckDriver(personSeed);
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/*
@@ -63,12 +153,7 @@ public class Simulation {
 	 */
 	public boolean isFinished()
 	{
-		if(finished)
-		{
-			return true;
-		}
-		
-		return false;
+		return finished;
 	}
 	
 	/*
