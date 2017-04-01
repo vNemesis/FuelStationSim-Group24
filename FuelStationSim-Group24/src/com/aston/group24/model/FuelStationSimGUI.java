@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
 /*
  * GUI class for the simulation
@@ -36,17 +37,25 @@ public class FuelStationSimGUI {
 	{
 		this.s = s;
 		
+		int blankSpace = 5;
+		
 		// Step 1: create the components
 		JButton runButton = new JButton();
 		JButton exitButton = new JButton();
 		
 		JTextField pumpsNumInput = new JTextField("3");
 		JTextField tillsNumInput = new JTextField("2");
-		JTextField ticksNumInput = new JTextField("2");
+		JTextField probPInput = new JTextField("0.5");
+		JTextField probQInput = new JTextField("0.5");
+		JTextField seedInput = new JTextField("10");
+		JTextField ticksInput = new JTextField("10");
 		
-		JLabel pumpsLabel = new JLabel("Number of pumps");
-		JLabel tillsLabel = new JLabel("Number of Tills");
-		JLabel ticksLabel = new JLabel("Number of Ticks to run Simulation 1 tick = 10 seconds");
+		JLabel pumpsLabel = new JLabel(" (Integer) Number of pumps");
+		JLabel tillsLabel = new JLabel(" (Integer) Number of Tills");
+		JLabel probPLabel = new JLabel(" (Double) Probibility of P (Number between 0 and 1)");
+		JLabel probQLabel = new JLabel(" (Double) Probibility of Q (Number between 0 and 1)");
+		JLabel seedLabel = new JLabel(" (Integer) Simulation random seed");
+		JLabel ticksLabel = new JLabel(" (Integer) Number of Ticks to run simulation for (1 tick = 10 seconds)");
 		JLabel logLabel = new JLabel("Simulation Log");
 		
 		log = new JTextArea();
@@ -63,7 +72,7 @@ public class FuelStationSimGUI {
 		exitButton.setToolTipText("Exit Program");
 				
 		// Step 3: Create containers to hold the components
-		mainFrame = new JFrame("DOME");
+		mainFrame = new JFrame("Fuel Station Simulation");
 		mainFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		
 		JPanel commandBox = new JPanel();
@@ -74,9 +83,10 @@ public class FuelStationSimGUI {
 		// Step 4: Specify LayoutManagers
 		
 		mainFrame.setLayout(new BorderLayout());
+		((JPanel)mainFrame.getContentPane()).setBorder(new EmptyBorder(blankSpace, blankSpace, blankSpace, blankSpace));
 		
 		dataBox.setLayout(new BorderLayout());
-		inputBox.setLayout(new GridLayout(3,2));
+		inputBox.setLayout(new GridLayout(6,2));
 		commandBox.setLayout(new FlowLayout());
 		logBox.setLayout(new BorderLayout());
 				
@@ -85,7 +95,13 @@ public class FuelStationSimGUI {
 		inputBox.add(pumpsLabel);
 		inputBox.add(tillsNumInput);
 		inputBox.add(tillsLabel);
-		inputBox.add(ticksNumInput);
+		inputBox.add(probPInput);
+		inputBox.add(probPLabel);
+		inputBox.add(probQInput);
+		inputBox.add(probQLabel);
+		inputBox.add(seedInput);
+		inputBox.add(seedLabel);
+		inputBox.add(ticksInput);
 		inputBox.add(ticksLabel);
 		
 		logBox.add(logLabel, BorderLayout.NORTH);
@@ -120,7 +136,7 @@ public class FuelStationSimGUI {
 				log.setForeground(Color.black);
 				
 				// Check if values are valid, if they are run sim if not throw error in log
-				if(!validateData(pumpsNumInput.getText(), tillsNumInput.getText(), ticksNumInput.getText()))
+				if(!validateData(pumpsNumInput.getText(), tillsNumInput.getText(), probPInput.getText(), probQInput.getText(), seedInput.getText(), ticksInput.getText()))
 				{
 					log.append("Please review input data and try again");
 					log.append("\n");
@@ -128,9 +144,9 @@ public class FuelStationSimGUI {
 				}
 				else
 				{
-					s.reset();																										// Reset sim values for next run
-					s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()));		// set Fuel station values according to text inputs
-					s.runSim(Integer.parseInt(ticksNumInput.getText()));															// Run sim for x Ticks
+					s.reset();																// Reset sim values for next run
+					s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()));		// set Fuel station values according to text inputs
+					s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
 					log.append(s.reportStatus());
 				}	
 			}
@@ -162,8 +178,9 @@ public class FuelStationSimGUI {
 	 * Method to test whether the data entered is valid
 	 * 
 	 */
-	private boolean validateData(String numPumps, String numTills, String ticks)
+	private boolean validateData(String numPumps, String numTills, String probP, String probQ, String seed, String ticks)
 	{
+		 // check num of pumps is valid
 		 try { 
 		        Integer.parseInt(numPumps); 
 		    } catch(NumberFormatException e) {
@@ -176,6 +193,7 @@ public class FuelStationSimGUI {
 		        return false;
 		    }
 		 
+		 // check num of tills is valid
 		 try { 
 		        Integer.parseInt(numTills); 
 		    } catch(NumberFormatException e) {
@@ -188,6 +206,61 @@ public class FuelStationSimGUI {
 		        return false;
 		    }
 		 
+		 
+		 // check seed is valid
+		 try { 
+		        Integer.parseInt(seed); 
+		    } catch(NumberFormatException e) {
+		    	log.setText("Number of ticks is not a valid Integer");
+		    	log.append("\n");
+		        return false; 
+		    } catch(NullPointerException e) {
+		    	log.setText("Number of ticks is null! set an Integer value");
+		    	log.append("\n");
+		        return false;
+		    }
+		 
+		 // check probability of p is valid
+		 try { 
+		        Double.parseDouble(probP); 
+		    } catch(NumberFormatException e) {
+		    	log.setText("Number of ticks is not a valid double value (i.e 0.2)");
+		    	log.append("\n");
+		        return false; 
+		    } catch(NullPointerException e) {
+		    	log.setText("Number of ticks is null! set an Integer value");
+		    	log.append("\n");
+		        return false;
+		    }
+		 
+		 if (Double.parseDouble(probP) < 0 || Double.parseDouble(probP) > 1)
+		 {
+			 log.setText("Probibility of P needs to be between 0 and 1");
+		     log.append("\n");
+		     return false; 
+		 }
+		 
+		 // check probability of q is valid
+		 try { 
+		        Double.parseDouble(probQ); 
+		    } catch(NumberFormatException e) {
+		    	log.setText("Number of ticks is not a valid double value (i.e 0.2)");
+		    	log.append("\n");
+		        return false; 
+		    } catch(NullPointerException e) {
+		    	log.setText("Number of ticks is null! set an double value");
+		    	log.append("\n");
+		        return false;
+		    }
+		 
+		 if (Double.parseDouble(probQ) < 0 || Double.parseDouble(probQ) > 1)
+		 {
+			 log.setText("Probibility of Q needs to be between 0 and 1");
+		     log.append("\n");
+		     return false; 
+		 }
+		 
+		 //Check ticks value is valid
 		 try { 
 		        Integer.parseInt(ticks); 
 		    } catch(NumberFormatException e) {
@@ -195,7 +268,7 @@ public class FuelStationSimGUI {
 		    	log.append("\n");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	log.setText("Number of ticks is null! set an Integer value");
+		    	log.setText("Number of ticks is null! set an Integer");
 		    	log.append("\n");
 		        return false;
 		    }
