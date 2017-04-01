@@ -195,10 +195,13 @@ public class Simulation {
 	 * @param numPumps set the number of pumps
 	 * @param numTills set the number of tills
 	 */
-	protected void setFuelStationVal(int numPumps, int numTills)
+	protected void setFuelStationVal(int numPumps, int numTills, long seed, double probabilityP, double probabilityQ)
 	{
 		numOfPumps = numPumps;
 		numOfTills = numTills;
+		this.probabilityP = probabilityP;
+		this.probabilityQ = probabilityQ;
+		this.seed = seed;
 	}
 	
 	
