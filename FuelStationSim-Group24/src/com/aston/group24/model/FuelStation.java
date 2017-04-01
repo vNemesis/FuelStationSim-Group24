@@ -25,6 +25,7 @@ public class FuelStation {
 	
 	private int gallonsFueled;							// How much fuel has been pumped total
 	private final int pumpSupplyRate = 1;				// How many gallons do the pumps fuel per tick
+	private final int pumpSpaceCapacity = 3;			// How much space is at each pump
 
 	public FuelStation(int numOfPumps) 
 	{
@@ -43,7 +44,7 @@ public class FuelStation {
 		for(int i = 0; i < amountOfPumps; i++)
 		{
 			//Pumps with 3.0 space and can pump 1 gallon at a time
-			pumps.add(new FuelPump(i, 3, pumpSupplyRate));
+			pumps.add(new FuelPump(i, pumpSpaceCapacity, pumpSupplyRate));
 		}
 	}
 	
@@ -63,17 +64,17 @@ public class FuelStation {
 	/*
 	 * Add a vehicle to the station at a pump
 	 */
-	protected void addVehicleToStation(Vehicle v)
+	protected void addPerson(Person p)
 	{
-		pumpWithShortestLine(v).addVehicle(v);;
+		pumpWithShortestLine(p).addPerson(p);;
 	}
 	
 	/*
 	 * Sort Pumps with space in Descending order
 	 * 
-	 * TODO - Revise this method,  possibly use custom container
+	 * TODO - Revise this method,  Use Que's instead
 	 */
-	protected FuelPump pumpWithShortestLine(Vehicle v)
+	protected FuelPump pumpWithShortestLine(Person p)
 	{
 			
 		ArrayList<FuelPump> pumpsWithSpace = new ArrayList<FuelPump>();
@@ -81,7 +82,7 @@ public class FuelStation {
 		//Check pumps with space for the vehicle
 		for(FuelPump fp : pumps)
 		{
-			if(fp.getCSA() >= v.getSize())
+			if(fp.getCSA() >= p.getVehicle().getSize())
 			{
 				pumpsWithSpace.add(fp);
 			}
@@ -220,12 +221,12 @@ public class FuelStation {
 	 * For testing purposes
 	 * 
 	 */
-	protected void testing(Vehicle v1, Vehicle v2, Vehicle v3)
+	protected void testing(Person v1, Person v2, Person v3)
 	{
 		
-		pumps.get(0).addVehicle(v1); //1.5
-		pumps.get(2).addVehicle(v2); //1
-		pumps.get(2).addVehicle(v3); //1.5
+		pumps.get(0).addPerson(v1); //1.5
+		pumps.get(2).addPerson(v2); //1
+		pumps.get(2).addPerson(v3); //1.5
 		
 		//pump 0 = 1.5 free space
 		//pump 1 = 0.5 free space
