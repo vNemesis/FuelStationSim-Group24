@@ -3,6 +3,7 @@ package com.aston.group24.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 import com.aston.group24.people.Person;
 import com.aston.group24.vehicles.Vehicle;
@@ -19,7 +20,7 @@ import com.aston.group24.vehicles.Vehicle;
  */
 public class FuelStation {
 	
-	private ArrayList<FuelPump> pumps;					// Fuel pumps in the station
+	private LinkedList<FuelPump> pumps;					// Fuel pumps in the station
 	private ArrayList<Person> people;					// List of all people in station (ONLY used for incrementing time in simulation each tick)
 	private Shop shop;
 	
@@ -29,7 +30,7 @@ public class FuelStation {
 
 	public FuelStation(int numOfPumps) 
 	{
-		pumps = new ArrayList<FuelPump>();
+		pumps = new LinkedList<FuelPump>();
 		people = new ArrayList<Person>();
 		shop = new Shop();
 		
@@ -64,15 +65,26 @@ public class FuelStation {
 	/*
 	 * Add a vehicle to the station at a pump
 	 */
-	protected void addPerson(Person p)
+	protected boolean addPerson(Person p)
 	{
-		pumpWithShortestLine(p).addPerson(p);;
+		FuelPump validPump = pumpWithShortestLine(p);
+		
+		if (validPump != null)
+		{
+			pumpWithShortestLine(p).addPerson(p);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
+	
 	
 	/*
 	 * Sort Pumps with space in Descending order
 	 * 
-	 * TODO - Revise this method,  Use Que's instead
+	 * 
 	 */
 	protected FuelPump pumpWithShortestLine(Person p)
 	{
