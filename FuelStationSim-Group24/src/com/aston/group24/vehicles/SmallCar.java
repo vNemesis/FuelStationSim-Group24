@@ -2,18 +2,19 @@ package com.aston.group24.vehicles;
 
 public class SmallCar extends Vehicle {
 
-	public SmallCar(int tankSize, int AOF, double pSize, boolean randomiseTank) 
+	public SmallCar(int minTankSize, int maxTankSize, int AOF, double pSize, boolean randomiseTank, boolean randomiseFuel, long seed) 
 	{
-		super(tankSize, AOF, pSize);
+		super(minTankSize, maxTankSize, AOF, pSize, randomiseTank, randomiseFuel, seed);
 		
-		// if true randomise tank size
-		if (randomiseTank)
-		{
-			// Randomise the tank size between 7 and 9 gallons
-			this.randomiseTankSize(7, 9);
-		}
+		// fuel should be 7 - 9
 	}
 	
-	
-
+	public SmallCar(long seed) 
+	{
+		super(seed);
+		
+		this.randomiseTankSize(7, 9);; 		// set fuel tank size
+		this.setSize(1.0);				// set size of car
+		this.setAmountOfFuel(0);		// set amount of fuel
+	}
 }
