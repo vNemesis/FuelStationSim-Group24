@@ -1,6 +1,6 @@
 package com.aston.group24.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.aston.group24.people.Person;;
 
@@ -11,7 +11,7 @@ public class FuelPump {
 	private double CSA; //Current space Available
 	private int fuelSupply;
 	private int pumpID;
-	private ArrayList<Person> currentPeople;
+	private LinkedList<Person> currentPeople;
 	private int fueledThisTick;
 	
 	public FuelPump(int pumpID, double space, int fuelSupply)
@@ -19,7 +19,7 @@ public class FuelPump {
 		this.pumpID = pumpID;
 		this.space = space;
 		this.fuelSupply = fuelSupply;
-		currentPeople = new ArrayList<Person>();
+		currentPeople = new LinkedList<Person>();
 		CSA = space;
 		CSO = 0;
 	}
@@ -62,22 +62,23 @@ public class FuelPump {
 		return space;
 	}
 	
-	protected ArrayList<Person> getPeople()
+	protected LinkedList<Person> getPeople()
 	{
 		return currentPeople;
 	}
 	
 	/*
-	 * supply fuel to all cars at the pump
+	 * supply fuel to first car at the pump
 	 */
 	protected void supplyFuel()
 	{
 		if (currentPeople.size() != 0)
 		{
-			for(Person p : currentPeople)
+			Person p = currentPeople.getFirst(); // get first car / person
+			
+			if(p.getRefuelled() == false)			// if they have not refuelled,
 			{
-				if(p.getRefuelled() == false)
-				p.getVehicle().fillCar(fuelSupply);
+				p.getVehicle().fillCar(fuelSupply);	// , then refuel the car
 				fueledThisTick++;
 			}
 		}
