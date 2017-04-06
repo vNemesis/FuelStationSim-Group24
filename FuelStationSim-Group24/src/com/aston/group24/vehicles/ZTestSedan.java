@@ -3,6 +3,7 @@ package com.aston.group24.vehicles;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class ZTestSedan {
 	@Before
 	public void setUp() throws Exception {
 		
-		sd = new Sedan(8, 2, 2, true);
+		sd = new Sedan(12, 18, 7, 1.5, true, true, 10);
 	}
 	
 	public ArrayList<Vehicle> createCars(int num)
@@ -23,8 +24,12 @@ public class ZTestSedan {
 		
 		for (int i = 0; i < num; i++)
 		{
-			Sedan car = new Sedan(8, 2, 2, true);
-			System.out.println(car.getFuelTankSize());
+			long seed = new Random().nextLong();
+			
+			Sedan car = new Sedan(12, 18, 7, 1.5, true, true, seed);
+			System.out.println("--------------------------");
+			System.out.println("Tank size:    " + car.getFuelTankSize());
+			System.out.println("Current Fuel: " + car.getCurrentFuel());
 		}
 		
 		
@@ -37,8 +42,7 @@ public class ZTestSedan {
 		
 		createCars(20); // Test fuel tank randomiser
 		System.out.println(sd.getFuelTankSize());
-		assertEquals(sd.getCurrentFuel(), 2);
-		assertEquals(sd.getSize(), 2, 0.1);
+		assertEquals(sd.getSize(), 1.5, 0.1);
 	}
 
 }

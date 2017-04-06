@@ -12,7 +12,7 @@ public class ZTestMotorbike {
 	@Before
 	public void setUp() throws Exception {
 		
-		mb = new Motorbike(5, 2, 1.5);
+		mb = new Motorbike(5, 2, 0, 1.5, true, false, 10);
 	}
 
 	@Test

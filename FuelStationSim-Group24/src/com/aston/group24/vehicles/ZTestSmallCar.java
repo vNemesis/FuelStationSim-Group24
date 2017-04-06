@@ -3,6 +3,7 @@ package com.aston.group24.vehicles;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class ZTestSmallCar {
 	@Before
 	public void setUp() throws Exception {
 		
-		sc = new SmallCar(5, 4, 1.5, true);
+		sc = new SmallCar(7, 9, 4, 1.5, true, true, 10);
 	}
 	
 	public ArrayList<Vehicle> createCars(int num)
@@ -23,8 +24,12 @@ public class ZTestSmallCar {
 		
 		for (int i = 0; i < num; i++)
 		{
-			SmallCar car = new SmallCar(8, 2, 2, true);
-			System.out.println(car.getFuelTankSize());
+			long seed = new Random().nextLong();
+			
+			SmallCar car = new SmallCar(7, 9, 4, 2, true, true, seed);
+			System.out.println("--------------------------");
+			System.out.println("Tank size:    " + car.getFuelTankSize());
+			System.out.println("Current Fuel: " + car.getCurrentFuel());
 		}
 		
 		
@@ -37,7 +42,6 @@ public class ZTestSmallCar {
 		
 		createCars(20);
 		System.out.println(sc.getFuelTankSize());
-		assertEquals(sc.getCurrentFuel(), 4);
 		assertEquals(sc.getSize(), 1.5, 0.1);
 	}
 
