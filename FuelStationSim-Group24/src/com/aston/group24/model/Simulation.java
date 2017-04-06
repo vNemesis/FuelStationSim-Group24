@@ -9,7 +9,6 @@ import com.aston.group24.people.Person;
 import com.aston.group24.people.SedanDriver;
 import com.aston.group24.people.SmallCarDriver;
 import com.aston.group24.people.TruckDriver;
-import com.aston.group24.vehicles.Vehicle;
 
 /*
  * Main Simulation class
@@ -29,6 +28,7 @@ public class Simulation {
 	public long seed;
 	
 	private int numOfPumps;								// Number of pumps
+	@SuppressWarnings("unused")
 	private int numOfTills;								// Number of tills
 	
 	private double probabilityP;						// Probability for small cars and motorbikes
@@ -95,14 +95,9 @@ public class Simulation {
 		//Add new person to simulation
 		if(newPerson != null)
 		{
-			//If station has space, add person
-			if(fs.hasSpaceFor(newPerson))
+			//If station couldn't add a person will return false, add person to remove list else carry on
+			if(!fs.addPerson(newPerson))
 			{
-				fs.addPerson(newPerson);
-			}
-			else
-			{
-				//If not, add them to the list for removal
 				removeList.add(newPerson);
 			}
 		}
@@ -179,7 +174,7 @@ public class Simulation {
 	}
 	
 	/*
-	 * Report status of Simulation - Mainly debug can be ommited in actual release
+	 * Report status of Simulation - Mainly debug can be omitted in actual release
 	 */
 	protected String reportStatus()
 	{
