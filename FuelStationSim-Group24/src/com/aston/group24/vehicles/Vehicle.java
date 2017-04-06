@@ -1,8 +1,7 @@
 package com.aston.group24.vehicles;
 
 import java.math.BigDecimal;
-
-import com.aston.group24.people.Person;
+import java.util.Random;
 
 /*
  * Vehicle library Super class
@@ -15,17 +14,26 @@ public abstract class Vehicle {
 	private int fuelTankSize;
 	private int amountOfFuel;
 	private double size;
-	private double probOfOccurance;
-	private double probOfShop;
+	private Random gener = new Random();
 	
-	public Vehicle(String model, int tankSize, int AOF, double pSize, double probO, double probS)
+	public Vehicle(String model, int tankSize, int AOF, double pSize)
 	{
 		this.model = model;
 		fuelTankSize = tankSize;
 		amountOfFuel = AOF;
 		size = pSize;
-		probOfOccurance = probO;
-		probOfShop = probS;
+	}
+	
+	/*
+	 * Constructor - Models omitted, Fixed tank size
+	 * 
+	 */
+	public Vehicle(int tankSize, int AOF, double pSize)
+	{
+		model = "N/A";
+		fuelTankSize = tankSize;
+		amountOfFuel = AOF;
+		size = pSize;
 	}
 	
 	//Getter methods
@@ -34,6 +42,30 @@ public abstract class Vehicle {
 	{
 		BigDecimal bd = new BigDecimal("fuelTankSize * 1.20"); //Added Method
 		return bd;
+	}
+	
+	public void randomiseTankSize(int lowerLimit, int upperLimit)
+	{
+		int upperL = upperLimit;
+		int lowerL = lowerLimit;
+		
+		// Swap values if one is higher
+		if(lowerL > upperL)
+		{
+			int tempInt = lowerL;
+			lowerL = upperL;
+			upperL = tempInt;
+		}
+		// else if they are equal then increase upper by 1
+		else if (lowerL == upperL)
+		{
+			upperL++;
+		}
+		
+		int difference = (upperL - lowerL) + 1;		
+		
+		fuelTankSize = (gener.nextInt(difference) + lowerL);
+		
 	}
 	
 	public String getmodel()
@@ -49,16 +81,6 @@ public abstract class Vehicle {
 	public double getSize()
 	{
 		return size;
-	}
-	
-	public double getProbOfOccurance()
-	{
-		return probOfOccurance;
-	}
-	
-	public double getProbOfShop()
-	{
-		return probOfShop;
 	}
 	
 	public int getCurrentFuel()
