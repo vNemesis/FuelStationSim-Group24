@@ -2,11 +2,17 @@ package com.aston.group24.vehicles;
 
 public class Sedan extends Vehicle {
 
-	public Sedan(String model, int tankSize, int AOF, double pSize, double probO, double probS) 
+	public Sedan(int tankSize, int AOF, double pSize, boolean randomiseTank) 
 	{
-		super(model, tankSize, AOF, pSize, probO, probS);
-	}
-	
+		super(tankSize, AOF, pSize);
+		
+		if (randomiseTank)
+		{
+			//Randomise the tank size between 12 and 18
+			this.randomiseTankSize(12, 18);
+			
+		}
+	}	
 	
 
 }

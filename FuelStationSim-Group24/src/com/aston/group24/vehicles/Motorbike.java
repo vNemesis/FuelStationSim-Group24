@@ -2,9 +2,10 @@ package com.aston.group24.vehicles;
 
 public class Motorbike extends Vehicle {
 
-	public Motorbike(String model, int tankSize, int AOF, double pSize, double probO, double probS) 
+	public Motorbike(int tankSize, int AOF, double size) 
 	{
-		super(model, tankSize, AOF, pSize, probO, probS);
+		super(tankSize, AOF, size);
+		
 	}
 	
 	
