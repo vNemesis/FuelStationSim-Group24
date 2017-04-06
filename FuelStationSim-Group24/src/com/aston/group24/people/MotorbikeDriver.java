@@ -8,7 +8,7 @@ public class MotorbikeDriver extends Person{
 	public MotorbikeDriver(long seed)
 	{
 		super(seed);
-		vehicle = new Motorbike();
+		vehicle = new Motorbike(seed);
 		shopTime = 0; 						//Motorbike drivers never visit the shop
 		spendingMoney = new BigDecimal(0); 	//Motorbike drivers never visit the shop
 	}
