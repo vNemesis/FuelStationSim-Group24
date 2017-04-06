@@ -10,30 +10,41 @@ import java.util.Random;
  */
 public abstract class Vehicle {
 	
-	private String model;
 	private int fuelTankSize;
-	private int amountOfFuel;
+	private int currentFuel;
 	private double size;
 	private Random gener = new Random();
 	
-	public Vehicle(String model, int tankSize, int AOF, double pSize)
+	public Vehicle(long seed)
 	{
-		this.model = model;
-		fuelTankSize = tankSize;
-		amountOfFuel = AOF;
-		size = pSize;
+		gener.setSeed(seed);
 	}
 	
 	/*
 	 * Constructor - Models omitted, Fixed tank size
 	 * 
 	 */
-	public Vehicle(int tankSize, int AOF, double pSize)
+	public Vehicle(int minTankSize, int maxTankSize, int AOF, double pSize, boolean randomiseTank, boolean randomiseFuel, long seed)
 	{
-		model = "N/A";
-		fuelTankSize = tankSize;
-		amountOfFuel = AOF;
+		fuelTankSize = maxTankSize;
+		currentFuel = AOF;
 		size = pSize;
+		gener.setSeed(seed);
+		
+		// if true randomise initial fuel
+		if (randomiseFuel)
+		{
+			//Randomise the tank size between 1 and 1 below its max
+			this.randomiseInitialFuel();
+			
+		}
+		
+		// if true randomise tank size
+		if (randomiseTank)
+		{
+			// Randomise the tank size between 7 and 9 gallons
+			this.randomiseTankSize(minTankSize, maxTankSize);
+		}
 	}
 	
 	//Getter methods
@@ -44,6 +55,10 @@ public abstract class Vehicle {
 		return bd;
 	}
 	
+	/*
+	 * Randomise the Fuel tank size between two values - should be used at instantiation
+	 * 
+	 */
 	public void randomiseTankSize(int lowerLimit, int upperLimit)
 	{
 		int upperL = upperLimit;
@@ -68,9 +83,16 @@ public abstract class Vehicle {
 		
 	}
 	
-	public String getmodel()
+	/*
+	 * Randomise the amount of fuel in the vehicle - should be used at instantiation
+	 */
+	public void randomiseInitialFuel()
 	{
-		return model;
+		int upperLimit = this.getFuelTankSize() - 2;
+		int newFuel = gener.nextInt(upperLimit) + 1;
+		
+		currentFuel = newFuel;
+		
 	}
 	
 	public int getFuelTankSize()
@@ -85,7 +107,7 @@ public abstract class Vehicle {
 	
 	public int getCurrentFuel()
 	{
-		return amountOfFuel;
+		return currentFuel;
 	}
 	
 	/*
@@ -94,10 +116,10 @@ public abstract class Vehicle {
 	 */
 	public void fillCar(int amount)
 	{
-		amountOfFuel += amount;
+		currentFuel += amount;
 	}
 	
-	/*Setter Methods
+	//Setter Methods
 	
 		protected void setFuelTankSize(int s)
 		{
@@ -109,20 +131,14 @@ public abstract class Vehicle {
 			this.size = size;
 		}
 		
-		protected void setProbOfOccurance(double p)
-		{
-			probOfOccurance = p;
-		}
-		
-		protected void setProbOfShop(double p)
-		{
-			probOfShop = p;
-		}
 		
 		protected void setAmountOfFuel(int a)
 		{
-			amountOfFuel = a;
+			currentFuel = a;
 		}
-	*/
-
+		
+		protected void setSeed(long seed)
+		{
+			gener.setSeed(seed);
+		}
 }
