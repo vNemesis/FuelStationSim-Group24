@@ -1,9 +1,6 @@
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
-import java.util.Random;
-
-import com.aston.group24.model.Simulation;
 import com.aston.group24.vehicles.Sedan;
 
 public class SedanDriver extends Person{
@@ -11,7 +8,7 @@ public class SedanDriver extends Person{
 	public SedanDriver(long seed) 
 	{
 		super(seed);
-		vehicle = new Sedan();
+		vehicle = new Sedan(seed);
 		shopTime = rnd.nextInt(19) + 12;	//2-5 minutes (12-30 ticks)
 		spendingMoney = new BigDecimal((rnd.nextInt(801) + 800) / 100.00);	//(£8-£16)
 		 
