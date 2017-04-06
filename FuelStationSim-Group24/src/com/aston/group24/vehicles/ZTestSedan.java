@@ -2,28 +2,43 @@ package com.aston.group24.vehicles;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class ZTestSedan {
 	
-	private Sedan sc;
+	private Sedan sd;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		sc = new Sedan("B.M.W", 8, 2, 1.5, 1, 0.5);
+		sd = new Sedan(8, 2, 2, true);
+	}
+	
+	public ArrayList<Vehicle> createCars(int num)
+	{
+		ArrayList<Vehicle> cars = new ArrayList<Vehicle>();
+		
+		for (int i = 0; i < num; i++)
+		{
+			Sedan car = new Sedan(8, 2, 2, true);
+			System.out.println(car.getFuelTankSize());
+		}
+		
+		
+		return cars;
+		
 	}
 
 	@Test
 	public void testSedan() {
 		
-		assertEquals(sc.getmodel(), "B.M.W");
-		assertEquals(sc.getFuelTankSize(), 8);
-		assertEquals(sc.getCurrentFuel(), 2);
-		assertEquals(sc.getSize(), 1.5, 0.1);
-		assertEquals(sc.getProbOfOccurance(), 1, 0.1);
-		assertEquals(sc.getProbOfShop(), 0.5, 0.1);
+		createCars(20); // Test fuel tank randomiser
+		System.out.println(sd.getFuelTankSize());
+		assertEquals(sd.getCurrentFuel(), 2);
+		assertEquals(sd.getSize(), 2, 0.1);
 	}
 
 }

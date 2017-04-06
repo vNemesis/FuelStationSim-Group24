@@ -7,23 +7,21 @@ import org.junit.Test;
 
 public class ZTestMotorbike {
 	
-	private Motorbike sc;
+	private Motorbike mb;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		sc = new Motorbike("Suzuki", 4, 2, 1.5, 1, 0.5);
+		mb = new Motorbike(5, 2, 1.5);
 	}
 
 	@Test
 	public void testMotorbike() {
 		
-		assertEquals(sc.getmodel(), "Suzuki");
-		assertEquals(sc.getFuelTankSize(), 4);
-		assertEquals(sc.getCurrentFuel(), 2);
-		assertEquals(sc.getSize(), 1.5, 0.1);
-		assertEquals(sc.getProbOfOccurance(), 1, 0.1);
-		assertEquals(sc.getProbOfShop(), 0.5, 0.1);
+		assertEquals(mb.getFuelTankSize(), 5);
+		assertEquals(mb.getCurrentFuel(), 2);
+		assertEquals(mb.getSize(), 1.5, 0.1);
+
 	}
 
 }
