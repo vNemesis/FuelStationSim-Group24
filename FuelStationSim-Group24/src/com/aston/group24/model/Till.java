@@ -1,3 +1,5 @@
+package com.aston.group24.model;
+
 
 
 import java.util.ArrayList;
@@ -13,9 +15,9 @@ private ArrayList<Person> tillQueue;
         tillQueue = new ArrayList<Person>();
     }
 
-    protected void addPerson()
+    protected void addPerson(Person p)
     {
-        tillQueue.add(Person);
+        tillQueue.add(p);
     }
 
     protected void removePerson(Person p)
@@ -25,7 +27,7 @@ private ArrayList<Person> tillQueue;
 
     protected int queueLength()
     {
-        return tillQueue.size;
+        return tillQueue.size();
     }
 
 

@@ -1,6 +1,8 @@
 package com.aston.group24.model;
 
-package com.aston.group24.till.Till;
+import java.util.ArrayList;
+
+import com.aston.group24.people.Person;
 
 public class Shop{
 
@@ -20,7 +22,7 @@ public class Shop{
   {
       for(int i = 0; i < ammountOfTills; i++)
       {
-          tills.add(new Till);
+          tills.add(new Till());
 
       }
   }
@@ -28,8 +30,7 @@ public class Shop{
 
   protected Till tillWithShortesQueue(Person p)
   {
-
-
+	return null; // Replace with your own code
   }
 
 }
