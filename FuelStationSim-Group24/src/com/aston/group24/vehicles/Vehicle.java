@@ -5,24 +5,36 @@ import java.util.Random;
 
 /*
  * Vehicle library Super class
- * @version - 0.0.2  
+ * @version - 0.0.4  
  * 
  */
 public abstract class Vehicle {
 	
-	private int fuelTankSize;
-	private int currentFuel;
-	private double size;
-	private Random gener = new Random();
+	private int fuelTankSize;					// Tank size of vehicle
+	private int currentFuel;					// Current fuel of vehicle
+	private double size;						// Size of vehicle
+	private Random gener = new Random();		// Random Generator
 	
+	/*
+	 * Create a vehicle with a set random seed
+	 * 
+	 * @param seed Set the vehicles random seed
+	 */
 	public Vehicle(long seed)
 	{
 		gener.setSeed(seed);
 	}
 	
 	/*
-	 * Constructor - Models omitted, Fixed tank size
+	 * Constructor - Fixed tank size
 	 * 
+	 * @param minTankSize Minimum fuel tank size
+	 * @param maxTankSize Maximum fuel tank size
+	 * @param AOF Amount of fuel to start with
+	 * @param pSize Size of vehicle
+	 * @param randomiseTank Whether or not to randomise the fuel tanks size between the min and max values
+	 * @param randomiseFuel Whether or not to randomise the amount of fuel the vehicle starts with
+	 * @param seed Seed for the random Generator
 	 */
 	public Vehicle(int minTankSize, int maxTankSize, int AOF, double pSize, boolean randomiseTank, boolean randomiseFuel, long seed)
 	{
@@ -49,6 +61,11 @@ public abstract class Vehicle {
 	
 	//Getter methods
 	
+	/*
+	 * Gets the amount of fuel sold to the person
+	 * 
+	 * @return Return the cost to fill this vehicle's tank to the top
+	 */
 	public BigDecimal getRefuelCost()
 	{
 		BigDecimal bd = new BigDecimal("fuelTankSize * 1.20"); //Added Method
@@ -58,6 +75,8 @@ public abstract class Vehicle {
 	/*
 	 * Randomise the Fuel tank size between two values - should be used at instantiation
 	 * 
+	 * @param lowerLimit The least a tank can be
+	 * @param upperLimit The largest a tank can be
 	 */
 	public void randomiseTankSize(int lowerLimit, int upperLimit)
 	{
@@ -95,16 +114,31 @@ public abstract class Vehicle {
 		
 	}
 	
+	/*
+	 * Return the vehicles tank size
+	 * 
+	 * @return The vehicles fuel tank size
+	 */
 	public int getFuelTankSize()
 	{
 		return fuelTankSize;
 	}
 	
+	/*
+	 * Return the vehicle's size
+	 * 
+	 * @return The vehicle's size
+	 */
 	public double getSize()
 	{
 		return size;
 	}
 	
+	/*
+	 * Return the Vehicle's current fuel level
+	 * 
+	 * @return The vehicle's current fuel
+	 */
 	public int getCurrentFuel()
 	{
 		return currentFuel;
@@ -112,7 +146,7 @@ public abstract class Vehicle {
 	
 	/*
 	 * Fill the vehicle with fuel
-	 * 	@param amount the amount of fuel to fill at one time
+	 * @param amount the amount of fuel to fill at one time
 	 */
 	public void fillCar(int amount)
 	{
