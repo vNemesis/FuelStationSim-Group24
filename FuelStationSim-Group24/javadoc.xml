@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="C:\Users\harma\.p2\pool\plugins\org.junit_4.12.0.v201504281640\junit.jar;C:\Users\harma\.p2\pool\plugins\org.hamcrest.core_1.3.0.v201303031735.jar" destdir="doc" doctitle="Fuel Station Simulation - Group 24" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.aston.group24.model,com.aston.group24.vehicles,com.aston.group24.people" source="1.8" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
