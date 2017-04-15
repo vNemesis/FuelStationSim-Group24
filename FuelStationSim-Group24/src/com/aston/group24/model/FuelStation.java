@@ -12,10 +12,7 @@ import com.aston.group24.vehicles.Vehicle;
  * Fuel Station
  * - Will contain fuel pumps and manager these pumps
  * 
- * @version 0.0.2
- * 
- * Changes - 08/03/2017
- * 	- Add fuel amount counter
+ * @version 0.0.3
  * 
  */
 public class FuelStation {
@@ -28,11 +25,11 @@ public class FuelStation {
 	private final int pumpSupplyRate = 1;				// How many gallons do the pumps fuel per tick
 	private final int pumpSpaceCapacity = 3;			// How much space is at each pump
 
-	public FuelStation(int numOfPumps) 
+	public FuelStation(int numOfPumps, int numOfTills) 
 	{
 		pumps = new LinkedList<FuelPump>();
 		people = new ArrayList<Person>();
-		shop = new Shop();
+		shop = new Shop(numOfTills);
 		
 		createPumps(numOfPumps);
 	}
@@ -60,6 +57,14 @@ public class FuelStation {
 			gallonsFueled += (fp.carsFuelThisTick() * pumpSupplyRate);
 			fp.resetFuelTickCounter();
 		}
+	}
+	
+	/*
+	 * Returns total amount this station has provided
+	 */
+	protected int getGallonsFueled()
+	{
+		return gallonsFueled;
 	}
 	
 	/*
