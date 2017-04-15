@@ -5,24 +5,24 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aston.group24.vehicles.SmallCar;
+import com.aston.group24.people.SmallCarDriver;
 
 public class FuelStationTest {
 	
 	private FuelStation fs;
-	private SmallCar sc1;
-	private SmallCar sc2;
-	private SmallCar sc3;
-	private SmallCar sc4;
+	private SmallCarDriver sc1;
+	private SmallCarDriver sc2;
+	private SmallCarDriver sc3;
+	private SmallCarDriver sc4;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		fs = new FuelStation(3);
-		sc1 = new SmallCar( "Honda", 6, 2, 1.5, 0.7, 0.5); 		//size 1.5
-		sc2 = new SmallCar( "Seat", 7, 3, 1.0, 0.7, 0.5); 		//size 1
-		sc3 = new SmallCar( "Ford", 8, 2, 1.5, 0.7, 0.5); 		//size 1.5
-		sc4 = new SmallCar( "Dodge", 8, 2, 1.0, 0.7, 0.5); 		//size 1.0
+		fs = new FuelStation(3, 2);
+		sc1 = new SmallCarDriver(6); 		//size 1.5
+		sc2 = new SmallCarDriver(7); 		//size 1
+		sc3 = new SmallCarDriver(8); 		//size 1.5
+		sc4 = new SmallCarDriver(9); 		//size 1.0
 	}
 
 	@Test
