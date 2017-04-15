@@ -24,11 +24,9 @@ public class Simulation {
 	private int tick; 									// Current simulation tick
 	
 	private FuelStation fs;								// Fuel Station for simulation
-	//private Shop shop;								// Shop for simulation
 	public long seed;
 	
 	private int numOfPumps;								// Number of pumps
-	@SuppressWarnings("unused")
 	private int numOfTills;								// Number of tills
 	
 	private double probabilityP;						// Probability for small cars and motorbikes
@@ -58,7 +56,7 @@ public class Simulation {
 	 */
 	public void runSim(int ticks)
 	{
-		fs = new FuelStation(numOfPumps);
+		fs = new FuelStation(numOfPumps, numOfTills);
 		
 		for (int i = 0; i < ticks; i++)
 		{
@@ -181,7 +179,7 @@ public class Simulation {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("Fuel station with " + fs.numberOfPumps() + " Pumps was created");
-		// b.append("Shop with " + numOfTills + "Has been created"); TODO - add when shop is ready
+		sb.append("Shop with " + numOfTills + "Has been created");
 		return sb.toString();
 	}
 	
