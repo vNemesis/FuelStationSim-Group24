@@ -68,7 +68,7 @@ public abstract class Vehicle {
 	 */
 	public BigDecimal getRefuelCost()
 	{
-		BigDecimal bd = new BigDecimal("fuelTankSize * 1.20"); //Added Method
+		BigDecimal bd = new BigDecimal(fuelTankSize * 1.20); //Added Method
 		return bd;
 	}
 	
