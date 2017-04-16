@@ -3,8 +3,17 @@ package com.aston.group24.people;
 import java.math.BigDecimal;
 import com.aston.group24.vehicles.Sedan;
 
+/**
+ * Sedan Driver 
+ * @author James Shorthouse
+ * @version 0.1
+ */
 public class SedanDriver extends Person{
-
+	
+	/**
+	 * Constructor
+	 * @param seed Seed used for random generation
+	 */
 	public SedanDriver(long seed) 
 	{
 		super(seed);
@@ -14,6 +23,10 @@ public class SedanDriver extends Person{
 		 
 	}
 	
+	/**
+	 * Returns whether the person wants to visit the shop at the current point in the simulation
+	 * @return true if the person wants to visit the shop
+	 */
 	@Override
 	public boolean wantsToShop() 
 	{

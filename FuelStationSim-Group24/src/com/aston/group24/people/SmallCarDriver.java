@@ -3,8 +3,17 @@ package com.aston.group24.people;
 import java.math.BigDecimal;
 import com.aston.group24.vehicles.SmallCar;
 
+/**
+ * Small Car Driver 
+ * @author James Shorthouse
+ * @version 0.1
+ */
 public class SmallCarDriver extends Person{
 	
+	/**
+	 * Constructor
+	 * @param seed Seed used for random generation
+	 */
 	public SmallCarDriver(long seed)
 	{
 		super(seed);
@@ -13,6 +22,10 @@ public class SmallCarDriver extends Person{
 		spendingMoney = new BigDecimal((rnd.nextInt(501) + 500) / 100.00); //£5.00-£10.00
 	}
 	
+	/**
+	 * Returns whether the person wants to visit the shop at the current point in the simulation
+	 * @return true if the person wants to visit the shop
+	 */
 	@Override
 	public boolean wantsToShop()
 	{
