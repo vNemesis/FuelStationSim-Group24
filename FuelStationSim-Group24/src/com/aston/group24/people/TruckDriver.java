@@ -5,12 +5,20 @@ import java.util.Random;
 
 import com.aston.group24.vehicles.Truck;
 
+/**
+ * Truck Driver 
+ * @author James Shorthouse
+ * @version 0.1
+ */
 public class TruckDriver extends Person{
 	private Random rnd;
 	private static final double INITIAL_HAPPINESS = 0.02;
 	private static double happiness = INITIAL_HAPPINESS;	//Global happiness of all truck drivers
 	
-	
+	/**
+	 * Constructor
+	 * @param seed Seed used for random generation
+	 */
 	public TruckDriver(long seed)
 	{
 		super(seed);
@@ -19,6 +27,10 @@ public class TruckDriver extends Person{
 		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00); //Needs to be randomly generated (£15 - £20)
 	}
 	
+	/**
+	 * Returns whether the person wants to visit the shop at the current point in the simulation
+	 * @return true if the person wants to visit the shop
+	 */
 	@Override
 	public boolean wantsToShop()
 	{
@@ -28,18 +40,29 @@ public class TruckDriver extends Person{
 	}
 	
 	//Static methods
+	
+	/**
+	 * Increases the global happiness of all truck drivers
+	 */
 	public static void increaseHappiness()
 	{
 		//Happy truck driver increases happiness by 5%, up to the original value
 		happiness = Math.min((happiness * 1.05), INITIAL_HAPPINESS);
 	}
 	
+	/**
+	 * Decreases the global happiness of all truck drivers
+	 */
 	public static void decreaseHappiness()
 	{
 		//Unhappy truck driver reduces happiness by 20%
 		happiness = happiness * 0.8;
 	}
 	
+	/**
+	 * Returns the current global happiness of truck drivers
+	 * @return happiness value
+	 */
 	public static double getHappiness()
 	{
 		return happiness;
