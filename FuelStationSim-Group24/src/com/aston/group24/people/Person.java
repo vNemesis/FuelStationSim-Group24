@@ -42,8 +42,8 @@ public abstract class Person {
 	public BigDecimal getMoneySpent()
 	{
 		BigDecimal money = new BigDecimal(0);
-		if(visitedShop) money.add(spendingMoney);
-		if(refuelled) money.add(vehicle.getRefuelCost());	//getRefuelCost needs to be implemented in vehicle class (tankSize * PRICE_PER_GALLON)
+		if(visitedShop) money = money.add(spendingMoney);
+		if(refuelled) money = money.add(vehicle.getRefuelCost());	//getRefuelCost needs to be implemented in vehicle class (tankSize * PRICE_PER_GALLON)
 		return money;
 	}
 	
@@ -54,8 +54,8 @@ public abstract class Person {
 	public BigDecimal getMoneyLost()						//Code is kind of duplicated between these two methods,
 	{														//replace if you can think of a more elegant solution
 		BigDecimal money = new BigDecimal(0);
-		if(!visitedShop) money.add(spendingMoney);
-		if(!refuelled) money.add(vehicle.getRefuelCost());
+		if(!visitedShop) money = money.add(spendingMoney);
+		if(!refuelled) money = money.add(vehicle.getRefuelCost());
 		return money;
 	}
 	
