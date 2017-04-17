@@ -25,7 +25,7 @@ public class MotorbikeDriverTest {
 		
 		rnd = new Random(22);
 		
-		drivers = new MotorbikeDriver[128];
+		drivers = new MotorbikeDriver[4096];
 		for(int i = 0; i<drivers.length ; i++){
 			drivers[i] = new MotorbikeDriver(rnd.nextLong()); //Use random seed for each driver
 		}
@@ -74,16 +74,6 @@ public class MotorbikeDriverTest {
 	}
 	
 	@Test
-	public void testGetVisitedShop(){
-		//Iterate through drivers
-		for(MotorbikeDriver driver : drivers){
-			boolean visited = rnd.nextBoolean(); //Generate true or false visited value
-			driver.setVisitedShop(visited);
-			assertEquals(visited, driver.getVisitedShop());
-		}
-	}
-	
-	@Test
 	public void testMoneySpent(){
 		//Randomly set some drivers to have refuelled
 		for(MotorbikeDriver driver : drivers){
@@ -118,6 +108,4 @@ public class MotorbikeDriverTest {
 			}
 		}
 	}
-	
-
 }

@@ -2,7 +2,6 @@ package com.aston.group24.people;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Random;
 
 import com.aston.group24.vehicles.Truck;
 
@@ -13,7 +12,6 @@ import com.aston.group24.vehicles.Truck;
  * @version 0.1
  */
 public class TruckDriver extends Person{
-	private Random rnd;
 	private static final double INITIAL_HAPPINESS = 0.02;
 	private static double happiness = INITIAL_HAPPINESS;	//Global happiness of all truck drivers
 	
@@ -25,8 +23,8 @@ public class TruckDriver extends Person{
 	{
 		super(seed);
 		vehicle = new Truck(seed);
-		shopTime = rnd.nextInt(13) + 24; 	//Needs to be randomly generated (4-6 minutes (24-36 ticks))
-		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00).setScale(2, RoundingMode.HALF_UP); //Needs to be randomly generated (£15 - £20)
+		shopTime = rnd.nextInt(13) + 24; //4-6 minutes (24-36 ticks)
+		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00).setScale(2, RoundingMode.HALF_UP); //£15.00-£20.00
 	}
 	
 	/**
@@ -50,6 +48,7 @@ public class TruckDriver extends Person{
 	{
 		//Happy truck driver increases happiness by 5%, up to the original value
 		happiness = Math.min((happiness * 1.05), INITIAL_HAPPINESS);
+		System.out.println(happiness);
 	}
 	
 	/**

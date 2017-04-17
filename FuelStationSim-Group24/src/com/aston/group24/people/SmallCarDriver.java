@@ -21,7 +21,7 @@ public class SmallCarDriver extends Person{
 	{
 		super(seed);
 		vehicle = new SmallCar(seed);
-		shopTime = rnd.nextInt(13) + 12;	//2-4 minutes (12-24 ticks)
+		shopTime = rnd.nextInt(13) + 12; //2-4 minutes (12-24 ticks)
 		spendingMoney = new BigDecimal((rnd.nextInt(501) + 500) / 100.00).setScale(2, RoundingMode.HALF_UP); //£5.00-£10.00
 	}
 	

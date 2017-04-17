@@ -21,9 +21,8 @@ public class SedanDriver extends Person{
 	{
 		super(seed);
 		vehicle = new Sedan(seed);
-		shopTime = rnd.nextInt(19) + 12;	//2-5 minutes (12-30 ticks)
-		spendingMoney = new BigDecimal((rnd.nextInt(801) + 800) / 100.00).setScale(2, RoundingMode.HALF_UP);	//(£8-£16)
-		 
+		shopTime = rnd.nextInt(19) + 12; //2-5 minutes (12-30 ticks)
+		spendingMoney = new BigDecimal((rnd.nextInt(801) + 800) / 100.00).setScale(2, RoundingMode.HALF_UP); //£8.00-£16.00
 	}
 	
 	/**
