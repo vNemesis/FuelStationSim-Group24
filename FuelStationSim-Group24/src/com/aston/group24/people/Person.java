@@ -54,7 +54,7 @@ public abstract class Person {
 	 */
 	public BigDecimal getMoneyLost()						//Code is kind of duplicated between these two methods,
 	{														//replace if you can think of a more elegant solution
-		BigDecimal money = new BigDecimal(0);
+		BigDecimal money = new BigDecimal(0.00);
 		if(!visitedShop) money = money.add(spendingMoney);
 		if(!refuelled) money = money.add(vehicle.getRefuelCost());
 		return money;

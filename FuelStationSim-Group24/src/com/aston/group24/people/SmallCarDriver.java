@@ -1,6 +1,8 @@
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import com.aston.group24.vehicles.SmallCar;
 
 /**
@@ -20,7 +22,7 @@ public class SmallCarDriver extends Person{
 		super(seed);
 		vehicle = new SmallCar(seed);
 		shopTime = rnd.nextInt(13) + 12;	//2-4 minutes (12-24 ticks)
-		spendingMoney = new BigDecimal((rnd.nextInt(501) + 500) / 100.00); //£5.00-£10.00
+		spendingMoney = new BigDecimal((rnd.nextInt(501) + 500) / 100.00).setScale(2, RoundingMode.HALF_UP); //£5.00-£10.00
 	}
 	
 	/**

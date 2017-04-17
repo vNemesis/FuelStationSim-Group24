@@ -1,6 +1,7 @@
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 import com.aston.group24.vehicles.Truck;
@@ -25,7 +26,7 @@ public class TruckDriver extends Person{
 		super(seed);
 		vehicle = new Truck(seed);
 		shopTime = rnd.nextInt(13) + 24; 	//Needs to be randomly generated (4-6 minutes (24-36 ticks))
-		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00); //Needs to be randomly generated (£15 - £20)
+		spendingMoney = new BigDecimal((rnd.nextInt(501) + 1500) / 100.00).setScale(2, RoundingMode.HALF_UP); //Needs to be randomly generated (£15 - £20)
 	}
 	
 	/**

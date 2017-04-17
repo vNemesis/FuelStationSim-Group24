@@ -1,6 +1,7 @@
 package com.aston.group24.vehicles;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 /**
@@ -69,7 +70,7 @@ public abstract class Vehicle {
 	 */
 	public BigDecimal getRefuelCost()
 	{
-		BigDecimal bd = new BigDecimal(fuelTankSize * 1.20); //Added Method
+		BigDecimal bd = new BigDecimal(fuelTankSize * 1.20).setScale(2, RoundingMode.HALF_UP); //Added Method
 		return bd;
 	}
 	
