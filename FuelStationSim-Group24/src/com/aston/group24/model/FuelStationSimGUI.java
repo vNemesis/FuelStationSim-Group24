@@ -261,7 +261,7 @@ public class FuelStationSimGUI {
 		     return false; 
 		 }
 		 
-		 //Check ticks value is valid
+		 //Check ticks value is valid 
 		 try { 
 		        Integer.parseInt(ticks); 
 		    } catch(NumberFormatException e) {
