@@ -4,6 +4,12 @@ import java.util.LinkedList;
 
 import com.aston.group24.people.Person;;
 
+/**
+ * This class models a fuel pump
+ * 
+ * @author HarmanU
+ *
+ */
 public class FuelPump {
 	
 	private double space;
@@ -24,7 +30,7 @@ public class FuelPump {
 		CSO = 0;
 	}
 	
-	/*
+	/**
 	 * Add vehicle to pumps list
 	 */
 	protected void addPerson(Person p)
@@ -46,7 +52,7 @@ public class FuelPump {
 		return pumpID;
 	}
 	
-	/*
+	/**
 	 * return the current space Available at the pump
 	 */
 	protected double getCSA()
@@ -54,7 +60,7 @@ public class FuelPump {
 		return CSA;
 	}
 	
-	/*
+	/**
 	 * return max space at pump 
 	 */
 	protected double getMaxSpace()
@@ -67,7 +73,7 @@ public class FuelPump {
 		return currentPeople;
 	}
 	
-	/*
+	/**
 	 * supply fuel to first car at the pump
 	 */
 	protected void supplyFuel()
@@ -84,7 +90,7 @@ public class FuelPump {
 		}
 	}
 	
-	/*
+	/**
 	 * How many vehicles has this pump fuel this tick
 	 */
 	protected int carsFuelThisTick()
@@ -92,7 +98,7 @@ public class FuelPump {
 		return fueledThisTick;
 	}
 	
-	/*
+	/**
 	 * resets the counter ready for next tick
 	 */
 	protected void resetFuelTickCounter()

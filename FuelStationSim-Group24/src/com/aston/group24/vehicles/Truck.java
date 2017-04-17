@@ -2,7 +2,7 @@ package com.aston.group24.vehicles;
 
 public class Truck extends Vehicle {
 
-	/*
+	/**
 	 * Constructor 1 - Instance of the vehicle class with dynamic values
 	 * 
 	 * @param minTankSize Minimum fuel tank size
@@ -19,7 +19,7 @@ public class Truck extends Vehicle {
 		
 	}
 
-	/*
+	/**
 	 * Constructor 2 - Instance of the vehicle class with set values
 	 * 
 	 * @param seed Seed for the random Generator

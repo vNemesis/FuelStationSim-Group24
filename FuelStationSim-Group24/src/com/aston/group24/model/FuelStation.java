@@ -8,12 +8,12 @@ import java.util.LinkedList;
 import com.aston.group24.people.Person;
 import com.aston.group24.vehicles.Vehicle;
 
-/*
+/**
  * Fuel Station
  * - Will contain fuel pumps and manager these pumps
  * 
  * @version 0.0.3
- * 
+ * @ HarmanU, JShorthouse
  */
 public class FuelStation {
 	
@@ -34,7 +34,7 @@ public class FuelStation {
 		createPumps(numOfPumps);
 	}
 	
-	/*
+	/**
 	 * Create X number of pumps at the station
 	 */
 	protected void createPumps(int amountOfPumps)
@@ -46,7 +46,7 @@ public class FuelStation {
 		}
 	}
 	
-	/*
+	/**
 	 * All pumps at the station pump fuel to cars
 	 */
 	protected void allPumpFuel()
@@ -59,7 +59,7 @@ public class FuelStation {
 		}
 	}
 	
-	/*
+	/**
 	 * Returns total amount this station has provided
 	 */
 	protected int getGallonsFueled()
@@ -67,7 +67,7 @@ public class FuelStation {
 		return gallonsFueled;
 	}
 	
-	/*
+	/**
 	 * Add a vehicle to the station at a pump
 	 */
 	protected boolean addPerson(Person p)
@@ -86,7 +86,7 @@ public class FuelStation {
 	}
 	
 	
-	/*
+	/**
 	 * Sort Pumps with space in Descending order
 	 * 
 	 * 

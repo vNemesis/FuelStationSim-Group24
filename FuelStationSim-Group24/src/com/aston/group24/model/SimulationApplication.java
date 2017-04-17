@@ -1,13 +1,14 @@
 package com.aston.group24.model;
 
-/*
+/**
  * Class to run simulation and display GUI
  * 
  * @version 0.0.1
+ * @author HarmanU
  */
 public class SimulationApplication {
 	
-	/*
+	/**
 	 * Ran by application
 	 * 
 	 * @param args[0] Number of pumps

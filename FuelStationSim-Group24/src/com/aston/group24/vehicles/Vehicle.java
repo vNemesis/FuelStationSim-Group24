@@ -3,9 +3,10 @@ package com.aston.group24.vehicles;
 import java.math.BigDecimal;
 import java.util.Random;
 
-/*
+/**
  * Vehicle library Super class
- * @version - 0.0.4  
+ * @version - 0.0.4 
+ * @author HarmanU
  * 
  */
 public abstract class Vehicle {
@@ -15,7 +16,7 @@ public abstract class Vehicle {
 	private double size;						// Size of vehicle
 	private Random gener = new Random();		// Random Generator
 	
-	/*
+	/**
 	 * Create a vehicle with a set random seed
 	 * 
 	 * @param seed Set the vehicles random seed
@@ -25,7 +26,7 @@ public abstract class Vehicle {
 		gener.setSeed(seed);
 	}
 	
-	/*
+	/**
 	 * Constructor - Fixed tank size
 	 * 
 	 * @param minTankSize Minimum fuel tank size
@@ -61,7 +62,7 @@ public abstract class Vehicle {
 	
 	//Getter methods
 	
-	/*
+	/**
 	 * Gets the amount of fuel sold to the person
 	 * 
 	 * @return Return the cost to fill this vehicle's tank to the top
@@ -72,7 +73,7 @@ public abstract class Vehicle {
 		return bd;
 	}
 	
-	/*
+	/**
 	 * Randomise the Fuel tank size between two values - should be used at instantiation
 	 * 
 	 * @param lowerLimit The least a tank can be
@@ -102,7 +103,7 @@ public abstract class Vehicle {
 		
 	}
 	
-	/*
+	/**
 	 * Randomise the amount of fuel in the vehicle - should be used at instantiation
 	 */
 	public void randomiseInitialFuel()
@@ -114,7 +115,7 @@ public abstract class Vehicle {
 		
 	}
 	
-	/*
+	/**
 	 * Return the vehicles tank size
 	 * 
 	 * @return The vehicles fuel tank size
@@ -124,7 +125,7 @@ public abstract class Vehicle {
 		return fuelTankSize;
 	}
 	
-	/*
+	/**
 	 * Return the vehicle's size
 	 * 
 	 * @return The vehicle's size
@@ -134,7 +135,7 @@ public abstract class Vehicle {
 		return size;
 	}
 	
-	/*
+	/**
 	 * Return the Vehicle's current fuel level
 	 * 
 	 * @return The vehicle's current fuel
@@ -144,7 +145,7 @@ public abstract class Vehicle {
 		return currentFuel;
 	}
 	
-	/*
+	/**
 	 * Fill the vehicle with fuel
 	 * @param amount the amount of fuel to fill at one time
 	 */

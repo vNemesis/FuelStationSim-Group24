@@ -21,10 +21,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-/*
+/**
  * GUI class for the simulation
  * 
  * @version 0.0.1
+ * @author HarmanU
  */
 public class FuelStationSimGUI {
 	
@@ -174,7 +175,7 @@ public class FuelStationSimGUI {
 		// Don't quit
 	}
 	
-	/*
+	/**
 	 * Method to test whether the data entered is valid
 	 * 
 	 */

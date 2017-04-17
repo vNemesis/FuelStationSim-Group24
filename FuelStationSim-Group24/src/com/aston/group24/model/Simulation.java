@@ -10,7 +10,7 @@ import com.aston.group24.people.SedanDriver;
 import com.aston.group24.people.SmallCarDriver;
 import com.aston.group24.people.TruckDriver;
 
-/*
+/**
  * Main Simulation class
  * 
  * all code to run the Simulation including time and variables will go here
@@ -50,7 +50,7 @@ public class Simulation {
 		loss = new BigDecimal(0);
 	}
 	
-	/*
+	/**
 	 * Run simulation for an amount of time
 	 * @param time Time to run simulation in ticks (1 tick = 10 seconds)
 	 */
@@ -66,7 +66,7 @@ public class Simulation {
 		finished = true;
 	}
 
-	/*
+	/**
 	 * Runs one tick of the simulation 
 	 * 
 	 */
@@ -141,7 +141,7 @@ public class Simulation {
 		}
 	}
 	
-	/*
+	/**
 	 *Check whether simulation has finished running 
 	 */
 	public boolean isFinished()
@@ -149,7 +149,7 @@ public class Simulation {
 		return finished;
 	}
 	
-	/*
+	/**
 	 * To execute when the simulation has finished running (May not be needed)
 	 */
 	public void postSimulationRun()
@@ -171,7 +171,7 @@ public class Simulation {
 		return tick;
 	}
 	
-	/*
+	/**
 	 * Report status of Simulation - Mainly debug can be omitted in actual release
 	 */
 	protected String reportStatus()
@@ -183,7 +183,7 @@ public class Simulation {
 		return sb.toString();
 	}
 	
-	/*
+	/**
 	 * Set the values for the fuel station
 	 * @param numPumps set the number of pumps
 	 * @param numTills set the number of tills
