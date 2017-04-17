@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import com.aston.group24.vehicles.SmallCar;
 
 /**
- * Small Car Driver 
+ * SmallCarDriver.java
+ * Model of a small car driver
  * @author James Shorthouse
  * @version 0.1
  */

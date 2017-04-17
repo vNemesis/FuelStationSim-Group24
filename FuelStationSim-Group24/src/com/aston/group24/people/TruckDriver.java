@@ -6,7 +6,8 @@ import java.util.Random;
 import com.aston.group24.vehicles.Truck;
 
 /**
- * Truck Driver 
+ * TruckDriver.java
+ * Model of a truck driver
  * @author James Shorthouse
  * @version 0.1
  */

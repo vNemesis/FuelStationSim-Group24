@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import com.aston.group24.vehicles.Sedan;
 
 /**
- * Sedan Driver 
+ * SedanDriver.java
+ * Model of a sedan driver
  * @author James Shorthouse
  * @version 0.1
  */

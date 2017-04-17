@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import com.aston.group24.vehicles.Motorbike;
 
 /**
- * MotorBike Driver
+ * MotorbikeDriver.java
+ * Model of a motorbike driver
  * @author James Shorthouse
  * @version 0.1
  */

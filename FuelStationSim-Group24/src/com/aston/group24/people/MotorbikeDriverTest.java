@@ -8,6 +8,12 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * MotorbikeDriverTest.java
+ * Unit test for MotorbikeDriver class
+ * @author James Shorthouse
+ * @version 0.1
+ */
 public class MotorbikeDriverTest {
 	
 	MotorbikeDriver[] drivers;
@@ -53,7 +59,7 @@ public class MotorbikeDriverTest {
 			for(int i=0 ; i<time ; i++){ //Simulate this many ticks
 				driver.incrementTime(); 
 			}
-			assertEquals(time, driver.getTimeAtStation()); //Check that time at station equals the simualted time
+			assertEquals(time, driver.getTimeAtStation()); //Check that time at station equals the simulated time
 		}
 	}
 	

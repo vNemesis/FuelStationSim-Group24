@@ -6,6 +6,7 @@ import java.util.Random;
 import com.aston.group24.vehicles.Vehicle;
 
 /**
+ * Person.java
  * Person superclass
  * @author James Shorthouse
  * @version 0.1
