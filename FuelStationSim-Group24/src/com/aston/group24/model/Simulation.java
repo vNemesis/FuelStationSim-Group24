@@ -33,6 +33,8 @@ public class Simulation {
 	private double probabilityQ;						// Probability for sedans
 	private BigDecimal profit;
 	private BigDecimal loss;
+	private double maxTruckDriverHappiness;
+	private double truckDriverHappiness;				// Happiness of all truck drivers
 	
 	private Random rnd;
 	
@@ -48,6 +50,9 @@ public class Simulation {
 		finished = false;
 		profit = new BigDecimal(0);
 		loss = new BigDecimal(0);
+		
+		
+		truckDriverHappiness = maxTruckDriverHappiness = 0.02;
 	}
 	
 	/**
@@ -107,6 +112,19 @@ public class Simulation {
 			profit = profit.add(p.getMoneySpent());
 			loss = loss.add(p.getMoneyLost());
 			
+			//If truck driver, change happiness value
+			if(p instanceof TruckDriver)
+			{
+				if(p.getVisitedShop())
+				{
+					increaseTruckHappiness();
+				}
+				else
+				{
+					decreaseTruckHappiness();
+				}
+			}
+			
 			//Remove from simulation
 			fs.removePerson(p);			
 		}
@@ -131,7 +149,7 @@ public class Simulation {
 		{
 			return new SedanDriver(personSeed);
 		}
-		else if(num > 2*probabilityP + probabilityQ && num <= 2*probabilityP + probabilityQ + TruckDriver.getHappiness())
+		else if(num > 2*probabilityP + probabilityQ && num <= 2*probabilityP + probabilityQ + getTruckHappiness())
 		{
 			return new TruckDriver(personSeed);
 		}
@@ -197,6 +215,31 @@ public class Simulation {
 		this.seed = seed;
 	}
 	
+	/**
+	 * Increases the happiness of all truck drivers
+	 */
+	protected void increaseTruckHappiness()
+	{
+		//Happy truck driver increases truckDriverHappiness by 5%, up to the original value
+		truckDriverHappiness = Math.min((truckDriverHappiness * 1.05), maxTruckDriverHappiness);
+		System.out.println(truckDriverHappiness);
+	}
 	
-
+	/**
+	 * Decreases the happiness of all truck drivers
+	 */
+	protected void decreaseTruckHappiness()
+	{
+		//Unhappy truck driver reduces truckDriverHappiness by 20%
+		truckDriverHappiness = truckDriverHappiness * 0.8;
+	}
+	
+	/**
+	 * Returns the current happiness of all truck drivers
+	 * @return truckDriverHappiness value
+	 */
+	protected double getTruckHappiness()
+	{
+		return truckDriverHappiness;
+	}
 }

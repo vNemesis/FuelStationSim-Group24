@@ -12,8 +12,6 @@ import com.aston.group24.vehicles.Truck;
  * @version 0.1
  */
 public class TruckDriver extends Person{
-	private static final double INITIAL_HAPPINESS = 0.02;
-	private static double happiness = INITIAL_HAPPINESS;	//Global happiness of all truck drivers
 	
 	/**
 	 * Constructor
@@ -37,36 +35,5 @@ public class TruckDriver extends Person{
 		//Will always shop if the refill took 8 minutes or less (48 ticks)
 		if(timeAtStation <= 48) return true;
 		else return false;
-	}
-	
-	//Static methods
-	
-	/**
-	 * Increases the global happiness of all truck drivers
-	 */
-	public static void increaseHappiness()
-	{
-		//Happy truck driver increases happiness by 5%, up to the original value
-		happiness = Math.min((happiness * 1.05), INITIAL_HAPPINESS);
-		System.out.println(happiness);
-	}
-	
-	/**
-	 * Decreases the global happiness of all truck drivers
-	 */
-	public static void decreaseHappiness()
-	{
-		//Unhappy truck driver reduces happiness by 20%
-		happiness = happiness * 0.8;
-	}
-	
-	/**
-	 * Returns the current global happiness of truck drivers
-	 * @return happiness value
-	 */
-	public static double getHappiness()
-	{
-		return happiness;
-	}
-	
+	}	
 }
