@@ -1,7 +1,5 @@
 package com.aston.group24.model;
 
-
-
 import java.util.ArrayList;
 
 import com.aston.group24.people.Person;;
@@ -29,6 +27,9 @@ private ArrayList<Person> tillQueue;
     {
         return tillQueue.size();
     }
+
+
+
 
 
 
