@@ -15,6 +15,7 @@ import com.aston.group24.people.TruckDriver;
  * 
  * all code to run the Simulation including time and variables will go here
  * 
+ * 
  * @version 0.0.2
  * 
  */
@@ -133,6 +134,12 @@ public class Simulation {
 		tick++;
 	}
 	
+	/**
+	 * 
+	 * Generate a random person with seed generated from a main seed
+	 * @return the person generated
+	 * 
+	 */
 	private Person generatePerson(){
 		double num = rnd.nextDouble();
 		long personSeed = rnd.nextLong(); //Generate unique seed for each person from main seed
@@ -181,6 +188,34 @@ public class Simulation {
 		tick = 0;
 	}
 	
+	/**
+	 * Increases the happiness of all truck drivers
+	 */
+	protected void increaseTruckHappiness()
+	{
+		//Happy truck driver increases truckDriverHappiness by 5%, up to the original value
+		truckDriverHappiness = Math.min((truckDriverHappiness * 1.05), maxTruckDriverHappiness);
+		System.out.println(truckDriverHappiness);
+	}
+	
+	/**
+	 * Decreases the happiness of all truck drivers
+	 */
+	protected void decreaseTruckHappiness()
+	{
+		//Unhappy truck driver reduces truckDriverHappiness by 20%
+		truckDriverHappiness = truckDriverHappiness * 0.8;
+	}
+	
+	/**
+	 * Returns the current happiness of all truck drivers
+	 * @return truckDriverHappiness value
+	 */
+	protected double getTruckHappiness()
+	{
+		return truckDriverHappiness;
+	}
+	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------
 	
 	// return current tick of simulation
@@ -213,33 +248,5 @@ public class Simulation {
 		this.probabilityP = probabilityP;
 		this.probabilityQ = probabilityQ;
 		this.seed = seed;
-	}
-	
-	/**
-	 * Increases the happiness of all truck drivers
-	 */
-	protected void increaseTruckHappiness()
-	{
-		//Happy truck driver increases truckDriverHappiness by 5%, up to the original value
-		truckDriverHappiness = Math.min((truckDriverHappiness * 1.05), maxTruckDriverHappiness);
-		System.out.println(truckDriverHappiness);
-	}
-	
-	/**
-	 * Decreases the happiness of all truck drivers
-	 */
-	protected void decreaseTruckHappiness()
-	{
-		//Unhappy truck driver reduces truckDriverHappiness by 20%
-		truckDriverHappiness = truckDriverHappiness * 0.8;
-	}
-	
-	/**
-	 * Returns the current happiness of all truck drivers
-	 * @return truckDriverHappiness value
-	 */
-	protected double getTruckHappiness()
-	{
-		return truckDriverHappiness;
 	}
 }
