@@ -61,18 +61,6 @@ public abstract class Vehicle {
 		}
 	}
 	
-	//Getter methods
-	
-	/**
-	 * Gets the amount of fuel sold to the person
-	 * 
-	 * @return Return the cost to fill this vehicle's tank to the top
-	 */
-	public BigDecimal getRefuelCost()
-	{
-		BigDecimal bd = new BigDecimal(fuelTankSize * 1.20).setScale(2, RoundingMode.HALF_UP); //Added Method
-		return bd;
-	}
 	
 	/**
 	 * Randomise the Fuel tank size between two values - should be used at instantiation
@@ -117,6 +105,28 @@ public abstract class Vehicle {
 	}
 	
 	/**
+	 * Fill the vehicle with fuel
+	 * @param amount the amount of fuel to fill at one time
+	 */
+	public void fillCar(int amount)
+	{
+		currentFuel += amount;
+	}
+	
+	//--------------------------------------------- Getter Methods
+	
+	/**
+	 * Gets the amount of fuel sold to the person
+	 * 
+	 * @return Return the cost to fill this vehicle's tank to the top
+	 */
+	public BigDecimal getRefuelCost()
+	{
+		BigDecimal bd = new BigDecimal(fuelTankSize * 1.20).setScale(2, RoundingMode.HALF_UP); //Added Method
+		return bd;
+	}
+	
+	/**
 	 * Return the vehicles tank size
 	 * 
 	 * @return The vehicles fuel tank size
@@ -146,16 +156,7 @@ public abstract class Vehicle {
 		return currentFuel;
 	}
 	
-	/**
-	 * Fill the vehicle with fuel
-	 * @param amount the amount of fuel to fill at one time
-	 */
-	public void fillCar(int amount)
-	{
-		currentFuel += amount;
-	}
-	
-	//Setter Methods
+	//--------------------------------------------- Setter Methods
 	
 		protected void setFuelTankSize(int s)
 		{
