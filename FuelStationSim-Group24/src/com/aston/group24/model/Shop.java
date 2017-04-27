@@ -1,24 +1,46 @@
 package com.aston.group24.model;
 
 import java.util.ArrayList;
- 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Random;
+
 import com.aston.group24.people.Person;
 
 public class Shop{
 
-	private int shopTime;
-	private int tillTime;
+	private HashMap<Person, Double> shopTime;
+	private HashMap<Person, Double> tillTime;
 	private ArrayList<Person> shopFloor; //Array for storing people currently on the shop floor.
 	private ArrayList<Till> tills; //Array for storing tills.
 
 public Shop(int numTills)
-  {
-	
+  {	
+	shopTime = new HashMap<Person, Double>();
+	tillTime = new HashMap<Person, Double>();
     tills = new ArrayList<Till>();
  
     createTills(numTills);
-
   }
+
+  protected void rndShopTime(Person p)
+  {
+	  Random r = new Random(2-3);
+	  Double time = r.nextDouble();
+	  
+	  shopTime.put(p, time);  
+	
+  }
+  
+  protected void rndTillTime(Person p)
+  {
+	  Random r = new Random(2-3);
+	  Double time = r.nextDouble();
+	  
+	  tillTime.put(p, time);  
+  } 
+  
+  
 
   protected void createTills(int ammountOfTills)
   {
@@ -30,16 +52,30 @@ public Shop(int numTills)
   }
  
   protected void addPersonToFloor(Person p)
-  {		   
-		   
+  {		   	   
 	  shopFloor.add(p);
+	  
+  }
+  
+  protected boolean addPersonToTills(Person p)
+  {
+	  Till validTill = tillWithShortesQueue();
+	
+	  if(validTill != null)
+	  {
+		  tillWithShortesQueue().addPerson(p);
+		  return true;
+	  }
+	  else 
+	  {
+		  return false;
+	  }
 	  
   }
   
   protected void removePersonFromTills(Person p, Till t)
   {
-	  t.removePerson(p); 
-	  
+	  t.removePerson(p);
   }
   
   protected void removePersonBrowsing(Person p)
@@ -48,37 +84,52 @@ public Shop(int numTills)
 	  
   }
   
-  protected void addPersonToTills(Person p, Till t)
+  
+  protected ArrayList<Person> getFinishedBrowsing(Person p)
   {
-	  t.addPerson(p);
-	  
+	 ArrayList<Person> finishedBrowsing = new ArrayList<Person>();
+
+		 if(p.getShopTime() == shopTime.get(p))
+		 {
+			 finishedBrowsing.add(p);
+		 }
+		 return finishedBrowsing;
   }
   
-  protected Person getFinishedBrowsing(Person p)
+  protected ArrayList<Person> getFinishedPaying(Person p)
   {
-	  if(p.getShopTime() == shopTime)
+	  ArrayList<Person> finishedPaying = new ArrayList<Person>();
+	  
+	  if(p.getTillTime() == tillTime.get(p))
 	  {
-		  return p;
+		  finishedPaying.add(p);
 	  }
-	  else return null;
-  }
-  
-  protected Person getFinishedPaying(Person p)
-  {
-	  if(p.getTillTime() == tillTime)
-	  {
-		  return p;
-	  }
-	  else return null;
+	  return finishedPaying;
 	  
   }
+ 
   
-  protected Till tillWithShortesQueue(Person p)
-  {
+  protected Till tillWithShortesQueue()
+  {  
 	  
-	  
+	 ArrayList<Integer> sortedTills = new ArrayList<Integer>();
 	 
+	 for(Till t : tills)
+	 {
+		sortedTills.add(t.queueLength());
+		
+	 }
+	 
+	 Collections.sort(sortedTills, Collections.reverseOrder());
+	  
+	 for(Till t : tills)
+		 if(t.queueLength() == sortedTills.get(0))
+		 {
+			 return t;
+		 }
+	return null;
 	  
   }
   
+   
 }
