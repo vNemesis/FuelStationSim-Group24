@@ -1,16 +1,17 @@
 package com.aston.group24.model;
-
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import com.aston.group24.people.Person;;
 
 public class Till{
 
-private ArrayList<Person> tillQueue;
-
+private Queue<Person> tillQueue; 
+	
+	
     public Till()
     {
-        tillQueue = new ArrayList<Person>();
+        tillQueue = new LinkedList<Person>();
     }
 
     protected void addPerson(Person p)
@@ -27,10 +28,6 @@ private ArrayList<Person> tillQueue;
     {
         return tillQueue.size();
     }
-
-
-
-
 
 
 }
