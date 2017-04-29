@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 import com.aston.group24.people.Person;
+import com.aston.group24.util.Logger;
 import com.aston.group24.vehicles.Vehicle;
 
 /**
@@ -15,7 +16,7 @@ import com.aston.group24.vehicles.Vehicle;
  * @version 0.0.3
  * @ HarmanU, JShorthouse
  */
-public class FuelStation {
+public class FuelStation implements Logger{
 	
 	private LinkedList<FuelPump> pumps;					// Fuel pumps in the station
 	private ArrayList<Person> people;					// List of all people in station (ONLY used for incrementing time in simulation each tick)
@@ -116,8 +117,12 @@ public class FuelStation {
 		}
 		
 		System.out.println("Before Ordering");
-		System.out.println(pumpsWithSpace.toString());
-		System.out.println("Before Ordering");
+		ArrayList<Double> unsortedValues = new ArrayList<Double>();
+		for(FuelPump fp : pumpsWithSpace)
+		{
+			unsortedValues.add(fp.getCSA());
+		}
+		System.out.println(unsortedValues.toString());
 		
 		// List to store sorted values
 		ArrayList<Double> sortedValues = new ArrayList<Double>();
@@ -146,7 +151,7 @@ public class FuelStation {
 		
 	}
 	
-	/*
+	/**
 	 * Returns people that finished refuelling on the last tick
 	 */
 	private ArrayList<Person> getPeopleJustRefulled()
@@ -168,7 +173,7 @@ public class FuelStation {
 		return returnPeople;
 	}
 	
-	/*
+	/**
 	 * Move people between stages and return people that need removing from the simulation
 	 */
 	public ArrayList<Person> movePeople(){
@@ -181,7 +186,7 @@ public class FuelStation {
 		{
 			if(p.wantsToShop())
 			{
-				shop.addPersonToFloor();
+				shop.addPersonToFloor(p);
 			}
 			else
 			{
@@ -202,7 +207,7 @@ public class FuelStation {
 		ArrayList<Person> tillsFinished = shop.getFinishedPaying();
 		for(Person p : tillsFinished)
 		{
-			shop.removePersonFromTills(p);
+			shop.removePersonFromTills(p, null); //TODO needs to know what till they are at
 			fp.removePerson(p);
 			removeList.add(p);
 		}
@@ -211,7 +216,7 @@ public class FuelStation {
 			
 	}
 	
-	/*
+	/**
 	 * Remove a person from the arraylist of all people
 	 */
 	public void removePerson(Person p)
@@ -231,6 +236,20 @@ public class FuelStation {
 		}
 	}
 	
+	/**
+	 * Logs information
+	 * @return returns log to send to console and GUI
+	 */
+	public String getLog()
+	{
+		String log = ("Empty Log");
+		
+		
+		
+		return log;
+	}
+	
+	
 	
 	//------------------------------------------------------------------DEBUGGING--------------------------------------------------------------------
 	
@@ -245,9 +264,9 @@ public class FuelStation {
 		pumps.get(2).addPerson(v2); //1
 		pumps.get(2).addPerson(v3); //1.5
 		
-		//pump 0 = 1.5 free space
-		//pump 1 = 0.5 free space
-		//pump 2 - 3.0 free space
+		//pump 0 = 2.0 free space
+		//pump 1 = 3.0 free space
+		//pump 2 - 1.0 free space
 	}
 	
 	protected int numberOfPumps()
