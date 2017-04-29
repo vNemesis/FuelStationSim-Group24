@@ -84,7 +84,7 @@ public Shop(int numTills)
 	  
   }
   
-  
+  //TODO Needs to return a list of the people that have finished, at the moment just returns the one person in the parameter
   protected ArrayList<Person> getFinishedBrowsing(Person p)
   {
 	 ArrayList<Person> finishedBrowsing = new ArrayList<Person>();
