@@ -227,6 +227,8 @@ public class FuelStation implements Logger{
 		for(FuelPump fp : pumps)
 		{
 			fp.simulate();
+			gallonsFueled += (fp.carsFuelThisTick() * pumpSupplyRate);
+			fp.resetFuelTickCounter();
 		}
 		
 		//Add time to people in shop (browsing and at tills)
