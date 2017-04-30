@@ -76,7 +76,7 @@ public class FuelPump {
 	/**
 	 * supply fuel to first car at the pump
 	 */
-	protected void supplyFuel()
+	protected void simulate()
 	{
 		if (currentPeople.size() != 0)
 		{
