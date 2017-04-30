@@ -224,10 +224,18 @@ public class FuelStation implements Logger{
 		people.remove(p);
 	}
 	
+	/**
+	 * Run methods needed to simulate activity in the station
+	 */
 	public void simulate(){
 		//Pump fuel to cars
-		//Add time to people in shop
-		//Add time to people paying at till
+		for(FuelPump fp : pumps)
+		{
+			fp.simulate();
+		}
+		
+		//Add time to people in shop (browsing and at tills)
+		shop.simulate();
 		
 		//Increment time of each person
 		for(Person p : people)
