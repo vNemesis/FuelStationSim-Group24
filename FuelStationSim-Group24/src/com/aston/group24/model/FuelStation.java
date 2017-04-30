@@ -48,19 +48,6 @@ public class FuelStation implements Logger{
 	}
 	
 	/**
-	 * All pumps at the station pump fuel to cars
-	 */
-	protected void allPumpFuel()
-	{
-		for(FuelPump fp : pumps)
-		{
-			fp.supplyFuel();
-			gallonsFueled += (fp.carsFuelThisTick() * pumpSupplyRate);
-			fp.resetFuelTickCounter();
-		}
-	}
-	
-	/**
 	 * Returns total amount this station has provided
 	 */
 	protected int getGallonsFueled()
@@ -191,7 +178,10 @@ public class FuelStation implements Logger{
 			else
 			{
 				removeList.add(p);
-				fp.removePerson(p);
+				for(FuelPump fp : pumps)
+				{
+					fp.removePerson(p);
+				}
 			}	
 		}
 		
@@ -207,8 +197,13 @@ public class FuelStation implements Logger{
 		ArrayList<Person> tillsFinished = shop.getFinishedPaying();
 		for(Person p : tillsFinished)
 		{
-			shop.removePersonFromTills(p, null); //TODO needs to know what till they are at
-			fp.removePerson(p);
+			shop.removePersonFromTills(p);
+			
+			for(FuelPump fp : pumps)
+			{
+				fp.removePerson(p);
+			}
+			
 			removeList.add(p);
 		}
 		
