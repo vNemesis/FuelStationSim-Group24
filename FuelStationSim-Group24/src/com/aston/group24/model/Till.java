@@ -28,6 +28,15 @@ private Queue<Person> tillQueue;
     {
         return tillQueue.size();
     }
-
+    
+    protected boolean containsPerson(Person p)
+    {
+    	if(tillQueue.contains(p))
+    	{
+    		return true;
+    	}
+    	else return false;
+    	
+    }
 
 }
