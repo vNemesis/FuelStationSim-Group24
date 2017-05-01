@@ -3,12 +3,14 @@ package com.aston.group24.model;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -32,7 +34,20 @@ public class FuelStationSimGUI {
 	
 	private JFrame mainFrame;
 	private JTextArea log;
-	@SuppressWarnings("unused")
+	
+	private Timer timer;
+	private TimerTask runningtask;
+	
+	//Inputs
+	private JTextField commandInput;
+	private JTextField pumpsNumInput;
+	private JTextField tillsNumInput;
+	private JTextField probPInput;
+	private JTextField probQInput;
+	private JTextField seedInput;
+	private JTextField ticksInput;
+	private JCheckBox chckbx_toggleTrucks;
+	
 	private Simulation s;
 	
 	public FuelStationSimGUI(Simulation s)
@@ -41,16 +56,30 @@ public class FuelStationSimGUI {
 		
 		int blankSpace = 5;
 		
+		runningtask = new TimerTask() {
+			
+			@Override
+			public void run() {
+				log.append("Running, Please wait....");
+			}
+		};
+		
 		// Step 1: create the components
 		JButton runButton = new JButton();
 		JButton exitButton = new JButton();
+		JButton commandButton = new JButton();
 		
-		JTextField pumpsNumInput = new JTextField("3");
-		JTextField tillsNumInput = new JTextField("2");
-		JTextField probPInput = new JTextField("0.5");
-		JTextField probQInput = new JTextField("0.5");
-		JTextField seedInput = new JTextField("10");
-		JTextField ticksInput = new JTextField("1440");
+		pumpsNumInput = new JTextField("3");
+		tillsNumInput = new JTextField("2");
+		probPInput = new JTextField("0.5");
+		probQInput = new JTextField("0.5");
+		seedInput = new JTextField("10");
+		ticksInput = new JTextField("1440");
+		commandInput = new JTextField("");
+		
+		JLabel title = new JLabel("Fuel Station Simulator");
+
+		title.setFont(new Font(title.getFont().getName(), title.getFont().getStyle(), 20));
 		
 		JLabel pumpsLabel = new JLabel(" (Integer) Number of pumps");
 		JLabel tillsLabel = new JLabel(" (Integer) Number of Tills");
@@ -58,7 +87,8 @@ public class FuelStationSimGUI {
 		JLabel probQLabel = new JLabel(" (Double) Probibility of Q (Number between 0 and 1)");
 		JLabel seedLabel = new JLabel(" (Integer) Simulation random seed");
 		JLabel ticksLabel = new JLabel(" (Integer) Number of Ticks to run simulation for (1 tick = 10 seconds)");
-		JCheckBox chckbx_toggleTrucks = new JCheckBox("Allow Trucks?");
+		JLabel commandLabel = new JLabel("Enter commands here");
+		chckbx_toggleTrucks = new JCheckBox("Allow Trucks?");
 		JLabel logLabel = new JLabel("Simulation Log");
 		
 		log = new JTextArea();
@@ -73,15 +103,21 @@ public class FuelStationSimGUI {
 		
 		exitButton.setText("Exit");
 		exitButton.setToolTipText("Exit Program");
+		
+		commandButton.setText("Execute command");
+		commandButton.setToolTipText("Execute commands entered into the command box");
 				
 		// Step 3: Create containers to hold the components
 		mainFrame = new JFrame("Fuel Station Simulation");
 		mainFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		mainFrame.setMinimumSize(new Dimension(850, 650));
 		
 		JPanel commandBox = new JPanel();
 		JPanel inputBox = new JPanel();
 		JPanel dataBox = new JPanel();
 		JPanel logBox = new JPanel();
+		JPanel commandLineBox = new JPanel();
+		JPanel commandButtonBox = new JPanel();
 				
 		// Step 4: Specify LayoutManagers
 		
@@ -90,7 +126,9 @@ public class FuelStationSimGUI {
 		
 		dataBox.setLayout(new BorderLayout());
 		inputBox.setLayout(new GridLayout(7,2));
-		commandBox.setLayout(new FlowLayout());
+		commandBox.setLayout(new BorderLayout());
+		commandLineBox.setLayout(new GridLayout(1,2));
+		commandButtonBox.setLayout(new GridLayout(1,3));
 		logBox.setLayout(new BorderLayout());
 				
 		// Step 5: Add components to containers
@@ -111,13 +149,23 @@ public class FuelStationSimGUI {
 		logBox.add(logLabel, BorderLayout.NORTH);
 		logBox.add(listScroller, BorderLayout.SOUTH);
 		
-		commandBox.add(runButton);
-		commandBox.add(exitButton);
+		commandBox.add(commandLineBox);
+		commandBox.add(commandButtonBox);
+		
+		commandLineBox.add(commandInput);
+		commandLineBox.add(commandLabel);
+		commandButtonBox.add(runButton);
+		commandButtonBox.add(commandButton);
+		commandButtonBox.add(exitButton);
+		
+		commandBox.add(commandLineBox, BorderLayout.NORTH);
+		commandBox.add(commandButtonBox, BorderLayout.SOUTH);
 		
 		dataBox.add(inputBox, BorderLayout.NORTH);
 		dataBox.add(logBox, BorderLayout.SOUTH);
 		
-		mainFrame.add(dataBox, BorderLayout.NORTH);
+		mainFrame.add(title, BorderLayout.NORTH);
+		mainFrame.add(dataBox, BorderLayout.CENTER);
 		mainFrame.add(commandBox, BorderLayout.SOUTH);
 				
 		// Step 6: Arrange to handle events in the user interface
@@ -136,25 +184,21 @@ public class FuelStationSimGUI {
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				log.setText("");
-				log.setForeground(Color.black);
-				
-				// Check if values are valid, if they are run sim if not throw error in log
-				if(!validateData(pumpsNumInput.getText(), tillsNumInput.getText(), probPInput.getText(), probQInput.getText(), seedInput.getText(), ticksInput.getText()))
-				{
-					log.append("Please review input data and try again");
-					log.append("\n");
-					log.setForeground(Color.red);
+					log.setText("");
+					log.setForeground(Color.black);
+					executeSim();
+					
 				}
-				else
-				{
-					s.reset();																// Reset sim values for next run
-					s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()), chckbx_toggleTrucks.isSelected());		// set Fuel station values according to text inputs
-					s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
-					log.append(s.reportStartStatus());
-				}	
-			}
-		});
+			});
+			
+			commandButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					log.setForeground(Color.black);
+					executeCommand();
+					commandInput.setText("");
+				}
+			});
 		
 		// Step 7: Display the GUI
 		mainFrame.pack();
@@ -179,6 +223,34 @@ public class FuelStationSimGUI {
 	}
 	
 	/**
+	 * Method to execute simulations after validating data inputed in GUI
+	 */
+	private void executeSim()
+	{
+		// Check if values are valid, if they are run simulation if not throw error in log
+		if(!validateData(pumpsNumInput.getText(), tillsNumInput.getText(), probPInput.getText(), probQInput.getText(), seedInput.getText(), ticksInput.getText()))
+		{
+			log.append("Please review input data and try again");
+			log.append("\n");
+			log.setForeground(Color.red);
+		}
+		else
+		{
+			s.reset();																// Reset sim values for next run
+			s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()), chckbx_toggleTrucks.isSelected());		// set Fuel station values according to text inputs
+			s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
+			log.setText("");
+			log.append(s.reportStartStatus());
+			while(s.isFinished() == false)
+			{
+				timer.schedule(runningtask, 0, 2500);
+			}
+			log.append("\n");
+			log.append(s.reportStats());
+		}
+	}
+	
+	/**
 	 * Method to test whether the data entered is valid
 	 * 
 	 */
@@ -197,7 +269,7 @@ public class FuelStationSimGUI {
 		        return false;
 		    }
 		 
-		 // check num of tills is valid
+		 // check number of tills is valid
 		 try { 
 		        Integer.parseInt(numTills); 
 		    } catch(NumberFormatException e) {
@@ -279,6 +351,76 @@ public class FuelStationSimGUI {
 		 
 		 // Return true is data is valid
 		 return true;
+	}
+	
+	/**
+	 * Method to read commands and act accordingly
+	 */
+	private void executeCommand()
+	{
+		String command = commandInput.getText();
+		
+		// check number of words
+		String trimmedText = commandInput.getText().trim();
+		int words = trimmedText.isEmpty() ? 0 : trimmedText.split("\\s+").length;
+		
+		// Parse commands and executes accordingly
+		if(words == 1)
+		{
+			if(command.equals("help"))
+			{
+				log.append("\n");
+				log.append("The current valid commands are: help, clear, info, run");
+				log.append("\n to learn about a command type help followed by the command (For example: help clear).");
+			}
+			else if(command.equals("clear"))
+			{
+				log.setText("");
+			}
+			else if(command.equals("info"))
+			{
+				log.append("\n");
+				log.append("This simulation models a fuel stations with configurable options.");
+				log.append("\n Enter custom data above or run the simulation with default values by clicking the 'Run' button or typing run.");
+			}
+			else if(command.equals("run"))
+			{
+				executeSim();
+			}
+			else
+			{
+				log.append("\n");
+				log.append("Command: " + command + " is not valid. Type ' help ' for help.");
+			}
+		}
+		else if(words == 2)
+		{
+			if(command.equals("help clear"))
+			{
+				log.append("\n");
+				log.append("The ' clear ' command is used to clear the log view.");
+			}
+			else if(command.equals("help info"))
+			{
+				log.append("\n");
+				log.append("The ' info ' command is used to display info about this application.");
+			}
+			else if(command.equals("help run"))
+			{
+				log.append("\n");
+				log.append("Run the simulation with the given data inputted at the top.");
+			}
+			else
+			{
+				log.append("\n");
+				log.append("Command: " + command + " is not valid. Type ' help ' for help.");
+			}
+		}
+		else if(words == 0 || words > 2)
+		{
+			log.append("\n");
+			log.append("The command: " + command + " contains more than 2 words or command box is empty. Type ' help ' for help.");
+		}
 	}
 
 }
