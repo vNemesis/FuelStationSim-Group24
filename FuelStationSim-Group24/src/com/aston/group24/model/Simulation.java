@@ -36,12 +36,12 @@ public class Simulation {
 	private BigDecimal loss;
 	private double maxTruckDriverHappiness;
 	private double truckDriverHappiness;				// Happiness of all truck drivers
-	private boolean createTrucks;
+	private boolean trucksEnabled;						// Whether truck drivers will enter the station or not
 	
 	private Random rnd;
 	
 	//Constructor
-	public Simulation(int numOfPumps, int numOfTills, double probabilityP, double probabilityQ, long seed)
+	public Simulation(int numOfPumps, int numOfTills, double probabilityP, double probabilityQ, boolean trucksEnabled, long seed)
 	{
 		this.numOfPumps = numOfPumps;
 		this.numOfTills = numOfTills;
@@ -52,6 +52,7 @@ public class Simulation {
 		finished = false;
 		profit = new BigDecimal(0);
 		loss = new BigDecimal(0);
+		this.trucksEnabled = trucksEnabled;
 		
 		
 		truckDriverHappiness = maxTruckDriverHappiness = 0.02;
@@ -157,7 +158,7 @@ public class Simulation {
 		{
 			return new SedanDriver(personSeed);
 		}
-		else if(num > 2*probabilityP + probabilityQ && num <= 2*probabilityP + probabilityQ + getTruckHappiness())
+		else if(trucksEnabled && (num > 2*probabilityP + probabilityQ && num <= 2*probabilityP + probabilityQ + getTruckHappiness()))
 		{
 			return new TruckDriver(personSeed);
 		}
@@ -252,7 +253,7 @@ public class Simulation {
 		
 		sb.append("Fuel station with " + fs.numberOfPumps() + " Pumps was created");
 		sb.append("Shop with " + numOfTills + "Has been created");
-		sb.append("Spawn trucks: " + createTrucks);
+		sb.append("Spawn trucks: " + trucksEnabled);
 		return sb.toString();
 	}
 	
@@ -268,6 +269,6 @@ public class Simulation {
 		this.probabilityP = probabilityP;
 		this.probabilityQ = probabilityQ;
 		this.seed = seed;
-		this.createTrucks = createTrucks;
+		trucksEnabled = createTrucks;
 	}
 }
