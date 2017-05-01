@@ -11,6 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -57,6 +58,7 @@ public class FuelStationSimGUI {
 		JLabel probQLabel = new JLabel(" (Double) Probibility of Q (Number between 0 and 1)");
 		JLabel seedLabel = new JLabel(" (Integer) Simulation random seed");
 		JLabel ticksLabel = new JLabel(" (Integer) Number of Ticks to run simulation for (1 tick = 10 seconds)");
+		JCheckBox chckbx_toggleTrucks = new JCheckBox("Allow Trucks?");
 		JLabel logLabel = new JLabel("Simulation Log");
 		
 		log = new JTextArea();
@@ -87,7 +89,7 @@ public class FuelStationSimGUI {
 		((JPanel)mainFrame.getContentPane()).setBorder(new EmptyBorder(blankSpace, blankSpace, blankSpace, blankSpace));
 		
 		dataBox.setLayout(new BorderLayout());
-		inputBox.setLayout(new GridLayout(6,2));
+		inputBox.setLayout(new GridLayout(7,2));
 		commandBox.setLayout(new FlowLayout());
 		logBox.setLayout(new BorderLayout());
 				
@@ -104,6 +106,7 @@ public class FuelStationSimGUI {
 		inputBox.add(seedLabel);
 		inputBox.add(ticksInput);
 		inputBox.add(ticksLabel);
+		inputBox.add(chckbx_toggleTrucks);
 		
 		logBox.add(logLabel, BorderLayout.NORTH);
 		logBox.add(listScroller, BorderLayout.SOUTH);
@@ -146,9 +149,9 @@ public class FuelStationSimGUI {
 				else
 				{
 					s.reset();																// Reset sim values for next run
-					s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()));		// set Fuel station values according to text inputs
+					s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()), chckbx_toggleTrucks.isSelected());		// set Fuel station values according to text inputs
 					s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
-					log.append(s.reportStatus());
+					log.append(s.reportStartStatus());
 				}	
 			}
 		});
