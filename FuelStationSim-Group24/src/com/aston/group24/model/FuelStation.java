@@ -247,9 +247,7 @@ public class FuelStation implements Logger{
 	 */
 	public String Log()
 	{
-		String log = ("Empty Log");
-		
-		
+		String log = ("Fuel Station Empty Log");
 		
 		return log;
 	}

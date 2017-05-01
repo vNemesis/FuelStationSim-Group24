@@ -224,7 +224,12 @@ public class Simulation {
 	 */
 	protected String retriveLogs()
 	{
-		return null;
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Retrieve Logs");
+		sb.append(fs.Log());
+		
+		return sb.toString();
 	}
 	
 	/**
