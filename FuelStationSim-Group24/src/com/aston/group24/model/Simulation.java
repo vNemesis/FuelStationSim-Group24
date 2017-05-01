@@ -220,7 +220,7 @@ public class Simulation {
 	
 	/**
 	 * Retrieves log information from appropriate classes
-	 * @return String with log information
+	 * @return String with log information of all relevant classes
 	 */
 	protected String retriveLogs()
 	{
@@ -234,7 +234,7 @@ public class Simulation {
 	
 	/**
 	 * Reports final statistics
-	 * @return string contains information
+	 * @return Returns String which contains information about the simulation outcome
 	 */
 	protected String reportStats()
 	{
