@@ -36,6 +36,7 @@ public class Simulation {
 	private BigDecimal loss;
 	private double maxTruckDriverHappiness;
 	private double truckDriverHappiness;				// Happiness of all truck drivers
+	private boolean createTrucks;
 	
 	private Random rnd;
 	
@@ -216,6 +217,24 @@ public class Simulation {
 		return truckDriverHappiness;
 	}
 	
+	/**
+	 * Retrieves log information from appropriate classes
+	 * @return String with log information
+	 */
+	protected String retriveLogs()
+	{
+		return null;
+	}
+	
+	/**
+	 * Reports final statistics
+	 * @return string contains information
+	 */
+	protected String reportStats()
+	{
+		return null;
+	}
+	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------
 	
 	// return current tick of simulation
@@ -227,12 +246,13 @@ public class Simulation {
 	/**
 	 * Report status of Simulation - Mainly debug can be omitted in actual release
 	 */
-	protected String reportStatus()
+	protected String reportStartStatus()
 	{
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("Fuel station with " + fs.numberOfPumps() + " Pumps was created");
 		sb.append("Shop with " + numOfTills + "Has been created");
+		sb.append("Spawn trucks: " + createTrucks);
 		return sb.toString();
 	}
 	
@@ -241,12 +261,13 @@ public class Simulation {
 	 * @param numPumps set the number of pumps
 	 * @param numTills set the number of tills
 	 */
-	protected void setFuelStationVal(int numPumps, int numTills, long seed, double probabilityP, double probabilityQ)
+	protected void setFuelStationVal(int numPumps, int numTills, long seed, double probabilityP, double probabilityQ, boolean createTrucks)
 	{
 		numOfPumps = numPumps;
 		numOfTills = numTills;
 		this.probabilityP = probabilityP;
 		this.probabilityQ = probabilityQ;
 		this.seed = seed;
+		this.createTrucks = createTrucks;
 	}
 }
