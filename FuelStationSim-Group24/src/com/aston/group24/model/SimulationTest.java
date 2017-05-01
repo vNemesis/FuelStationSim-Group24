@@ -11,7 +11,7 @@ public class SimulationTest {
 	
 	@Before
 	public void setUp(){
-		sim = new Simulation(4, 2, 0.5, 0.5, 1);
+		sim = new Simulation(4, 2, 0.5, 0.5, false, 1);
 	}
 	
 	@Test
