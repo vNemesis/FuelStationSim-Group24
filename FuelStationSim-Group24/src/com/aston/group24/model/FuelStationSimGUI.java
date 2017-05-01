@@ -241,10 +241,10 @@ public class FuelStationSimGUI {
 			s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
 			log.setText("");
 			log.append(s.reportStartStatus());
-			while(s.isFinished() == false)
-			{
-				timer.schedule(runningtask, 0, 2500);
-			}
+			//while(s.isFinished() == false)
+			//{
+			//	timer.schedule(runningtask, 0, 2500);
+			//}
 			log.append("\n");
 			log.append(s.reportStats());
 		}
