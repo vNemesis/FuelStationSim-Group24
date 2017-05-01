@@ -245,7 +245,7 @@ public class FuelStation implements Logger{
 	 * Logs information
 	 * @return returns log to send to console and GUI
 	 */
-	public String getLog()
+	public String Log()
 	{
 		String log = ("Empty Log");
 		
