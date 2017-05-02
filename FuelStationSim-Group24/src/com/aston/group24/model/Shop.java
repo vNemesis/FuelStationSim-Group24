@@ -114,14 +114,17 @@ public Shop(int numTills)
   /**
    * Return ArrayList of people who have finished paying
    */
-  protected ArrayList<Person> getFinishedPaying(Person p)
+  protected ArrayList<Person> getFinishedPaying()
   {
-	  ArrayList<Person> finishedPaying = new ArrayList<Person>();
+	ArrayList<Person> finishedPaying = new ArrayList<Person>();
 	  
-	  if(p.getTillTime() == tillTime.get(p))
+	for(int i = 0; i < tills.size(); i++)
+	{  
+	  if(tills.get(i).getFirstInQueue().getTillTime() == tillTime.get(tills.get(i).getFirstInQueue()))
 	  {
-		  finishedPaying.add(p);
+		  finishedPaying.add(tills.get(i).getFirstInQueue());
 	  }
+	}
 	  return finishedPaying;
   }
  
