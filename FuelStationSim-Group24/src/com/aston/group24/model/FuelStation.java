@@ -167,7 +167,7 @@ public class FuelStation implements Logger{
 	 */
 	public ArrayList<Person> movePeople(){
 		
-		ArrayList<Person> removeList;
+		ArrayList<Person> removeList = new ArrayList<Person>();
 		
 		//Add refuelled people to shop (Keeping them at the pump as they are still "using" the space)
 		ArrayList<Person> refulled = getPeopleJustRefulled();
