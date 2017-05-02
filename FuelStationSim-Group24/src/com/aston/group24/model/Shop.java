@@ -120,7 +120,8 @@ public Shop(int numTills)
 	ArrayList<Person> finishedPaying = new ArrayList<Person>();
 	  
 	for(int i = 0; i < tills.size(); i++)
-	{  
+	{
+		
 	  if(tills.get(i).getFirstInQueue().getTillTime() == tillTime.get(tills.get(i).getFirstInQueue()))
 	  {
 		  finishedPaying.add(tills.get(i).getFirstInQueue());
@@ -157,7 +158,11 @@ public Shop(int numTills)
   {
 	  for(Person p : shopFloor)
 	  {
-		  shopTime.put(p, + 1);		  
+		  shopTime.put(p, + 1);
+		  /*
+		   * int newTime = shopTime.get(p) + 1;
+		   * shopTime.put(p, newTime);
+		   */
 	  }
 	  
 	  for(Till t : tills)

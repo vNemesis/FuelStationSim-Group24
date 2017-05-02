@@ -61,6 +61,12 @@ public class SimulationTest {
 			assertEquals(0.2, decreasePercentage, 0.01);
 		}
 	}
+	
+	@Test
+	public void testExecuteSim(){
+		
+		sim.runSim(1440);
+	}
 
 
 }
