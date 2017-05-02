@@ -26,7 +26,8 @@ public Shop(int numTills)
   {	
 	shopTime = new HashMap<Person, Integer>();
 	tillTime = new HashMap<Person, Integer>();
-    tills = new ArrayList<Till>();
+	shopFloor = new ArrayList<Person>();
+    	tills = new ArrayList<Till>();
  
     createTills(numTills);
   }
