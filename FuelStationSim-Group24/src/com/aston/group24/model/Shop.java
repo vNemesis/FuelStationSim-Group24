@@ -8,10 +8,11 @@ import com.aston.group24.people.Person;
 
 /**
  * Shop
- * - Will contain and manage tills and shop floor.
  * 
- * @version 0.0.3
- * @ JTurner
+ * Will contain and manage tills and shop floor.
+ * 
+ * @author JTurner
+ * 
  */
 
 public class Shop{
@@ -25,7 +26,7 @@ public Shop(int numTills)
   {	
 	shopTime = new HashMap<Person, Integer>();
 	tillTime = new HashMap<Person, Integer>();
-    	tills = new ArrayList<Till>();
+    tills = new ArrayList<Till>();
  
     createTills(numTills);
   }
@@ -103,8 +104,7 @@ public Shop(int numTills)
 	 for(int i = 0; i < shopFloor.size(); i++)
 	 { 
 		 if(shopFloor.get(i).getShopTime() == shopTime.get(shopFloor.get(i)))
-		 {		 
-			 
+		 {		 	 
 			 finishedBrowsing.add(shopFloor.get(i));
 		 }
 	 }
@@ -122,7 +122,7 @@ public Shop(int numTills)
 	  {
 		  finishedPaying.add(p);
 	  }
-	  return finishedPaying;  
+	  return finishedPaying;
   }
  
   /**
@@ -136,7 +136,6 @@ public Shop(int numTills)
 	 for(Till t : tills)
 	 {
 		sortedTills.add(t.queueLength());
-		
 	 }
 	 
 	 Collections.sort(sortedTills, Collections.reverseOrder());//Sort values
@@ -146,12 +145,21 @@ public Shop(int numTills)
 		 {
 			 return t;
 		 }
-	return null;	  
+	return null;
+
   }
   
   public void simulate()
   {
-
-	 
-  }  
+	  for(Person p : shopFloor)
+	  {
+		  shopTime.put(p, + 1);		  
+	  }
+	  
+	  for(Till t : tills)
+	  {
+		  tillTime.put(t.getFirstInQueue(), + 1);
+	  }
+  }
+ 
 }
