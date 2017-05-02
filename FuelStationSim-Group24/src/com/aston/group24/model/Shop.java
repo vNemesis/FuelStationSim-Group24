@@ -160,8 +160,12 @@ public Shop(int numTills)
 	  {
 		  shopTime.put(p, + 1);
 		  /*
-		   * int newTime = shopTime.get(p) + 1;
-		   * shopTime.put(p, newTime);
+		   * Solution 1 :
+		   * 	int newTime = shopTime.get(p) + 1;
+		   * 	shopTime.put(p, newTime);
+		   * 
+		   * Solution 2 :
+		   * 	shopTime.put(p, shopTime.get(p) + 1);
 		   */
 	  }
 	  
