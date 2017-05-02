@@ -1,14 +1,22 @@
 package com.aston.group24.model;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
+
+import org.hamcrest.core.IsInstanceOf;
 
 import com.aston.group24.people.MotorbikeDriver;
 import com.aston.group24.people.Person;
 import com.aston.group24.people.SedanDriver;
 import com.aston.group24.people.SmallCarDriver;
 import com.aston.group24.people.TruckDriver;
+import com.aston.group24.util.StringToFile;
+import com.aston.group24.vehicles.Motorbike;
+import com.aston.group24.vehicles.Sedan;
+import com.aston.group24.vehicles.SmallCar;
+import com.aston.group24.vehicles.Truck;
 
 /**
  * Main Simulation class
@@ -16,7 +24,7 @@ import com.aston.group24.people.TruckDriver;
  * all code to run the Simulation including time and variables will go here
  * 
  * 
- * @version 0.0.2
+ * @version 02.05.2017/2329
  * 
  */
 public class Simulation {
@@ -37,6 +45,13 @@ public class Simulation {
 	private double maxTruckDriverHappiness;
 	private double truckDriverHappiness;				// Happiness of all truck drivers
 	private boolean trucksEnabled;						// Whether truck drivers will enter the station or not
+	
+	// Number of each type of vehicle that was served at the station
+	private int numOfSmallCars;
+	private int numOfSedans;
+	private int numOfMotorbikes;
+	private int numOfTrucks;
+	private int numOfLossedCustomers;
 	
 	private Random rnd;
 	
@@ -105,6 +120,27 @@ public class Simulation {
 			if(!fs.addPerson(newPerson))
 			{
 				removeList.add(newPerson);
+				numOfLossedCustomers++;
+			}
+			else
+			{
+				// Checks what vehicle the person has then increments a variable to keep track of how many where served
+				if (newPerson.getVehicle() instanceof SmallCar)
+				{
+					numOfSmallCars++;
+				}
+				else if (newPerson.getVehicle() instanceof Sedan)
+				{
+					numOfSedans++;
+				}
+				else if (newPerson.getVehicle() instanceof Motorbike)
+				{
+					numOfMotorbikes++;
+				}
+				else if (newPerson.getVehicle() instanceof Truck)
+				{
+					numOfTrucks++;
+				}
 			}
 		}
 		
@@ -184,7 +220,7 @@ public class Simulation {
 
 	}
 	
-	protected void reset()
+	public void reset()
 	{
 		fs = null;
 		tick = 0;
@@ -219,26 +255,20 @@ public class Simulation {
 	}
 	
 	/**
-	 * Retrieves log information from appropriate classes
-	 * @return String with log information of all relevant classes
+	 * Reports final statistics and then send output to a file
+	 * @return Returns String which contains information about the simulation outcome
 	 */
-	protected String retriveLogs()
+	public String reportStats()
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("Retrieve Logs");
 		sb.append(fs.Log());
+		sb.append("A total of " + numOfSmallCars + " Small cars, " + numOfSedans + " Sedans, " + numOfMotorbikes + " Motorbikes and " + numOfTrucks + " Trucks were served");
+		sb.append("A total of " + numOfLossedCustomers + " customers were lost due to no space");
+		sb.append(" The Station made £" + profit + " profit and a loss of £" + loss);
 		
+		System.out.println(sb.toString());
 		return sb.toString();
-	}
-	
-	/**
-	 * Reports final statistics
-	 * @return Returns String which contains information about the simulation outcome
-	 */
-	protected String reportStats()
-	{
-		return null;
 	}
 	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------
@@ -252,7 +282,7 @@ public class Simulation {
 	/**
 	 * Report status of Simulation - Mainly debug can be omitted in actual release
 	 */
-	protected String reportStartStatus()
+	public String reportStartStatus()
 	{
 		StringBuilder sb = new StringBuilder();
 		
@@ -267,7 +297,7 @@ public class Simulation {
 	 * @param numPumps set the number of pumps
 	 * @param numTills set the number of tills
 	 */
-	protected void setFuelStationVal(int numPumps, int numTills, long seed, double probabilityP, double probabilityQ, boolean createTrucks)
+	public void setFuelStationVal(int numPumps, int numTills, long seed, double probabilityP, double probabilityQ, boolean createTrucks)
 	{
 		numOfPumps = numPumps;
 		numOfTills = numTills;

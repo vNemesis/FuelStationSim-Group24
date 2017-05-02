@@ -1,4 +1,4 @@
-package com.aston.group24.model;
+package com.aston.group24.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,10 +25,13 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.aston.group24.model.*;
+import com.aston.group24.util.StringToFile;
+
 /**
  * GUI class for the simulation
  * 
- * @version 0.0.1
+ * @version 02.05.2017/2329
  * @author HarmanU
  */
 public class FuelStationSimGUI {
@@ -83,8 +87,8 @@ public class FuelStationSimGUI {
 		
 		JLabel pumpsLabel = new JLabel(" (Integer) Number of pumps");
 		JLabel tillsLabel = new JLabel(" (Integer) Number of Tills");
-		JLabel probPLabel = new JLabel(" (Double) Probibility of P (Number between 0 and 1)");
-		JLabel probQLabel = new JLabel(" (Double) Probibility of Q (Number between 0 and 1)");
+		JLabel probPLabel = new JLabel(" (Double) Probibility of a small car arriving (P) (Number between 0 and 1)");
+		JLabel probQLabel = new JLabel(" (Double) Probibility of a sedan arriving (Q) (Number between 0 and 1)");
 		JLabel seedLabel = new JLabel(" (Integer) Simulation random seed");
 		JLabel ticksLabel = new JLabel(" (Integer) Number of Ticks to run simulation for (1 tick = 10 seconds)");
 		JLabel commandLabel = new JLabel("Enter commands here");
@@ -149,6 +153,7 @@ public class FuelStationSimGUI {
 		logBox.add(logLabel, BorderLayout.NORTH);
 		logBox.add(listScroller, BorderLayout.SOUTH);
 		
+		// set up the command box
 		commandBox.add(commandLineBox);
 		commandBox.add(commandButtonBox);
 		
@@ -186,11 +191,21 @@ public class FuelStationSimGUI {
 				
 					log.setText("");
 					log.setForeground(Color.black);
-					executeSim();
+					
+					// Execute the simulation
+						executeSim();
+					// print status to file
+					StringToFile stf = new StringToFile();
+					try {
+						stf.sendToFile(s.reportStats(), "Simulation Output");
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					
 				}
 			});
 			
+			// execute command when the button is pressed
 			commandButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					

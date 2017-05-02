@@ -13,7 +13,7 @@ import com.aston.group24.vehicles.Vehicle;
  * Fuel Station
  * - Will contain fuel pumps and manager these pumps
  * 
- * @version 0.0.3
+ * @version 02.05.2017/2329
  * @ HarmanU, JShorthouse
  */
 public class FuelStation implements Logger{
@@ -25,6 +25,7 @@ public class FuelStation implements Logger{
 	private int gallonsFueled;							// How much fuel has been pumped total
 	private final int pumpSupplyRate = 1;				// How many gallons do the pumps fuel per tick
 	private final int pumpSpaceCapacity = 3;			// How much space is at each pump
+	private int numberOfCustomersServed;
 
 	public FuelStation(int numOfPumps, int numOfTills) 
 	{
@@ -65,6 +66,7 @@ public class FuelStation implements Logger{
 		if (validPump != null)
 		{
 			pumpWithShortestLine(p).addPerson(p);
+			numberOfCustomersServed++;
 			return true;
 		}
 		else
@@ -243,13 +245,16 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Logs information
-	 * @return returns log to send to console and GUI
+	 * @return returns stringBuilder to send to console and GUI as a log
 	 */
 	public String Log()
 	{
-		String log = ("Fuel Station Empty Log");
+		StringBuilder sb = new StringBuilder();
 		
-		return log;
+		sb.append("The total amount of fuel pumped was " + getGallonsFueled() + " gallons of fuel.");
+		sb.append("The number of customers who used a fuel pump was " + numberOfCustomersServed + ".");
+		
+		return sb.toString();
 	}
 	
 	

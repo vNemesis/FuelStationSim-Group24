@@ -1,9 +1,11 @@
-package com.aston.group24.model;
+package com.aston.group24.view;
+
+import com.aston.group24.model.Simulation;
 
 /**
  * Class to run simulation and display GUI
  * 
- * @version 0.0.1
+ * @version 02.05.2017/2329
  * @author HarmanU
  */
 public class SimulationApplication {
