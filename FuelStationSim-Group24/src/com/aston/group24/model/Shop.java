@@ -9,7 +9,7 @@ import com.aston.group24.people.Person;
 
 /**
  * Shop
- * @author JTurner
+ * @author Jake Turner
  * @version 20.04.2017/2055
  */
 public class Shop{
