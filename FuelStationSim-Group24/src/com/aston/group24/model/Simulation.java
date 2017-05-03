@@ -1,5 +1,6 @@
 package com.aston.group24.model;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,6 +10,7 @@ import com.aston.group24.people.Person;
 import com.aston.group24.people.SedanDriver;
 import com.aston.group24.people.SmallCarDriver;
 import com.aston.group24.people.TruckDriver;
+import com.aston.group24.util.StringToFile;
 import com.aston.group24.vehicles.Motorbike;
 import com.aston.group24.vehicles.Sedan;
 import com.aston.group24.vehicles.SmallCar;
@@ -253,6 +255,24 @@ public class Simulation {
 	protected double getTruckHappiness()
 	{
 		return truckDriverHappiness;
+	}
+	// ----------------------------------------------- Output Integration ----------------------------------------------
+	
+	public void PrintOutputToFile()
+	{
+		// print status to file
+		StringToFile stf = new StringToFile();
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(reportStartStatus());
+		sb.append(reportStats());
+		
+		try {
+			stf.sendToFile(sb.toString(), "Simulation Output");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------
