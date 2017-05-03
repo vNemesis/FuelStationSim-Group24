@@ -39,7 +39,7 @@ public class SimulationApplication {
 			
 			if(Boolean.parseBoolean(args[7]))
 			{
-				s.PrintOutputToFile();
+				s.PrintOutputToFile("Simulation Output");
 			}
 			
 			System.out.print(s.reportStartStatus());
