@@ -6,8 +6,8 @@ import java.util.Random;
 
 /**
  * Vehicle library Super class
- * @version - 0.0.4 
- * @author HarmanU
+ * @version - 03.05.2017/1750
+ * @author HarmanU, HuzaifahR
  * 
  */
 public abstract class Vehicle {

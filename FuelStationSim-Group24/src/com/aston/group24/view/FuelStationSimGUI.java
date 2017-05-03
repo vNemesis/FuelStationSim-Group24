@@ -31,16 +31,13 @@ import com.aston.group24.util.StringToFile;
 /**
  * GUI class for the simulation
  * 
- * @version 02.05.2017/2329
+ * @version - 03.05.2017/1750
  * @author HarmanU
  */
 public class FuelStationSimGUI {
 	
 	private JFrame mainFrame;
 	private JTextArea log;
-	
-	private Timer timer;
-	private TimerTask runningtask;
 	
 	//Inputs
 	private JTextField commandInput;
@@ -59,14 +56,6 @@ public class FuelStationSimGUI {
 		this.s = s;
 		
 		int blankSpace = 5;
-		
-		runningtask = new TimerTask() {
-			
-			@Override
-			public void run() {
-				log.append("Running, Please wait....");
-			}
-		};
 		
 		// Step 1: create the components
 		JButton runButton = new JButton();
@@ -210,6 +199,7 @@ public class FuelStationSimGUI {
 				public void actionPerformed(ActionEvent e) {
 					
 					log.setForeground(Color.black);
+					log.append("\n");
 					executeCommand();
 					commandInput.setText("");
 				}
@@ -219,6 +209,8 @@ public class FuelStationSimGUI {
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
+	
+	//---------------------------------------------------------------------------------------------- Methods ------------------------------------------------------------
 	
 	/**
 	 * Helper method to ensure consistency in leaving application.
@@ -256,18 +248,20 @@ public class FuelStationSimGUI {
 			s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
 			log.setText("");
 			log.append(s.reportStartStatus());
-			//while(s.isFinished() == false)
-			//{
-			//	timer.schedule(runningtask, 0, 2500);
-			//}
 			log.append("\n");
 			log.append(s.reportStats());
+			System.out.print(s.reportStats());
 		}
 	}
 	
 	/**
 	 * Method to test whether the data entered is valid
-	 * 
+	 * @param numPumps Check number of pumps
+	 * @param numTills Check number of tills
+	 * @param probP Check Prob of P
+	 * @param probQ Check Prob of Q
+	 * @param seed Check seed for simulation
+	 * @param ticks Check number of Ticks to run simulation
 	 */
 	private boolean validateData(String numPumps, String numTills, String probP, String probQ, String seed, String ticks)
 	{
@@ -367,6 +361,8 @@ public class FuelStationSimGUI {
 		 // Return true is data is valid
 		 return true;
 	}
+	
+	//-------------------------------------------------------------------------Command Line-------------------------------------------------------------------
 	
 	/**
 	 * Method to read commands and act accordingly

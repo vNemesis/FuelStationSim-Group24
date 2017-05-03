@@ -5,6 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for Motorbike
+ * @see Motorbike
+ * @version - 03.05.2017/1750 
+ * @author HarmanU
+ */
+
 public class ZTestMotorbike {
 	
 	private Motorbike mb;

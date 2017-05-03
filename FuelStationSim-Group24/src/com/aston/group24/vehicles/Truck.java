@@ -1,5 +1,12 @@
 package com.aston.group24.vehicles;
 
+/**
+ * Models a truck via Vehicles super class
+ * @see Vehicle
+ * @version - 03.05.2017/1750
+ * @author HarmanU, HuzaifahR
+ */
+
 public class Truck extends Vehicle {
 
 	/**

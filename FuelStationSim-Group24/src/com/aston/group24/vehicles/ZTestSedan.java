@@ -9,6 +9,13 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for Sedan
+ * @see Sedan
+ * @version - 03.05.2017/1750 
+ * @author HarmanU
+ */
+
 public class ZTestSedan {
 	
 	private Sedan sd1;

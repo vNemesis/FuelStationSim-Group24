@@ -1,3 +1,5 @@
+// Fuel Station Simulation Group 24
+
 package com.aston.group24.model;
 
 import java.math.BigDecimal;
@@ -13,8 +15,8 @@ import com.aston.group24.vehicles.Vehicle;
  * Fuel Station
  * - Will contain fuel pumps and manager these pumps
  * 
- * @version 02.05.2017/2329
- * @ HarmanU, JShorthouse
+ * @version 03.05.2017/1752
+ * @author HarmanU, JShorthouse
  */
 public class FuelStation implements Logger{
 	
@@ -164,6 +166,7 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Move people between stages and return people that need removing from the simulation
+	 * @return Returns arrayList of people to move.
 	 */
 	public ArrayList<Person> movePeople(){
 		
@@ -210,7 +213,8 @@ public class FuelStation implements Logger{
 	}
 	
 	/**
-	 * Remove a person from the arraylist of all people
+	 * Remove a person from the arrayList of all people
+	 * @param p Person to be removed
 	 */
 	public void removePerson(Person p)
 	{
@@ -247,7 +251,7 @@ public class FuelStation implements Logger{
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("\n The total amount of fuel pumped was " + getGallonsFueled() + " gallons of fuel.");
+		sb.append("\n The total amount of fuel pumped was " + getGallonsFueled() + " gallon(s) of fuel.");
 		sb.append("\n The number of customers who used a fuel pump was " + numberOfCustomersServed + ".");
 		
 		return sb.toString();

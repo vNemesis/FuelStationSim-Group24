@@ -22,6 +22,7 @@ import com.aston.group24.vehicles.Truck;
  * 
  * @version 02.05.2017/2329
  * 
+ * @author HarmanU, JShorthouse
  */
 public class Simulation {
 	
@@ -71,7 +72,7 @@ public class Simulation {
 	
 	/**
 	 * Run simulation for an amount of time
-	 * @param time Time to run simulation in ticks (1 tick = 10 seconds)
+	 * @param ticks Time to run simulation in ticks (1 tick = 10 seconds)
 	 */
 	public void runSim(int ticks)
 	{
@@ -205,6 +206,7 @@ public class Simulation {
 	
 	/**
 	 *Check whether simulation has finished running 
+	 *@return Returns Boolean for whether the simulation has finished or not
 	 */
 	public boolean isFinished()
 	{
@@ -253,23 +255,6 @@ public class Simulation {
 		return truckDriverHappiness;
 	}
 	
-	/**
-	 * Reports final statistics and then send output to a file
-	 * @return Returns String which contains information about the simulation outcome
-	 */
-	public String reportStats()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append(fs.Log());
-		sb.append("\n A total of " + numOfSmallCars + " Small cars, " + numOfSedans + " Sedans, " + numOfMotorbikes + " Motorbikes and " + numOfTrucks + " Trucks were served");
-		sb.append("\n A total of " + numOfLossedCustomers + " customers were lost due to no space");
-		sb.append("\n The Station made £" + profit + " profit and a loss of £" + loss);
-		
-		System.out.println(sb.toString());
-		return sb.toString();
-	}
-	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------
 	
 	// return current tick of simulation
@@ -279,15 +264,33 @@ public class Simulation {
 	}
 	
 	/**
-	 * Report status of Simulation - Mainly debug can be omitted in actual release
+	 * Report status of Simulation
+	 * @return Returns a String with the simulation startup status
 	 */
 	public String reportStartStatus()
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("Fuel station with " + fs.numberOfPumps() + " Pumps was created");
-		sb.append("Shop with " + numOfTills + "Has been created");
-		sb.append("Spawn trucks: " + trucksEnabled);
+		sb.append(" A fuel station with " + fs.numberOfPumps() + " fuel pumps was created.");
+		sb.append("\n A shop with " + numOfTills + " tills has been created.");
+		sb.append("\n Spawn trucks has been set to: " + trucksEnabled);
+		sb.append("\n");
+		return sb.toString();
+	}
+	
+	/**
+	 * Reports final statistics and then send output to a file
+	 * @return Returns String which contains information about the simulation outcome
+	 */
+	public String reportStats()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(fs.Log());
+		sb.append("\n A total of " + numOfSmallCars + " Small car(s), " + numOfSedans + " Sedan(s), " + numOfMotorbikes + " Motorbike(s) and " + numOfTrucks + " Truck(s) were served.");
+		sb.append("\n A total of " + numOfLossedCustomers + " customer(s) were lost due to no space at the pumps.");
+		sb.append("\n The Station made £" + profit + " profit and a loss of £" + loss);
+		
 		return sb.toString();
 	}
 	
@@ -295,6 +298,10 @@ public class Simulation {
 	 * Set the values for the fuel station
 	 * @param numPumps set the number of pumps
 	 * @param numTills set the number of tills
+	 * @param seed Seed for simulation
+	 * @param probabilityP Probability for P
+	 * @param probabilityQ Probability for Q
+	 * @param createTrucks Whether to create trucks or not
 	 */
 	public void setFuelStationVal(int numPumps, int numTills, long seed, double probabilityP, double probabilityQ, boolean createTrucks)
 	{
