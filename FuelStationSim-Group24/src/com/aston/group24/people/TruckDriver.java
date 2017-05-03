@@ -1,3 +1,4 @@
+//TruckDriver.java
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
@@ -6,10 +7,9 @@ import java.math.RoundingMode;
 import com.aston.group24.vehicles.Truck;
 
 /**
- * TruckDriver.java
  * Model of a truck driver
- * @author James Shorthouse
- * @version 0.1
+ * @author JShorthouse
+ * @version 20.04.2017/2055
  */
 public class TruckDriver extends Person{
 	

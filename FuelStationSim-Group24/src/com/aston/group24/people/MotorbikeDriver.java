@@ -1,13 +1,13 @@
+//MotorbikeDriver.java
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
 import com.aston.group24.vehicles.Motorbike;
 
 /**
- * MotorbikeDriver.java
  * Model of a motorbike driver
- * @author James Shorthouse
- * @version 0.1
+ * @author JShorthouse
+ * @version 20.04.2017/2055
  */
 public class MotorbikeDriver extends Person{
 

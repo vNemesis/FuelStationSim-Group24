@@ -1,3 +1,4 @@
+//TruckDriverTest.java
 package com.aston.group24.people;
 
 import static org.junit.Assert.*;
@@ -12,8 +13,8 @@ import org.junit.Test;
 /**
  * TruckDriverTest.java
  * Unit test for TruckDriver class
- * @author James Shorthouse
- * @version 0.1
+ * @author JShorthouse
+ * @version 20.04.2017/2055
  */
 public class TruckDriverTest {
 

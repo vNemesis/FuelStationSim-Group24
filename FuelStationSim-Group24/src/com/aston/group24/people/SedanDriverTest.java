@@ -1,3 +1,4 @@
+//SedanDriverTest.java
 package com.aston.group24.people;
 
 import static org.junit.Assert.*;
@@ -10,10 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * SedanDriverTest.java
  * Unit test for SedanDriver class
- * @author James Shorthouse
- * @version 0.1
+ * @author JShorthouse
+ * @version 20.04.2017/2055
  */
 public class SedanDriverTest {
 

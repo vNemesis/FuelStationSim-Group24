@@ -267,7 +267,7 @@ public class FuelStation implements Logger{
 		{
 			for(Person p : fp.getPeople())
 			{
-				//Check if vehicle is refulled but not yet marked as refulled
+				//Check if vehicle is refuelled but not yet marked as refuelled
 				if(p.getVehicle().getCurrentFuel() == p.getVehicle().getFuelTankSize() && !p.getRefuelled())
 				{
 					p.setRefuelled(true);

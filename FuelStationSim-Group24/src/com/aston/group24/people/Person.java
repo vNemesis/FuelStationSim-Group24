@@ -1,3 +1,4 @@
+//Person.java
 package com.aston.group24.people;
 
 import java.math.BigDecimal;
@@ -6,10 +7,9 @@ import java.util.Random;
 import com.aston.group24.vehicles.Vehicle;
 
 /**
- * Person.java
  * Person superclass
- * @author James Shorthouse
- * @version 0.1
+ * @author JShorthouse
+ * @version 20.04.2017/2055
  */
 public abstract class Person {
 	
@@ -52,8 +52,8 @@ public abstract class Person {
 	 * Returns the potential money that could have been spent by the customer but wasn't
 	 * @return money lost
 	 */
-	public BigDecimal getMoneyLost()						//Code is kind of duplicated between these two methods,
-	{														//replace if you can think of a more elegant solution
+	public BigDecimal getMoneyLost()
+	{
 		BigDecimal money = new BigDecimal(0.00);
 		if(!visitedShop) money = money.add(spendingMoney);
 		if(!refuelled) money = money.add(vehicle.getRefuelCost());

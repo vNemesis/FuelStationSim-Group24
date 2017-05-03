@@ -1,3 +1,4 @@
+//SmallCarDriverTest.java
 package com.aston.group24.people;
 
 import static org.junit.Assert.*;
@@ -11,10 +12,9 @@ import org.junit.Test;
 
 
 /**
- * SmallCarDriverTest.java
  * Unit test for SmallCarDriver class
- * @author James Shorthouse
- * @version 0.1
+ * @author JShorthouse
+ * @version 20.04.2017/2055
  */
 public class SmallCarDriverTest {
 
