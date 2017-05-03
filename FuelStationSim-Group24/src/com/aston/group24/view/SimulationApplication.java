@@ -54,6 +54,7 @@ public class SimulationApplication {
 		else
 		{
 			System.out.println("Invalid Number of arguemnts given. either 0 or 7");
+			System.out.println("You gave " + args.length + " arguemnts");
 			System.out.println("Format is (int numOfPumps, int numOfTills, double probabilityP, double probabilityQ, boolean trucksEnabled, long seed, int ticksToRunSim, boolean printOutputToFile)");
 		}
 	}
