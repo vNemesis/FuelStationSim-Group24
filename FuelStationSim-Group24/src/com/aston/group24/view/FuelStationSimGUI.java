@@ -48,6 +48,7 @@ public class FuelStationSimGUI {
 	private JTextField seedInput;
 	private JTextField ticksInput;
 	private JCheckBox chckbx_toggleTrucks;
+	private JCheckBox chckbx_printToFile;
 	
 	private Simulation s;
 	
@@ -82,6 +83,7 @@ public class FuelStationSimGUI {
 		JLabel ticksLabel = new JLabel(" (Integer) Number of Ticks to run simulation for (1 tick = 10 seconds)");
 		JLabel commandLabel = new JLabel("Enter commands here");
 		chckbx_toggleTrucks = new JCheckBox("Allow Trucks?");
+		chckbx_printToFile = new JCheckBox("Print to File? (Named 'Simulation Output' by default, use commandline to print with different name)");
 		JLabel logLabel = new JLabel("Simulation Log");
 		
 		log = new JTextArea();
@@ -140,7 +142,8 @@ public class FuelStationSimGUI {
 		inputBox.add(chckbx_toggleTrucks);
 		
 		logBox.add(logLabel, BorderLayout.NORTH);
-		logBox.add(listScroller, BorderLayout.SOUTH);
+		logBox.add(listScroller, BorderLayout.CENTER);
+		logBox.add(chckbx_printToFile, BorderLayout.SOUTH);
 		
 		// set up the command box
 		commandBox.add(commandLineBox);
@@ -183,19 +186,6 @@ public class FuelStationSimGUI {
 					
 					// Execute the simulation
 						executeSim();
-					// print status to file
-					StringToFile stf = new StringToFile();
-					
-					StringBuilder sb = new StringBuilder();
-					
-					sb.append(s.reportStartStatus());
-					sb.append(s.reportStats());
-					
-					try {
-						stf.sendToFile(sb.toString(), "Simulation Output");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
 					
 				}
 			});
@@ -258,6 +248,11 @@ public class FuelStationSimGUI {
 			log.append(s.reportStats());
 			System.out.print(s.reportStartStatus());
 			System.out.print(s.reportStats());
+			
+			if(chckbx_printToFile.isSelected())
+			{
+				s.PrintOutputToFile("Simulation Output");
+			}
 		}
 	}
 	
@@ -395,6 +390,11 @@ public class FuelStationSimGUI {
 			{
 				log.setText("");
 			}
+			else if(command.equals("print"))
+			{
+				log.append("\n");
+				log.append("'print' requires a second arguemnt as the name (For example ' print simulationOutput ')");
+			}
 			else if(command.equals("info"))
 			{
 				log.append("\n");
@@ -427,6 +427,17 @@ public class FuelStationSimGUI {
 			{
 				log.append("\n");
 				log.append("Run the simulation with the given data inputted at the top.");
+			}
+			else if(command.equals("help print"))
+			{
+				log.append("\n");
+				log.append("Print simulation log to file. Requires 2 arguments' print nameOfFile ' (For example ' print simulationOutput ')");
+			}
+			else if(command.startsWith("print"))
+			{
+				s.PrintOutputToFile(trimmedText.split("\\s+")[1]);
+				log.append("\n");
+				log.append("Printed output to file" + trimmedText.split("\\s+")[1]);
 			}
 			else
 			{
