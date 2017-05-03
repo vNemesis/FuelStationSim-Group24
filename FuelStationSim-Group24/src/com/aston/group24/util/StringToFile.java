@@ -21,7 +21,7 @@ public class StringToFile {
 		FileWriter writer = null;
 		 try
 		 {
-			 writer = new FileWriter(nameOfFile);
+			 writer = new FileWriter(nameOfFile + ".txt");
 			 writer.write(text);
 		 } 
 		 finally 
