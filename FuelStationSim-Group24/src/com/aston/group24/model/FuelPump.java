@@ -42,9 +42,11 @@ public class FuelPump {
 	
 	protected void removePerson(Person p)
 	{
-		currentPeople.remove(p);
-		CSO -= p.getVehicle().getSize();
-		CSA = space + CSO;
+		if(currentPeople.contains(p)){
+			currentPeople.remove(p);
+			CSO -= p.getVehicle().getSize();
+			CSA = space - CSO;
+		}
 	}
 	
 	protected int getID()
@@ -78,6 +80,26 @@ public class FuelPump {
 	 */
 	protected void simulate()
 	{
+		System.out.print("Pump " + pumpID + ": " + CSA + " " + CSO + " " + currentPeople.size() + "\t");
+		
+		//Print spaces for cars
+		boolean darkColour = true;
+		for(int i = 0; i< currentPeople.size(); i++){
+			for(double x = 0.25; x <= currentPeople.get(i).getVehicle().getSize(); x+=0.25){
+				if(darkColour) System.out.print("▓");
+				else System.out.print("▒");
+			}
+			if(darkColour) darkColour = false;
+			else darkColour = true;
+		}
+		
+		//Print empty spaces
+		for(double i = 0.25; i<=CSA; i+= 0.25){
+			System.out.print("░");
+		}
+		System.out.println();
+		
+		
 		if (currentPeople.size() != 0)
 		{
 			Person p = currentPeople.getFirst(); // get first car / person

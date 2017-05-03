@@ -35,9 +35,9 @@ public Shop(int numTills)
   /**
    * Create X number of tills in the shop
    */
-  protected void createTills(int ammountOfTills)
+  protected void createTills(int amountOfTills)
   {
-      for(int i = 0; i < ammountOfTills; i++)
+      for(int i = 0; i < amountOfTills; i++)
       {
           tills.add(new Till());
       }
@@ -146,7 +146,9 @@ public Shop(int numTills)
 		sortedTills.add(t.queueLength());
 	 }
 	 
-	 Collections.sort(sortedTills, Collections.reverseOrder());//Sort values
+	 Collections.sort(sortedTills);//Sort values
+	 
+	 System.out.println("Shortest length:" + sortedTills.get(0));
 	  
 	 for(Till t : tills)
 		 if(t.queueLength() == sortedTills.get(0))
@@ -159,6 +161,16 @@ public Shop(int numTills)
   
   public void simulate()
   {
+	  System.out.println("People on shop floor: " + shopFloor.size());
+	  
+	  for(int i = 0; i<tills.size(); i++){
+		  System.out.print("Till " + (i + 1) + ": " + tills.get(i).queueLength() + "\t\t");
+		  for(int x = 0 ; x < tills.get(i).queueLength(); x++){
+			  System.out.print("▓");
+		  }
+		  System.out.println();
+	  }
+	  
 	  for(Person p : shopFloor)
 	  {
 		  shopTime.put(p, shopTime.get(p) + 1);

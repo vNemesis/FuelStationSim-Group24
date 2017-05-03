@@ -95,6 +95,7 @@ public class Simulation {
 	 */
 	private void simulate() 
 	{
+		System.out.println("Running tick: " + tick);
 		//Create list of people to be removed from the simulation
 		ArrayList<Person> removeList = new ArrayList<Person>();
 		
@@ -124,6 +125,7 @@ public class Simulation {
 			}
 			else
 			{
+				System.out.println("Added new car to simulation");
 				// Checks what vehicle the person has then increments a variable to keep track of how many where served
 				if (newPerson.getVehicle() instanceof SmallCar)
 				{
@@ -162,6 +164,7 @@ public class Simulation {
 				{
 					decreaseTruckHappiness();
 				}
+				System.out.println("Truck happiness: " + truckDriverHappiness);
 			}
 			
 			//Remove from simulation
@@ -265,7 +268,7 @@ public class Simulation {
 		sb.append(fs.Log());
 		sb.append("A total of " + numOfSmallCars + " Small cars, " + numOfSedans + " Sedans, " + numOfMotorbikes + " Motorbikes and " + numOfTrucks + " Trucks were served");
 		sb.append("A total of " + numOfLossedCustomers + " customers were lost due to no space");
-		sb.append(" The Station made £" + profit + " profit and a loss of £" + loss);
+		sb.append(" The Station made ï¿½" + profit + " profit and a loss of ï¿½" + loss);
 		
 		System.out.println(sb.toString());
 		return sb.toString();
