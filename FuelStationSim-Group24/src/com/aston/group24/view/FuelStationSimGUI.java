@@ -185,8 +185,14 @@ public class FuelStationSimGUI {
 						executeSim();
 					// print status to file
 					StringToFile stf = new StringToFile();
+					
+					StringBuilder sb = new StringBuilder();
+					
+					sb.append(s.reportStartStatus());
+					sb.append(s.reportStats());
+					
 					try {
-						stf.sendToFile(s.reportStats(), "Simulation Output");
+						stf.sendToFile(sb.toString(), "Simulation Output");
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -250,6 +256,7 @@ public class FuelStationSimGUI {
 			log.append(s.reportStartStatus());
 			log.append("\n");
 			log.append(s.reportStats());
+			System.out.print(s.reportStartStatus());
 			System.out.print(s.reportStats());
 		}
 	}
