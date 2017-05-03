@@ -1,3 +1,4 @@
+//Shop.java
 package com.aston.group24.model;
 
 import java.util.ArrayList;
@@ -8,13 +9,9 @@ import com.aston.group24.people.Person;
 
 /**
  * Shop
- * 
- * Will contain and manage tills and shop floor.
- * 
  * @author JTurner
- * 
+ * @version 20.04.2017/2055
  */
-
 public class Shop{
 
 	private HashMap<Person, Integer> shopTime; //HashMap for storing and managing the time spent on the shop floor.
