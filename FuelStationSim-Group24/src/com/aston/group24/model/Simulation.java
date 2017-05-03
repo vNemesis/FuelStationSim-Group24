@@ -263,16 +263,14 @@ public class Simulation {
 	 */
 	public void PrintOutputToFile(String filename)
 	{
-		// print status to file
-		StringToFile stf = new StringToFile();
-		
+		// print status to file	
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(reportStartStatus());
 		sb.append(reportStats());
 		
 		try {
-			stf.sendToFile(sb.toString(), filename);
+			StringToFile.sendToFile(sb.toString(), filename);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
