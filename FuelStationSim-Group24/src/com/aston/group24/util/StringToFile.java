@@ -11,12 +11,7 @@ import java.io.IOException;
  */
 public class StringToFile {
 	
-	public StringToFile()
-	{
-		
-	}
-	
-	public void sendToFile(String text, String nameOfFile) throws IOException
+	public static void sendToFile(String text, String nameOfFile) throws IOException
 	{
 		FileWriter writer = null;
 		 try
