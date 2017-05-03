@@ -48,7 +48,6 @@ public class SimulationApplication {
 					s.PrintOutputToFile("Simulation Output");
 				}
 				
-				System.out.print(s.reportStartStatus());
 				System.out.print(s.reportStats());
 			}
 		}

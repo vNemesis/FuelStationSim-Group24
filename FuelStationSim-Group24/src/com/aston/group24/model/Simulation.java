@@ -266,7 +266,6 @@ public class Simulation {
 		// print status to file	
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(reportStartStatus());
 		sb.append(reportStats());
 		
 		try {
@@ -285,10 +284,10 @@ public class Simulation {
 	}
 	
 	/**
-	 * Report status of Simulation
-	 * @return Returns a String with the simulation startup status
+	 * Reports final statistics and then send output to a file
+	 * @return Returns String which contains information about the simulation outcome
 	 */
-	public String reportStartStatus()
+	public String reportStats()
 	{
 		StringBuilder sb = new StringBuilder();
 		
@@ -296,16 +295,6 @@ public class Simulation {
 		sb.append("\n A shop with " + numOfTills + " tills has been created.");
 		sb.append("\n Spawn trucks has been set to: " + trucksEnabled);
 		sb.append("\n");
-		return sb.toString();
-	}
-	
-	/**
-	 * Reports final statistics and then send output to a file
-	 * @return Returns String which contains information about the simulation outcome
-	 */
-	public String reportStats()
-	{
-		StringBuilder sb = new StringBuilder();
 		
 		sb.append(fs.Log());
 		sb.append("\n A total of " + numOfSmallCars + " Small car(s), " + numOfSedans + " Sedan(s), " + numOfMotorbikes + " Motorbike(s) and " + numOfTrucks + " Truck(s) were served.");
