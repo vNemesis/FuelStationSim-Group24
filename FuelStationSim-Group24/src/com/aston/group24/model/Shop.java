@@ -148,7 +148,7 @@ public Shop(int numTills)
 	 
 	 Collections.sort(sortedTills);//Sort values
 	 
-	 System.out.println("Shortest length:" + sortedTills.get(0));
+	 //System.out.println("Shortest length:" + sortedTills.get(0));
 	  
 	 for(Till t : tills)
 		 if(t.queueLength() == sortedTills.get(0))
@@ -161,15 +161,6 @@ public Shop(int numTills)
   
   public void simulate()
   {
-	  System.out.println("People on shop floor: " + shopFloor.size());
-	  
-	  for(int i = 0; i<tills.size(); i++){
-		  System.out.print("Till " + (i + 1) + ": " + tills.get(i).queueLength() + "\t\t");
-		  for(int x = 0 ; x < tills.get(i).queueLength(); x++){
-			  System.out.print("▓");
-		  }
-		  System.out.println();
-	  }
 	  
 	  for(Person p : shopFloor)
 	  {
@@ -183,6 +174,24 @@ public Shop(int numTills)
 			  tillTime.put(t.getFirstInQueue(), tillTime.get(t.getFirstInQueue()) + 1);
 		  }
 	  }
+  }
+  
+  /**
+   * Provides debugging information
+   */
+  protected void debugInfo()
+  {
+			// Used for debugging
+		    System.out.println("People on shop floor: " + shopFloor.size());
+		   
+		 	  for(int i = 0; i<tills.size(); i++){
+		 		  System.out.print("Till " + (i + 1) + ": " + tills.get(i).queueLength() + "\t\t");
+		 		  for(int x = 0 ; x < tills.get(i).queueLength(); x++){
+		 			  System.out.print("▓");
+		 		  }
+		 		  System.out.println();
+		   }
+		  
   }
  
 }

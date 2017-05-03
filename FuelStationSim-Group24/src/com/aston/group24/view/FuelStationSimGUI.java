@@ -241,7 +241,7 @@ public class FuelStationSimGUI {
 		{
 			s.reset();																// Reset sim values for next run
 			s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()), chckbx_toggleTrucks.isSelected());		// set Fuel station values according to text inputs
-			s.runSim(Integer.parseInt(ticksInput.getText()));						// Run sim for x Ticks
+			s.runSim(Integer.parseInt(ticksInput.getText()), false);						// Run sim for x Ticks
 			log.setText("");
 			log.append("\n");
 			log.append(s.reportStats());

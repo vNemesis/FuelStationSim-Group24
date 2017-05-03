@@ -51,14 +51,6 @@ public class FuelStation implements Logger{
 	}
 	
 	/**
-	 * Returns total amount this station has provided
-	 */
-	protected int getGallonsFueled()
-	{
-		return gallonsFueled;
-	}
-	
-	/**
 	 * Add a vehicle to the station at a pump
 	 */
 	protected boolean addPerson(Person p)
@@ -107,13 +99,13 @@ public class FuelStation implements Logger{
 			return pumpsWithSpace.get(0);
 		}
 		
-		System.out.println("Before Ordering");
+		//System.out.println("Before Ordering");
 		ArrayList<Double> unsortedValues = new ArrayList<Double>();
 		for(FuelPump fp : pumpsWithSpace)
 		{
 			unsortedValues.add(fp.getCSA());
 		}
-		System.out.println(unsortedValues.toString());
+		//System.out.println(unsortedValues.toString());
 		
 		// List to store sorted values
 		ArrayList<Double> sortedValues = new ArrayList<Double>();
@@ -126,8 +118,8 @@ public class FuelStation implements Logger{
 		
 		Collections.sort(sortedValues, Collections.reverseOrder()); // Sort values
 		
-		System.out.println("After Ordering");
-		System.out.println(sortedValues.toString());
+		//System.out.println("After Ordering");
+		//System.out.println(sortedValues.toString());
 		
 		for(FuelPump fp : pumpsWithSpace)
 		{
@@ -140,28 +132,6 @@ public class FuelStation implements Logger{
 		return null;
 		
 		
-	}
-	
-	/**
-	 * Returns people that finished refuelling on the last tick
-	 */
-	private ArrayList<Person> getPeopleJustRefulled()
-	{
-		ArrayList<Person> returnPeople = new ArrayList<Person>();
-		
-		for(FuelPump fp : pumps)
-		{
-			for(Person p : fp.getPeople())
-			{
-				//Check if vehicle is refulled but not yet marked as refulled
-				if(p.getVehicle().getCurrentFuel() == p.getVehicle().getFuelTankSize() && !p.getRefuelled())
-				{
-					p.setRefuelled(true);
-					returnPeople.add(p);
-				}
-			}
-		}
-		return returnPeople;
 	}
 	
 	/**
@@ -257,7 +227,56 @@ public class FuelStation implements Logger{
 		return sb.toString();
 	}
 	
+	//------------------------------------------------------------ Getter methods -----------------------------------------------------------
 	
+	/**
+	 * Returns total amount this station has provided
+	 */
+	protected int getGallonsFueled()
+	{
+		return gallonsFueled;
+	}
+	
+	/**
+	 * Returns shop at station
+	 * @return shop at station
+	 */
+	protected Shop getShop()
+	{
+		return shop;
+	}
+	
+	/**
+	 * Returns the fuel pumps at this station
+	 * @see FuelPump
+	 * @return Returns a LinkedList of Fuel pumps
+	 */
+	protected LinkedList<FuelPump> getFuelPumps()
+	{
+		return pumps;
+	}
+	
+	/**
+	 * Returns people that finished refuelling on the last tick
+	 */
+	private ArrayList<Person> getPeopleJustRefulled()
+	{
+		ArrayList<Person> returnPeople = new ArrayList<Person>();
+		
+		for(FuelPump fp : pumps)
+		{
+			for(Person p : fp.getPeople())
+			{
+				//Check if vehicle is refulled but not yet marked as refulled
+				if(p.getVehicle().getCurrentFuel() == p.getVehicle().getFuelTankSize() && !p.getRefuelled())
+				{
+					p.setRefuelled(true);
+					returnPeople.add(p);
+				}
+			}
+		}
+		return returnPeople;
+	}
 	
 	//------------------------------------------------------------------DEBUGGING--------------------------------------------------------------------
 	

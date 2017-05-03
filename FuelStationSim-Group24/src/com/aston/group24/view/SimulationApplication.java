@@ -21,6 +21,7 @@ public class SimulationApplication {
 	 * @param args[5] Simulation seed
 	 * @param args[6] Ticks to run Simulation
 	 * @param args[7] Print output to file?
+	 * @param args[8] Log debugging information?
 	 */
 	public static void main(String[] args)
 	{ 
@@ -31,9 +32,9 @@ public class SimulationApplication {
 			Simulation s = new Simulation(3, 2, 0.05, 0.05, false, 10);
 			@SuppressWarnings("unused") FuelStationSimGUI fsg = new FuelStationSimGUI(s);
 		}
-		else if (args.length == 8)
+		else if (args.length == 9)
 		{	
-			if (!validateArguments(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]))
+			if (!validateArguments(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]))
 			{
 				System.out.println("Arguments Invalid. Please Try again");
 				System.out.println("You gave " + args.length + " arguemnts");
@@ -51,8 +52,11 @@ public class SimulationApplication {
 			{
 				// Pass arguments to simulation
 				Simulation s = new Simulation(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Double.parseDouble(args[2]),  Double.parseDouble(args[3]), Boolean.parseBoolean(args[4]), Long.parseLong(args[5]));
-				s.runSim(Integer.parseInt(args[6]));
 				
+				//run simulation
+				s.runSim(Integer.parseInt(args[6]), Boolean.parseBoolean(args[8]));
+				
+				// if true, print to file
 				if(Boolean.parseBoolean(args[7]) == true)
 				{
 					s.PrintOutputToFile("Simulation Output");
@@ -89,7 +93,7 @@ public class SimulationApplication {
 	 * @param seed Check seed for simulation
 	 * @param ticks Check number of Ticks to run simulation
 	 */
-	private static boolean validateArguments(String numPumps, String numTills, String probP, String probQ, String trucks, String seed, String ticks, String print)
+	private static boolean validateArguments(String numPumps, String numTills, String probP, String probQ, String trucks, String seed, String ticks, String print, String debug)
 	{
 		 // check num of pumps is valid
 		 try { 
@@ -194,6 +198,12 @@ public class SimulationApplication {
 		 if((print.equals("false") || print.equals("true")) == false)
 		 {
 			 System.out.println("print is not a valid boolean");
+			 return false;
+		 }
+		 
+		 if((debug.equals("false") || debug.equals("true")) == false)
+		 {
+			 System.out.println("debug is not a valid boolean");
 			 return false;
 		 }
 		 

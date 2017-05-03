@@ -65,7 +65,7 @@ public class SimulationTest {
 	@Test
 	public void testExecuteSim(){
 		
-		sim.runSim(1440);
+		sim.runSim(1440, false);
 	}
 
 

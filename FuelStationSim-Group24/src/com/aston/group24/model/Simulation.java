@@ -76,13 +76,24 @@ public class Simulation {
 	 * Run simulation for an amount of time
 	 * @param ticks Time to run simulation in ticks (1 tick = 10 seconds)
 	 */
-	public void runSim(int ticks)
+	public void runSim(int ticks, boolean logDebug)
 	{
 		fs = new FuelStation(numOfPumps, numOfTills);
 		
 		for (int i = 0; i < ticks; i++)
 		{
 			simulate();
+			
+			// if true, log debugging information
+			if(logDebug)
+			{
+				for(FuelPump fp : fs.getFuelPumps())
+				{
+					fp.debugInfo();
+				}
+				
+				fs.getShop().debugInfo();
+			}
 		}
 		
 		finished = true;
@@ -94,7 +105,7 @@ public class Simulation {
 	 */
 	private void simulate() 
 	{
-		System.out.println("Running tick: " + tick);
+		//System.out.println("Running tick: " + tick);
 		//Create list of people to be removed from the simulation
 		ArrayList<Person> removeList = new ArrayList<Person>();
 		
@@ -124,7 +135,7 @@ public class Simulation {
 			}
 			else
 			{
-				System.out.println("Added new car to simulation");
+				//System.out.println("Added new car to simulation");
 				// Checks what vehicle the person has then increments a variable to keep track of how many where served
 				if (newPerson.getVehicle() instanceof SmallCar)
 				{
@@ -163,7 +174,7 @@ public class Simulation {
 				{
 					decreaseTruckHappiness();
 				}
-				System.out.println("Truck happiness: " + truckDriverHappiness);
+				//System.out.println("Truck happiness: " + truckDriverHappiness);
 			}
 			
 			//Remove from simulation
@@ -237,7 +248,7 @@ public class Simulation {
 	{
 		//Happy truck driver increases truckDriverHappiness by 5%, up to the original value
 		truckDriverHappiness = Math.min((truckDriverHappiness * 1.05), maxTruckDriverHappiness);
-		System.out.println(truckDriverHappiness);
+		//System.out.println(truckDriverHappiness);
 	}
 	
 	/**
@@ -300,7 +311,7 @@ public class Simulation {
 		sb.append(fs.Log());
 		sb.append("\n A total of " + numOfSmallCars + " Small car(s), " + numOfSedans + " Sedan(s), " + numOfMotorbikes + " Motorbike(s) and " + numOfTrucks + " Truck(s) were served.");
 		sb.append("\n A total of " + numOfLossedCustomers + " customer(s) were lost due to no space at the pumps.");
-		sb.append("\n The Station made ï¿½" + profit + " profit and missed ï¿½" + loss + " worth of sales.");
+		sb.append("\n The Station made £" + profit + " profit and missed £" + loss + " worth of sales.");
 		
 		return sb.toString();
 	}
