@@ -6,11 +6,8 @@ import com.aston.group24.people.Person;;
 
 /**
  * Till
- * 
- * Models a till
- * 
- * @author JTurner
- * 
+ * @author Jake Turner
+ * @version 20.04.2017/2055
  */
 
 public class Till{
