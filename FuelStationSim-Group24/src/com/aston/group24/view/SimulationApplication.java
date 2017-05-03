@@ -35,7 +35,17 @@ public class SimulationApplication {
 		{	
 			if (!validateArguments(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]))
 			{
-				System.out.print("Arguments Invalid. Try again");
+				System.out.println("Arguments Invalid. Please Try again");
+				System.out.println("You gave " + args.length + " arguemnts");
+				System.out.println("");
+				System.out.println("They are ");
+				
+				for (int i = 0; i < args.length; i++)
+				{
+					int j = i + 1;
+					System.out.print("Argument " + j + ": ");
+					System.out.println(args[i]);
+				}
 			}
 			else
 			{
@@ -53,8 +63,19 @@ public class SimulationApplication {
 		}
 		else
 		{
-			System.out.println("Invalid Number of arguemnts given. either 0 or 7");
+			System.out.println("Invalid Number of arguemnts given. Give either 0 or 8");
 			System.out.println("You gave " + args.length + " arguemnts");
+			System.out.println("");
+			System.out.println("They are ");
+			
+			for (int i = 0; i < args.length; i++)
+			{
+				int j = i + 1;
+				System.out.print("Argument " + j + ": ");
+				System.out.println(args[i]);
+			}
+			
+			System.out.println("");
 			System.out.println("Format is (int numOfPumps, int numOfTills, double probabilityP, double probabilityQ, boolean trucksEnabled, long seed, int ticksToRunSim, boolean printOutputToFile)");
 		}
 	}
@@ -74,12 +95,12 @@ public class SimulationApplication {
 		 try { 
 		        Integer.parseInt(numPumps); 
 		    } catch(NumberFormatException e) {
-		    	System.out.print("Number of pumps is not a valid Integer");
-		    	System.out.print("\n");
+		    	System.out.println("Number of pumps is not a valid Integer");
+			    System.out.println("");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	System.out.print("Number of Pumps is null! set an Integer value");
-		    	System.out.print("\n");
+		    	System.out.println("Number of Pumps is null! set an Integer value");
+			    System.out.println("");
 		        return false;
 		    }
 		 
@@ -87,12 +108,12 @@ public class SimulationApplication {
 		 try { 
 		        Integer.parseInt(numTills); 
 		    } catch(NumberFormatException e) {
-		    	System.out.print("Number of tills is not a valid Integer");
-		    	System.out.print("\n");
+		    	System.out.println("Number of tills is not a valid Integer");
+			    System.out.println("");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	System.out.print("Number of tills is null! set an Integer value");
-		    	System.out.print("\n");
+		    	System.out.println("Number of tills is null! set an Integer value");
+			    System.out.println("");
 		        return false;
 		    }
 		 
@@ -101,12 +122,12 @@ public class SimulationApplication {
 		 try { 
 		        Integer.parseInt(seed); 
 		    } catch(NumberFormatException e) {
-		    	System.out.print("Number of ticks is not a valid Integer");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is not a valid Integer");
+			    System.out.println("");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	System.out.print("Number of ticks is null! set an Integer value");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is null! set an Integer value");
+			    System.out.println("");
 		        return false;
 		    }
 		 
@@ -114,19 +135,19 @@ public class SimulationApplication {
 		 try { 
 		        Double.parseDouble(probP); 
 		    } catch(NumberFormatException e) {
-		    	System.out.print("Number of ticks is not a valid double value (i.e 0.2)");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is not a valid double value (i.e 0.2)");
+			    System.out.println("");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	System.out.print("Number of ticks is null! set an Integer value");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is null! set an Integer value");
+			    System.out.println("");
 		        return false;
 		    }
 		 
 		 if (Double.parseDouble(probP) < 0 || Double.parseDouble(probP) > 1)
 		 {
-			 System.out.print("Probibility of P needs to be between 0 and 1");
-		     System.out.print("\n");
+			 System.out.println("Probibility of P needs to be between 0 and 1");
+			 System.out.println("");
 		     return false; 
 		 }
 		 
@@ -134,19 +155,19 @@ public class SimulationApplication {
 		 try { 
 		        Double.parseDouble(probQ); 
 		    } catch(NumberFormatException e) {
-		    	System.out.print("Number of ticks is not a valid double value (i.e 0.2)");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is not a valid double value (i.e 0.2)");
+			    System.out.println("");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	System.out.print("Number of ticks is null! set an double value");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is null! set an double value");
+			    System.out.println("");
 		        return false;
 		    }
 		 
 		 if (Double.parseDouble(probQ) < 0 || Double.parseDouble(probQ) > 1)
 		 {
-			 System.out.print("Probibility of Q needs to be between 0 and 1");
-		     System.out.print("\n");
+			 System.out.println("Probibility of Q needs to be between 0 and 1");
+		     System.out.println("");
 		     return false; 
 		 }
 		 
@@ -154,21 +175,25 @@ public class SimulationApplication {
 		 try { 
 		        Integer.parseInt(ticks); 
 		    } catch(NumberFormatException e) {
-		    	System.out.print("Number of ticks is not a valid Integer");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is not a valid Integer");
+			    System.out.println("");
 		        return false; 
 		    } catch(NullPointerException e) {
-		    	System.out.print("Number of ticks is null! set an Integer");
-		    	System.out.print("\n");
+		    	System.out.println("Number of ticks is null! set an Integer");
+			    System.out.println("");
 		        return false;
 		    }
 		 
-		 if(!Boolean.parseBoolean(trucks))
+		 if((trucks.equals("false") || trucks.equals("true")) == false)
 		 {
+			 System.out.println("Trucks is not a valid boolean");
+			 System.out.println("'" + trucks + "' does not equal 'true' or 'false'");
 			 return false;
 		 }
-		 if(!Boolean.parseBoolean(print))
+		 
+		 if((print.equals("false") || print.equals("true")) == false)
 		 {
+			 System.out.println("print is not a valid boolean");
 			 return false;
 		 }
 		 

@@ -9,6 +9,6 @@ set /P seed="Simulation seed: "
 set /P ticks="Ticks to run sim: "
 set /P ptf="Print to file true/false: "
 
-java -jar Fuel_Station_Simulation_(Executable)-Group24.jar %numOfPumps% %numOfTills% %ProbP% %ProbQ% %enableTrucks% %seed% %ptf%
+java -jar Fuel_Station_Simulation_(Executable)-Group24.jar %numOfPumps% %numOfTills% %ProbP% %ProbQ% %enableTrucks% %seed% %ticks% %ptf%
 
 pause
