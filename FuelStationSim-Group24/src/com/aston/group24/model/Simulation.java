@@ -258,7 +258,10 @@ public class Simulation {
 	}
 	// ----------------------------------------------- Output Integration ----------------------------------------------
 	
-	public void PrintOutputToFile()
+	/**
+	 * Print output to file
+	 */
+	public void PrintOutputToFile(String filename)
 	{
 		// print status to file
 		StringToFile stf = new StringToFile();
@@ -269,7 +272,7 @@ public class Simulation {
 		sb.append(reportStats());
 		
 		try {
-			stf.sendToFile(sb.toString(), "Simulation Output");
+			stf.sendToFile(sb.toString(), filename);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
