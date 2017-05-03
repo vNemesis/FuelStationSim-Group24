@@ -121,13 +121,16 @@ public Shop(int numTills)
 	  
 	for(int i = 0; i < tills.size(); i++)
 	{
-		
-	  if(tills.get(i).getFirstInQueue().getTillTime() == tillTime.get(tills.get(i).getFirstInQueue()))
+	
+	  if(tills.get(i).queueLength() > 0)
 	  {
-		  finishedPaying.add(tills.get(i).getFirstInQueue());
+		  if(tills.get(i).getFirstInQueue().getTillTime() == tillTime.get(tills.get(i).getFirstInQueue()))
+		  {
+			  finishedPaying.add(tills.get(i).getFirstInQueue());
+		  }
 	  }
 	}
-	  return finishedPaying;
+	return finishedPaying;
   }
  
   /**
@@ -158,20 +161,15 @@ public Shop(int numTills)
   {
 	  for(Person p : shopFloor)
 	  {
-		  shopTime.put(p, + 1);
-		  /*
-		   * Solution 1 :
-		   * 	int newTime = shopTime.get(p) + 1;
-		   * 	shopTime.put(p, newTime);
-		   * 
-		   * Solution 2 :
-		   * 	shopTime.put(p, shopTime.get(p) + 1);
-		   */
+		  shopTime.put(p, shopTime.get(p) + 1);
 	  }
 	  
 	  for(Till t : tills)
 	  {
-		  tillTime.put(t.getFirstInQueue(), + 1);
+		  if(t.queueLength() > 0)
+		  {
+			  tillTime.put(t.getFirstInQueue(), tillTime.get(t.getFirstInQueue()) + 1);
+		  }
 	  }
   }
  
