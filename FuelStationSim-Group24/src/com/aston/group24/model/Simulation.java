@@ -1,18 +1,14 @@
 package com.aston.group24.model;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.hamcrest.core.IsInstanceOf;
 
 import com.aston.group24.people.MotorbikeDriver;
 import com.aston.group24.people.Person;
 import com.aston.group24.people.SedanDriver;
 import com.aston.group24.people.SmallCarDriver;
 import com.aston.group24.people.TruckDriver;
-import com.aston.group24.util.StringToFile;
 import com.aston.group24.vehicles.Motorbike;
 import com.aston.group24.vehicles.Sedan;
 import com.aston.group24.vehicles.SmallCar;
@@ -266,9 +262,9 @@ public class Simulation {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(fs.Log());
-		sb.append("A total of " + numOfSmallCars + " Small cars, " + numOfSedans + " Sedans, " + numOfMotorbikes + " Motorbikes and " + numOfTrucks + " Trucks were served");
-		sb.append("A total of " + numOfLossedCustomers + " customers were lost due to no space");
-		sb.append(" The Station made ï¿½" + profit + " profit and a loss of ï¿½" + loss);
+		sb.append("\n A total of " + numOfSmallCars + " Small cars, " + numOfSedans + " Sedans, " + numOfMotorbikes + " Motorbikes and " + numOfTrucks + " Trucks were served");
+		sb.append("\n A total of " + numOfLossedCustomers + " customers were lost due to no space");
+		sb.append("\n The Station made £" + profit + " profit and a loss of £" + loss);
 		
 		System.out.println(sb.toString());
 		return sb.toString();

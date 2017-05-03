@@ -75,8 +75,8 @@ public class FuelStationSimGUI {
 		
 		pumpsNumInput = new JTextField("3");
 		tillsNumInput = new JTextField("2");
-		probPInput = new JTextField("0.5");
-		probQInput = new JTextField("0.5");
+		probPInput = new JTextField("0.05");
+		probQInput = new JTextField("0.05");
 		seedInput = new JTextField("10");
 		ticksInput = new JTextField("1440");
 		commandInput = new JTextField("");

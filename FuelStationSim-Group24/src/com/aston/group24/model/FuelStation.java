@@ -251,8 +251,8 @@ public class FuelStation implements Logger{
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("The total amount of fuel pumped was " + getGallonsFueled() + " gallons of fuel.");
-		sb.append("The number of customers who used a fuel pump was " + numberOfCustomersServed + ".");
+		sb.append("\n The total amount of fuel pumped was " + getGallonsFueled() + " gallons of fuel.");
+		sb.append("\n The number of customers who used a fuel pump was " + numberOfCustomersServed + ".");
 		
 		return sb.toString();
 	}
