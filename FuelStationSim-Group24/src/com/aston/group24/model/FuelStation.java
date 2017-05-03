@@ -179,11 +179,7 @@ public class FuelStation implements Logger{
 			}
 			else
 			{
-				removeList.add(p);
-				for(FuelPump fp : pumps)
-				{
-					fp.removePerson(p);
-				}
+				shop.addPersonToTills(p);
 			}	
 		}
 		
