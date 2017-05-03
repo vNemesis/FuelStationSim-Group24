@@ -1,3 +1,4 @@
+//SimulationApplication.java
 package com.aston.group24.view;
 
 import com.aston.group24.model.Simulation;

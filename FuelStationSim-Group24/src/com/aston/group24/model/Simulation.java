@@ -1,3 +1,4 @@
+//Simulation.java
 package com.aston.group24.model;
 
 import java.io.IOException;
@@ -311,7 +312,7 @@ public class Simulation {
 		sb.append(fs.Log());
 		sb.append("\n A total of " + numOfSmallCars + " Small car(s), " + numOfSedans + " Sedan(s), " + numOfMotorbikes + " Motorbike(s) and " + numOfTrucks + " Truck(s) were served.");
 		sb.append("\n A total of " + numOfLossedCustomers + " customer(s) were lost due to no space at the pumps.");
-		sb.append("\n The Station made £" + profit + " profit and missed £" + loss + " worth of sales.");
+		sb.append("\n The Station made ï¿½" + profit + " profit and missed ï¿½" + loss + " worth of sales.");
 		
 		return sb.toString();
 	}

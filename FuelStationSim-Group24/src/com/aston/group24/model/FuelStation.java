@@ -1,4 +1,6 @@
-// Fuel Station Simulation Group 24
+//FuelStation.java
+
+//Fuel Station Simulation Group 24
 
 package com.aston.group24.model;
 
