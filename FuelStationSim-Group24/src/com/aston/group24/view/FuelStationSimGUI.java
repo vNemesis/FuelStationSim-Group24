@@ -367,6 +367,7 @@ public class FuelStationSimGUI {
 			}
 		}
 		System.out.println("Ran " + simulationsRun + " simulations, writing results to file");
+		log.append("\nRan " + simulationsRun + " simulations, writing results to file: simulationOutputAverageTest");
 		try {
 			StringToFile.sendToFileCSV(output.toString(), "simulationOutputAverageTest");
 		} catch (IOException e) {
