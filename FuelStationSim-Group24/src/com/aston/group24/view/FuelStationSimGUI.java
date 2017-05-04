@@ -438,7 +438,7 @@ public class FuelStationSimGUI {
 			{
 				s.PrintOutputToFile(trimmedText.split("\\s+")[1]);
 				log.append("\n");
-				log.append("Printed output to file" + trimmedText.split("\\s+")[1]);
+				log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
 			}
 			else
 			{
