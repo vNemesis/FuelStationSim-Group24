@@ -363,16 +363,16 @@ public class FuelStationSimGUI {
 							BigDecimal averageProfit = totalProfit.divide(new BigDecimal(numRuns));
 							BigDecimal averageLoss = totalProfit.divide(new BigDecimal(numRuns));
 														
-							output.append(pValues[p] + "," + qValues[q] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
+							output.append(pValues[p] + "," + qValues[q] + "," + numPumps[pumps] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
 						}
 					}
 				}
 			}
 		}
 		System.out.println("Ran " + simulationsRun + " simulations, writing results to file");
-		log.append("\nRan " + simulationsRun + " simulations, writing results to file: simulationOutputAverageTest");
+		log.append("\nRan " + simulationsRun + " simulations, writing results to file: simulationOutput.csv");
 		try {
-			StringToFile.sendToFileCSV(output.toString(), "simulationOutputAverageTest");
+			StringToFile.sendToFileCSV(output.toString(), "simulationOutput");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
