@@ -552,6 +552,12 @@ public class FuelStationSimGUI {
 				log.append("\n");
 				executeSim(1);
 			}
+			else if(command.equals("run-average"))
+			{
+				log.append("\n");
+				log.append("Running defualt settings, simulations runs 10 times.");
+				getResults();
+			}
 			else
 			{
 				log.append("\n");
@@ -581,6 +587,7 @@ public class FuelStationSimGUI {
 			{
 				log.append("\n");
 				log.append("Run the simulation with the given data inputted at the top a number of times, average results and randomise seed each time. ' run-average 3 ' will run the simulation 3 times.");
+				log.append("\nTyping 'run-average' with no number will run a defualt test.");
 			}
 			else if(command.equals("help print"))
 			{
@@ -631,9 +638,10 @@ public class FuelStationSimGUI {
 			}
 			else if(command.startsWith("run-average") && validateInt(trimmedText.split("\\s+")[1]) && Integer.parseInt(trimmedText.split("\\s+")[1]) > 1 )
 			{
-				log.append("\n");
-				log.append("The simulation ran " + trimmedText.split("\\s+")[1] + " times and randomised the seed each time");
-				executeSim(Integer.parseInt(trimmedText.split("\\s+")[1]));
+					log.append("\n");
+					log.append("The simulation ran " + trimmedText.split("\\s+")[1] + " times and randomised the seed each time");
+					executeSim(Integer.parseInt(trimmedText.split("\\s+")[1]));
+
 			}
 			else
 			{
