@@ -341,26 +341,34 @@ public class FuelStationSimGUI {
 		StringBuilder output = new StringBuilder();
 		output.append("p,q,pumps,tills,trucks,averageProfit,averageLoss\n");
 		
-		for(int p = 0; p<pValues.length; p++){
-			for(int q = 0; q<qValues.length; q++){
-				for(int pumps = 0; p<numPumps.length; p++){
-					for(int tills = 0; tills<numTills.length; tills++){
-						for(int truck = 0; truck<trucks.length; truck++){
+		for(int truck = 0; truck<trucks.length; truck++){
+			for(int p = 0; p<pValues.length; p++){
+				for(int q = 0; q<qValues.length; q++){
+					for(int pumps = 0; pumps<numPumps.length; pumps++){
+						for(int tills = 0; tills<numTills.length; tills++){
+						
 							BigDecimal totalProfit = new BigDecimal(0.00);
 							BigDecimal totalLoss = new BigDecimal(0.00);
 							
 							for(int run = 0; run < numRuns; run++){
 								simulationsRun++;
-								Simulation sim = new Simulation(numPumps[pumps],numTills[tills],pValues[p],qValues[q],trucks[truck],gener.nextLong());
+								System.out.println("Running simulation");
+								System.out.println(numPumps[pumps]+ "," +numTills[tills]+ "," +pValues[p]+ "," +qValues[q]+ "," +trucks[truck]);
+								Simulation sim = new Simulation(numPumps[pumps],numTills[tills],pValues[p],qValues[q],trucks[truck], gener.nextLong());
 								sim.runSim(1440, false);
-								totalProfit.add(sim.getProfit());
-								totalLoss.add(sim.getLoss());
 								
-								BigDecimal averageProfit = totalProfit.divide(new BigDecimal(numRuns));
-								BigDecimal averageLoss = totalProfit.divide(new BigDecimal(numRuns));
-								
-								output.append(pValues[p] + "," + qValues[q] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
+								totalProfit = totalProfit.add(sim.getProfit());
+								totalLoss = totalLoss.add(sim.getLoss());
 							}
+							
+							System.out.println("toatl" + totalProfit);
+							
+							BigDecimal averageProfit = totalProfit.divide(new BigDecimal(numRuns));
+							BigDecimal averageLoss = totalProfit.divide(new BigDecimal(numRuns));
+							
+							System.out.println(averageProfit);
+							
+							output.append(pValues[p] + "," + qValues[q] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
 						}
 					}
 				}
