@@ -241,6 +241,16 @@ public class Simulation {
 		truckDriverHappiness = maxTruckDriverHappiness;
 		fs = null;
 		tick = 0;
+		
+		numOfSmallCars = 0;
+		numOfSedans = 0;
+		numOfMotorbikes = 0;
+		numOfTrucks = 0;
+		numOfLossedCustomers = 0;
+		profit = null;
+		loss = null;
+		profit = new BigDecimal(0);
+		loss = new BigDecimal(0);
 	}
 	
 	/**
