@@ -52,11 +52,13 @@ public class FuelStationSimGUI {
 	private JCheckBox chckbx_printToFile;
 	private JCheckBox chckbx_printToFileCSV;
 	
-	private Simulation s;
+	private Simulation s;						//Simulation itself
+	private int run;							//Run of simulation
 	
 	public FuelStationSimGUI(Simulation s)
 	{
 		this.s = s;
+		run = 0;
 		
 		int blankSpace = 5;
 		
@@ -257,13 +259,15 @@ public class FuelStationSimGUI {
 			// If check box is selected print to file automatically
 			if(chckbx_printToFile.isSelected())
 			{
-				s.PrintOutputToFile("Simulation Output");
+				s.PrintOutputToFile("Simulation Output" + run);
 			}
 			
 			if(chckbx_printToFileCSV.isSelected())
 			{
-				s.PrintOutputToFileCSV("Simulation OutputCSV");
+				s.PrintOutputToFileCSV("Simulation OutputCSV" + run);
 			}
+			
+			run++;
 		}
 	}
 	
