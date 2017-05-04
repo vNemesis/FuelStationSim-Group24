@@ -247,6 +247,15 @@ public class FuelStation implements Logger{
 	}
 	
 	/**
+	 * Returns total amount of customers served
+	 * @return Returns int for number of customers
+	 */
+	protected int getCustomersServed()
+	{
+		return numberOfCustomersServed;
+	}
+	
+	/**
 	 * get number of pumps
 	 * @return returns int for size of pumps list
 	 */

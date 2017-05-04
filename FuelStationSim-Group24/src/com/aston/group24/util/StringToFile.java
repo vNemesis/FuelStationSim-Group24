@@ -38,5 +38,25 @@ public class StringToFile {
 			 }
 		 }
 	}
+	
+	public static void sendToFileCSV(String text, String nameOfFile) throws IOException
+	{
+		FileWriter writer = null;
+		 try
+		 {
+			 writer = new FileWriter(nameOfFile + ".csv");
+			 writer.write(text);
+		 } 
+		 finally 
+		 {
+			 try {
+				 if (writer != null) writer.close();
+			 }
+			 catch (Exception e) 
+			 {
+				 System.out.print("Could not print file");
+			 }
+		 }
+	}
 
 }

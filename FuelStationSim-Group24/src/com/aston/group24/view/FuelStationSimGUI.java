@@ -50,6 +50,7 @@ public class FuelStationSimGUI {
 	private JTextField ticksInput;
 	private JCheckBox chckbx_toggleTrucks;
 	private JCheckBox chckbx_printToFile;
+	private JCheckBox chckbx_printToFileCSV;
 	
 	private Simulation s;
 	
@@ -84,7 +85,8 @@ public class FuelStationSimGUI {
 		JLabel ticksLabel = new JLabel(" (Integer) Number of Ticks to run simulation for (1 tick = 10 seconds)");
 		JLabel commandLabel = new JLabel("Enter commands here");
 		chckbx_toggleTrucks = new JCheckBox("Allow Trucks?");
-		chckbx_printToFile = new JCheckBox("Print to File? (Named 'Simulation Output' by default, use commandline to print with different name)");
+		chckbx_printToFile = new JCheckBox("Print to File as txt? (Named 'Simulation Output' by default, use commandline to print with different name)");
+		chckbx_printToFileCSV = new JCheckBox("Print to File as CSV? (Named 'Simulation OutputCSV' by default, use commandline to print with different name)");
 		JLabel logLabel = new JLabel("Simulation Log");
 		
 		log = new JTextArea();
@@ -114,6 +116,7 @@ public class FuelStationSimGUI {
 		JPanel logBox = new JPanel();
 		JPanel commandLineBox = new JPanel();
 		JPanel commandButtonBox = new JPanel();
+		JPanel commandCheckBox = new JPanel();
 				
 		// Step 4: Specify LayoutManagers
 		
@@ -125,6 +128,7 @@ public class FuelStationSimGUI {
 		commandBox.setLayout(new BorderLayout());
 		commandLineBox.setLayout(new GridLayout(1,2));
 		commandButtonBox.setLayout(new GridLayout(1,3));
+		commandCheckBox.setLayout(new GridLayout(2,1));
 		logBox.setLayout(new BorderLayout());
 				
 		// Step 5: Add components to containers
@@ -144,7 +148,6 @@ public class FuelStationSimGUI {
 		
 		logBox.add(logLabel, BorderLayout.NORTH);
 		logBox.add(listScroller, BorderLayout.CENTER);
-		logBox.add(chckbx_printToFile, BorderLayout.SOUTH);
 		
 		// set up the command box
 		commandBox.add(commandLineBox);
@@ -155,8 +158,11 @@ public class FuelStationSimGUI {
 		commandButtonBox.add(runButton);
 		commandButtonBox.add(commandButton);
 		commandButtonBox.add(exitButton);
-		
-		commandBox.add(commandLineBox, BorderLayout.NORTH);
+		commandCheckBox.add(chckbx_printToFile);
+		commandCheckBox.add(chckbx_printToFileCSV);
+
+		commandBox.add(commandCheckBox, BorderLayout.NORTH);
+		commandBox.add(commandLineBox, BorderLayout.CENTER);
 		commandBox.add(commandButtonBox, BorderLayout.SOUTH);
 		
 		dataBox.add(inputBox, BorderLayout.NORTH);
@@ -248,9 +254,15 @@ public class FuelStationSimGUI {
 			log.append(s.reportStats());
 			System.out.print(s.reportStats());
 			
+			// If check box is selected print to file automatically
 			if(chckbx_printToFile.isSelected())
 			{
 				s.PrintOutputToFile("Simulation Output");
+			}
+			
+			if(chckbx_printToFileCSV.isSelected())
+			{
+				s.PrintOutputToFileCSV("Simulation OutputCSV");
 			}
 		}
 	}
@@ -391,10 +403,15 @@ public class FuelStationSimGUI {
 			{
 				log.setText("");
 			}
-			else if(command.equals("print"))
+			else if(command.equals("print-txt"))
 			{
 				log.append("\n");
-				log.append("'print' requires a second arguemnt as the name (For example ' print simulationOutput ')");
+				log.append("'print-txt' requires a second arguemnt as the name (For example ' print-csv simulationOutput ')");
+			}
+			else if(command.equals("print-csv"))
+			{
+				log.append("\n");
+				log.append("'print-csv' requires a second arguemnt as the name (For example ' print-csv simulationOutput ')");
 			}
 			else if(command.equals("info"))
 			{
@@ -432,11 +449,17 @@ public class FuelStationSimGUI {
 			else if(command.equals("help print"))
 			{
 				log.append("\n");
-				log.append("Print simulation log to file. Requires 2 arguments' print nameOfFile ' (For example ' print simulationOutput ')");
+				log.append("Print simulation log to file. Requires 2 arguments' print-txt/print-csv nameOfFile ' (For example ' print-txt simulationOutput ')");
 			}
-			else if(command.startsWith("print"))
+			else if(command.startsWith("print-txt"))
 			{
 				s.PrintOutputToFile(trimmedText.split("\\s+")[1]);
+				log.append("\n");
+				log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
+			}
+			else if(command.startsWith("print-csv"))
+			{
+				s.PrintOutputToFileCSV(trimmedText.split("\\s+")[1]);
 				log.append("\n");
 				log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
 			}

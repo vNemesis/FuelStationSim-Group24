@@ -290,6 +290,29 @@ public class Simulation {
 		}
 	}
 	
+	/**
+	 * Print output to file
+	 * @param filename Name of file to print output to
+	 */
+	public void PrintOutputToFileCSV(String filename)
+	{
+		// print status to file	
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Number of pumps,Number of Tills,Probability of P,Probability of Q,Trucks Enabled,Seed");
+		sb.append("\n");
+		sb.append(numOfPumps + "," + numOfTills + "," + probabilityP + "," + probabilityQ + "," + trucksEnabled + "," + seed);
+		sb.append("\n");
+		sb.append("Number of Gallons Fueled,Number of Customers Served,Number of Small Cars,Number of Sedans,Number of Motorbikes,Number of Trucks,Number of Customers Lost,Profit,Loss");
+		sb.append("\n");
+		sb.append(fs.getGallonsFueled() + "," + fs.getCustomersServed() + "," + numOfSmallCars + "," + numOfSedans + "," + numOfMotorbikes + "," + numOfTrucks + "," + numOfLossedCustomers + "," + profit + "," + loss);
+		try {
+			StringToFile.sendToFileCSV(sb.toString(), filename);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------
 	
 	// return current tick of simulation
@@ -306,7 +329,16 @@ public class Simulation {
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(" A fuel station with " + fs.numberOfPumps() + " fuel pumps was created.");
+		sb.append(" With these parameters: ");
+		sb.append("\n Number of Pumps: " + numOfPumps);
+		sb.append("\n Number of Tills: " + numOfTills);
+		sb.append("\n Probability of P: " + probabilityP);
+		sb.append("\n Probability of Q: " + probabilityQ);
+		sb.append("\n Allow Trucks?: " + trucksEnabled);
+		sb.append("\n Seed: " + seed);
+		sb.append("\n");
+		
+		sb.append("\n A fuel station with " + fs.numberOfPumps() + " fuel pumps was created.");
 		sb.append("\n A shop with " + numOfTills + " tills has been created.");
 		sb.append("\n Spawn trucks has been set to: " + trucksEnabled);
 		sb.append("\n");
