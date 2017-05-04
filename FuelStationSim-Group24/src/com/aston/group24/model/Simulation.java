@@ -270,6 +270,15 @@ public class Simulation {
 	{
 		return truckDriverHappiness;
 	}
+	
+	/**
+	 * Sets seed of simulation
+	 * @param newSeed New seed for simulation
+	 */
+	protected void setSeed(long newSeed)
+	{
+		seed = newSeed;
+	}
 	// ----------------------------------------------- Output Integration ----------------------------------------------
 	
 	/**
@@ -311,6 +320,15 @@ public class Simulation {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Formats results for CSV files
+	 * @return Returns String with formatted results
+	 */
+	public String formatResultsInCSV()
+	{
+		return(fs.getGallonsFueled() + "," + fs.getCustomersServed() + "," + numOfSmallCars + "," + numOfSedans + "," + numOfMotorbikes + "," + numOfTrucks + "," + numOfLossedCustomers + "," + profit + "," + loss);	
 	}
 	
 	// ------------------------------------------------ GUI Integration ------------------------------------------------

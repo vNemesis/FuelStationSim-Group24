@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +55,8 @@ public class FuelStationSimGUI {
 	
 	private Simulation s;						//Simulation itself
 	private int run;							//Run of simulation
+	private Random gener;
+	private String averageRunString;
 	
 	public FuelStationSimGUI(Simulation s)
 	{
@@ -194,7 +197,7 @@ public class FuelStationSimGUI {
 					log.setForeground(Color.black);
 					
 					// Execute the simulation
-						executeSim();
+						executeSim(1);
 					
 				}
 			});
@@ -213,6 +216,10 @@ public class FuelStationSimGUI {
 		// Step 7: Display the GUI
 		mainFrame.pack();
 		mainFrame.setVisible(true);
+		
+		//Inistalise variables
+		gener = new Random(Integer.parseInt(seedInput.getText()));
+		
 	}
 	
 	//---------------------------------------------------------------------------------------------- Methods ------------------------------------------------------------
@@ -237,7 +244,7 @@ public class FuelStationSimGUI {
 	/**
 	 * Method to execute simulations after validating data inputed in GUI
 	 */
-	private void executeSim()
+	private void executeSim(int runAmount)
 	{
 		// Check if values are valid, if they are run simulation if not throw error in log
 		if(!validateData(pumpsNumInput.getText(), tillsNumInput.getText(), probPInput.getText(), probQInput.getText(), seedInput.getText(), ticksInput.getText()))
@@ -246,7 +253,7 @@ public class FuelStationSimGUI {
 			log.append("\n");
 			log.setForeground(Color.red);
 		}
-		else
+		else if (runAmount == 1)
 		{
 			s.reset();																// Reset sim values for next run
 			s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), Integer.parseInt(seedInput.getText()), Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()), chckbx_toggleTrucks.isSelected());		// set Fuel station values according to text inputs
@@ -268,6 +275,51 @@ public class FuelStationSimGUI {
 			}
 			
 			run++;
+		}
+		else if (runAmount > 1)
+		{
+			// run sim more than once
+			
+			StringBuilder sb = new StringBuilder();
+			
+			log.append("\n");
+			log.append("\n Number of Gallons Fueled, Number of Customers Served, Number of Small Cars, Number of Sedans, Number of Motorbikes, Number of Trucks, Number of Customers Lost, Profit, Loss");
+			sb.append("Number of Gallons Fueled,Number of Customers Served,Number of Small Cars,Number of Sedans,Number of Motorbikes,Number of Trucks,Number of Customers Lost,Profit,Loss");
+			
+			for (int i = 0; i < runAmount; i++)
+			{
+				long newSeed  = gener.nextLong();
+				s.reset();																// Reset sim values for next run
+				s.setFuelStationVal(Integer.parseInt(pumpsNumInput.getText()), Integer.parseInt(tillsNumInput.getText()), newSeed, Double.parseDouble(probPInput.getText()), Double.parseDouble(probQInput.getText()), chckbx_toggleTrucks.isSelected());		// set Fuel station values according to text inputs
+				s.runSim(Integer.parseInt(ticksInput.getText()), false);						// Run sim for x Ticks
+				
+				sb.append("\n" + s.formatResultsInCSV());
+				log.append("\n");
+				log.append("\n" + s.formatResultsInCSV());
+			}
+			
+			// If check box is selected print to file automatically
+			if(chckbx_printToFile.isSelected())
+			{
+				try {
+					StringToFile.sendToFile(sb.toString(), "AverageRunCSVResults" + run);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+			if(chckbx_printToFileCSV.isSelected())
+			{
+				try {
+					StringToFile.sendToFileCSV(sb.toString(), "AverageRunCSVResults" + run);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+			run++;
+			
+			averageRunString = sb.toString();
 		}
 	}
 	
@@ -381,6 +433,25 @@ public class FuelStationSimGUI {
 		 return true;
 	}
 	
+	/**
+	 * Validates an String is an integer
+	 * @param integerToValidate
+	 * @return Returns true if yes, false if not
+	 */
+	protected boolean validateInt(String integerToValidate)
+	{
+		 //Check ticks value is valid 
+		 try { 
+		        Integer.parseInt(integerToValidate); 
+		    } catch(NumberFormatException e) {
+		        return false; 
+		    } catch(NullPointerException e) {
+		        return false;
+		    }
+		 
+		 return true;
+	}
+	
 	//-------------------------------------------------------------------------Command Line-------------------------------------------------------------------
 	
 	/**
@@ -400,7 +471,7 @@ public class FuelStationSimGUI {
 			if(command.equals("help"))
 			{
 				log.append("\n");
-				log.append("The current valid commands are: help, clear, info, run");
+				log.append("The current valid commands are: help, clear, info, print-txt, print-csv, run, run-average");
 				log.append("\n to learn about a command type help followed by the command (For example: help clear).");
 			}
 			else if(command.equals("clear"))
@@ -425,16 +496,20 @@ public class FuelStationSimGUI {
 			}
 			else if(command.equals("run"))
 			{
-				executeSim();
+				log.append("\n Simulation ran one time");
+				log.append("\n");
+				executeSim(1);
 			}
 			else
 			{
 				log.append("\n");
-				log.append("Command: " + command + " is not valid. Type ' help ' for help.");
+				log.append(" Command: " + command + " is not valid. Type ' help ' for help.");
 			}
 		}
 		else if(words == 2)
 		{
+			int runsAmount = Integer.parseInt(trimmedText.split("\\s+")[1]);
+			
 			if(command.equals("help clear"))
 			{
 				log.append("\n");
@@ -448,7 +523,12 @@ public class FuelStationSimGUI {
 			else if(command.equals("help run"))
 			{
 				log.append("\n");
-				log.append("Run the simulation with the given data inputted at the top.");
+				log.append("Run the simulation with the given data inputted at the top once.");
+			}
+			else if(command.equals("help run-average"))
+			{
+				log.append("\n");
+				log.append("Run the simulation with the given data inputted at the top a number of times, average results and randomise seed each time. ' run-average 3 ' will run the simulation 3 times.");
 			}
 			else if(command.equals("help print"))
 			{
@@ -457,15 +537,51 @@ public class FuelStationSimGUI {
 			}
 			else if(command.startsWith("print-txt"))
 			{
-				s.PrintOutputToFile(trimmedText.split("\\s+")[1]);
+				if (runsAmount == 1)
+				{
+					s.PrintOutputToFile(trimmedText.split("\\s+")[1]);
+					log.append("\n");
+					log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
+				}
+				else if (runsAmount > 1)
+				{
+					try {
+						StringToFile.sendToFile(averageRunString.toString(), trimmedText.split("\\s+")[1]);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					log.append("\n");
+					log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
+				}
+				
 				log.append("\n");
 				log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
 			}
 			else if(command.startsWith("print-csv"))
 			{
-				s.PrintOutputToFileCSV(trimmedText.split("\\s+")[1]);
+				if (runsAmount == 1)
+				{
+					s.PrintOutputToFileCSV(trimmedText.split("\\s+")[1]);
+					log.append("\n");
+					log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
+				}
+				else if (runsAmount > 1)
+				{
+					try {
+						StringToFile.sendToFileCSV(averageRunString.toString(), trimmedText.split("\\s+")[1]);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					log.append("\n");
+					log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
+				}
+
+			}
+			else if(command.startsWith("run-average") && validateInt(trimmedText.split("\\s+")[1]) && Integer.parseInt(trimmedText.split("\\s+")[1]) > 1 )
+			{
 				log.append("\n");
-				log.append("Printed output to file: " + trimmedText.split("\\s+")[1]);
+				log.append("The simulation ran " + trimmedText.split("\\s+")[1] + " times and randomised the seed each time");
+				executeSim(Integer.parseInt(trimmedText.split("\\s+")[1]));
 			}
 			else
 			{
