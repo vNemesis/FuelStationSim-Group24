@@ -279,6 +279,24 @@ public class Simulation {
 	{
 		seed = newSeed;
 	}
+	
+	/**
+	 * Returns the profit made by the simulation
+	 * @return profit
+	 */
+	public BigDecimal getProfit(){
+		return profit;
+	}
+	
+	/**
+	 * Returns the loss made by the simulation
+	 * @return loss
+	 */
+	public BigDecimal getLoss(){
+		return loss;
+	}
+	
+	
 	// ----------------------------------------------- Output Integration ----------------------------------------------
 	
 	/**

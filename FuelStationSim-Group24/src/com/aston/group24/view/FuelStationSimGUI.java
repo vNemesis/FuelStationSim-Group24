@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -322,6 +323,56 @@ public class FuelStationSimGUI {
 			averageRunString = sb.toString();
 		}
 	}
+	
+	/**
+	 * Runs the simulation for a number of different scenarios and outputs the results to a file
+	 */
+	private void getResults(){
+		int numRuns = 10;
+		int simulationsRun = 0;
+		
+		double pValues[] = {0.01, 0.02, 0.03, 0.04, 0.05};
+		double qValues[] = {0.01, 0.02, 0.03, 0.04, 0.05};
+		int numPumps[] = {1, 2, 4};
+		int numTills[] = {1, 2, 4};
+		boolean trucks[] = {true, false};
+		
+		StringBuilder output = new StringBuilder();
+		output.append("p,q,pumps,tills,trucks,averageProfit,averageLoss\n");
+		
+		for(int p = 0; p<pValues.length; p++){
+			for(int q = 0; q<qValues.length; q++){
+				for(int pumps = 0; p<numPumps.length; p++){
+					for(int tills = 0; tills<numTills.length; tills++){
+						for(int truck = 0; truck<trucks.length; truck++){
+							BigDecimal totalProfit = new BigDecimal(0.00);
+							BigDecimal totalLoss = new BigDecimal(0.00);
+							
+							for(int run = 0; run < numRuns; run++){
+								simulationsRun++;
+								Simulation sim = new Simulation(numPumps[pumps],numTills[tills],pValues[p],qValues[q],trucks[truck],gener.nextLong());
+								sim.runSim(1440, false);
+								totalProfit.add(sim.getProfit());
+								totalLoss.add(sim.getLoss());
+								
+								BigDecimal averageProfit = totalProfit.divide(new BigDecimal(numRuns));
+								BigDecimal averageLoss = totalProfit.divide(new BigDecimal(numRuns));
+								
+								output.append(pValues[p] + "," + qValues[q] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
+							}
+						}
+					}
+				}
+			}
+		}
+		System.out.println("Ran " + simulationsRun + " simulations, writing results to file");
+		try {
+			StringToFile.sendToFileCSV(output.toString(), "simulationOutput");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * Method to test whether the data entered is valid
