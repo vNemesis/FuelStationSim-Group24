@@ -81,7 +81,7 @@ public class FuelStation implements Logger{
 	/**
 	 * Sort Pumps with space in Descending order
 	 * @param p person to add
-	 * @return Returns a Fuel pump that has the shortest que
+	 * @return Returns a Fuel pump that has the shortest queue
 	 */
 	protected FuelPump pumpWithShortestLine(Person p)
 	{

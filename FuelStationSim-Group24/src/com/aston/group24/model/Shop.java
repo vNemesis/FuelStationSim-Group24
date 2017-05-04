@@ -19,6 +19,11 @@ public class Shop{
 	private ArrayList<Person> shopFloor; //Array for storing people currently on the shop floor.
 	private ArrayList<Till> tills; //Array for storing tills.
 
+	/**
+	 * Constructor for Shop - initialises fields
+	 * 
+	 * @param numTills Number of tills to generate
+	 */
 public Shop(int numTills)
   {	
 	shopTime = new HashMap<Person, Integer>();
@@ -31,6 +36,7 @@ public Shop(int numTills)
   
   /**
    * Create X number of tills in the shop
+   * @param amountOfTills Amount of tills to generate
    */
   protected void createTills(int amountOfTills)
   {
@@ -42,6 +48,7 @@ public Shop(int numTills)
  
   /**
    * Add specified person p to shop floor
+   * @param p Person to add to floor
    */
   protected void addPersonToFloor(Person p)
   {		   	
@@ -52,6 +59,8 @@ public Shop(int numTills)
   
   /**
    * Add person p to till with shortest queue
+   * @param p Person to add to tills
+   * @return Returns true if they were added, false if not
    */
   protected boolean addPersonToTills(Person p)
   {		
@@ -72,6 +81,7 @@ public Shop(int numTills)
   
   /**
    * Remove person from till
+   * @param p Person to remove from tills
    */
   protected void removePersonFromTills(Person p)
   {
@@ -86,6 +96,7 @@ public Shop(int numTills)
   
   /**
    * Remove person from shopFloor
+   * @param p Person to remove from browsing
    */
   protected void removePersonBrowsing(Person p)
   {
@@ -94,6 +105,7 @@ public Shop(int numTills)
   
   /**
    * Return ArrayList of people who have finished browsing
+   * @return Returns ArrayList of Person objects finished browsing
    */
   protected ArrayList<Person> getFinishedBrowsing()
   {
@@ -111,6 +123,7 @@ public Shop(int numTills)
   
   /**
    * Return ArrayList of people who have finished paying
+   * @return Returns ArrayList of Person objects finished paying
    */
   protected ArrayList<Person> getFinishedPaying()
   {
@@ -132,6 +145,8 @@ public Shop(int numTills)
  
   /**
    * Sort tills in descending order
+   * 
+   * @return Returns Till with shortest que
    */
   protected Till tillWithShortesQueue()
   {  
@@ -156,6 +171,9 @@ public Shop(int numTills)
 
   }
   
+  /**
+   * Method for simulation to run logic
+   */
   public void simulate()
   {
 	  

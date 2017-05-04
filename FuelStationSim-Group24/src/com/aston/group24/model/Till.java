@@ -10,12 +10,13 @@ import com.aston.group24.people.Person;;
  * @author Jake Turner
  * @version 20.04.2017/2055
  */
-
 public class Till{
 
-private Queue<Person> tillQueue;
+private Queue<Person> tillQueue;						// Queue in till
 	
-	
+	/**
+	 * Constructor for till - initialises tillQueue
+	 */
     public Till()
     {
         tillQueue = new LinkedList<Person>();
@@ -23,6 +24,7 @@ private Queue<Person> tillQueue;
 
     /**
      * Add a person at the back of the till queue
+     * @param p Person to add to till
      */
     protected void addPerson(Person p)
     {
@@ -31,6 +33,7 @@ private Queue<Person> tillQueue;
     
     /**
      * Remove the person at the front of the till queue
+     * @param p Person to remove from till
      */
     protected void removePerson(Person p)
     {
@@ -39,6 +42,7 @@ private Queue<Person> tillQueue;
 
     /**
      * Return the till queue size
+     * @return Returns the length of the queue at this till
      */
     protected int queueLength()
     {
@@ -47,6 +51,8 @@ private Queue<Person> tillQueue;
     
     /**
      * Return true if the till queue contains person p or false if not
+     * @param p Person to check
+     * @return Returns true if Person is in queue, false if not
      */
     protected boolean containsPerson(Person p)
     {
@@ -60,6 +66,7 @@ private Queue<Person> tillQueue;
     
     /**
      * Returns the person at the front of the queue
+     * @return Returns Person whos is first in the queue
      */
     protected Person getFirstInQueue()
     {
