@@ -103,7 +103,7 @@ public class SimulationApplication {
 	 * @param trucks Check trucks boolean is valid
 	 * @param print Check print boolean is valid
 	 * @param debug Check debug boolean is valid
-	 * @param printCSV 
+	 * @param printCSV Print to CSV file
 	 * 
 	 * @return Returns boolean if data is valid or not
 	 */
