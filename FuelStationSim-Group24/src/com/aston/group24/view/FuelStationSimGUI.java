@@ -329,6 +329,7 @@ public class FuelStationSimGUI {
 	 * Runs the simulation for a number of different scenarios and outputs the results to a file
 	 */
 	private void getResults(){
+		System.out.println("Running simulations...");
 		int numRuns = 10;
 		int simulationsRun = 0;
 		
@@ -352,8 +353,6 @@ public class FuelStationSimGUI {
 							
 							for(int run = 0; run < numRuns; run++){
 								simulationsRun++;
-								System.out.println("Running simulation");
-								System.out.println(numPumps[pumps]+ "," +numTills[tills]+ "," +pValues[p]+ "," +qValues[q]+ "," +trucks[truck]);
 								Simulation sim = new Simulation(numPumps[pumps],numTills[tills],pValues[p],qValues[q],trucks[truck], gener.nextLong());
 								sim.runSim(1440, false);
 								
@@ -361,13 +360,9 @@ public class FuelStationSimGUI {
 								totalLoss = totalLoss.add(sim.getLoss());
 							}
 							
-							System.out.println("toatl" + totalProfit);
-							
 							BigDecimal averageProfit = totalProfit.divide(new BigDecimal(numRuns));
 							BigDecimal averageLoss = totalProfit.divide(new BigDecimal(numRuns));
-							
-							System.out.println(averageProfit);
-							
+														
 							output.append(pValues[p] + "," + qValues[q] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
 						}
 					}
