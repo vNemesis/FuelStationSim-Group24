@@ -76,6 +76,7 @@ public class Simulation {
 	/**
 	 * Run simulation for an amount of time
 	 * @param ticks Time to run simulation in ticks (1 tick = 10 seconds)
+	 * @param logDebug Whether or not to log debug information
 	 */
 	public void runSim(int ticks, boolean logDebug)
 	{
@@ -273,6 +274,7 @@ public class Simulation {
 	
 	/**
 	 * Print output to file
+	 * @param filename Name of file to print output to
 	 */
 	public void PrintOutputToFile(String filename)
 	{

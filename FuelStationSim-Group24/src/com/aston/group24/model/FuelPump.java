@@ -34,6 +34,7 @@ public class FuelPump {
 	
 	/**
 	 * Add vehicle to pumps list
+	 * @param p Person to add
 	 */
 	protected void addPerson(Person p)
 	{
@@ -58,6 +59,7 @@ public class FuelPump {
 	
 	/**
 	 * return the current space Available at the pump
+	 * @return Returns Current space available at pump
 	 */
 	protected double getCSA()
 	{
@@ -65,7 +67,8 @@ public class FuelPump {
 	}
 	
 	/**
-	 * return max space at pump 
+	 * return max space at pump
+	 * @return returns max space at pump
 	 */
 	protected double getMaxSpace()
 	{
@@ -96,6 +99,8 @@ public class FuelPump {
 	
 	/**
 	 * How many vehicles has this pump fuel this tick
+	 * 
+	 * @return Returns how many cars refueld that tick
 	 */
 	protected int carsFuelThisTick()
 	{

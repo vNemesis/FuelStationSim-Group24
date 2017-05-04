@@ -263,6 +263,8 @@ public class FuelStationSimGUI {
 	 * @param probQ Check Prob of Q
 	 * @param seed Check seed for simulation
 	 * @param ticks Check number of Ticks to run simulation
+	 * 
+	 * @return Returns boolean whether data is valid or not
 	 */
 	private boolean validateData(String numPumps, String numTills, String probP, String probQ, String seed, String ticks)
 	{

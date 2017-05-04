@@ -42,6 +42,8 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Create X number of pumps at the station
+	 * 
+	 * @param amountOfPumps Amount of pumps to create
 	 */
 	protected void createPumps(int amountOfPumps)
 	{
@@ -54,6 +56,10 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Add a vehicle to the station at a pump
+	 * 
+	 * @param p Person to add
+	 * 
+	 * @return Returns true if person was added, false if not
 	 */
 	protected boolean addPerson(Person p)
 	{
@@ -74,8 +80,8 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Sort Pumps with space in Descending order
-	 * 
-	 * 
+	 * @param p person to add
+	 * @return Returns a Fuel pump that has the shortest que
 	 */
 	protected FuelPump pumpWithShortestLine(Person p)
 	{
@@ -271,6 +277,8 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Returns people that finished refuelling on the last tick
+	 * 
+	 * @return Returns an arrayList with the people who refueled
 	 */
 	private ArrayList<Person> getPeopleJustRefulled()
 	{

@@ -93,6 +93,11 @@ public class SimulationApplication {
 	 * @param probQ Check Prob of Q
 	 * @param seed Check seed for simulation
 	 * @param ticks Check number of Ticks to run simulation
+	 * @param trucks Check trucks boolean is valid
+	 * @param print Check print boolean is valid
+	 * @param debug Check debug boolean is valid
+	 * 
+	 * @return Returns boolean if data is valid or not
 	 */
 	private static boolean validateArguments(String numPumps, String numTills, String probP, String probQ, String trucks, String seed, String ticks, String print, String debug)
 	{
