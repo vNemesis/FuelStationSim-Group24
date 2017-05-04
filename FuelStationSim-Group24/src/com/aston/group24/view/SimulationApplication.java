@@ -23,6 +23,7 @@ public class SimulationApplication {
 	 * @param args[6] Ticks to run Simulation
 	 * @param args[7] Print output to file?
 	 * @param args[8] Log debugging information?
+	 * @param args[9] Print to csv?
 	 */
 	public static void main(String[] args)
 	{ 
@@ -33,9 +34,9 @@ public class SimulationApplication {
 			Simulation s = new Simulation(3, 2, 0.05, 0.05, false, 10);
 			@SuppressWarnings("unused") FuelStationSimGUI fsg = new FuelStationSimGUI(s);
 		}
-		else if (args.length == 9)
+		else if (args.length == 10)
 		{	
-			if (!validateArguments(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]))
+			if (!validateArguments(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
 			{
 				System.out.println("Arguments Invalid. Please Try again");
 				System.out.println("You gave " + args.length + " arguemnts");
@@ -61,6 +62,12 @@ public class SimulationApplication {
 				if(Boolean.parseBoolean(args[7]) == true)
 				{
 					s.PrintOutputToFile("Simulation Output");
+				}
+				
+				// if true, print to file
+				if(Boolean.parseBoolean(args[9]) == true)
+				{
+					s.PrintOutputToFileCSV("Simulation Output");
 				}
 				
 				System.out.print(s.reportStats());
@@ -96,10 +103,11 @@ public class SimulationApplication {
 	 * @param trucks Check trucks boolean is valid
 	 * @param print Check print boolean is valid
 	 * @param debug Check debug boolean is valid
+	 * @param printCSV 
 	 * 
 	 * @return Returns boolean if data is valid or not
 	 */
-	private static boolean validateArguments(String numPumps, String numTills, String probP, String probQ, String trucks, String seed, String ticks, String print, String debug)
+	private static boolean validateArguments(String numPumps, String numTills, String probP, String probQ, String trucks, String seed, String ticks, String print, String debug, String printCSV)
 	{
 		 // check num of pumps is valid
 		 try { 
@@ -210,6 +218,12 @@ public class SimulationApplication {
 		 if((debug.equals("false") || debug.equals("true")) == false)
 		 {
 			 System.out.println("debug is not a valid boolean");
+			 return false;
+		 }
+		 
+		 if((printCSV.equals("false") || printCSV.equals("true")) == false)
+		 {
+			 System.out.println("printCSV is not a valid boolean");
 			 return false;
 		 }
 		 
