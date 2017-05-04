@@ -9,10 +9,11 @@ set /P ProbQ="Probability of Q: "
 set /P enableTrucks="Enable Trucks? true/false: "
 set /P seed="Simulation seed: "
 set /P ticks="Ticks to run sim: "
-set /P ptf="Print to file? true/false: "
+set /P ptf="Print to Text file? true/false: "
+set /P ptfcsv="Print to CSV file? true/false: "
 set /P debug="Show debug information? true/false: "
 
-java -jar Fuel_Station_Simulation_(Executable)-Group24.jar %numOfPumps% %numOfTills% %ProbP% %ProbQ% %enableTrucks% %seed% %ticks% %ptf% %debug%
+java -jar Fuel_Station_Simulation_(Executable)-Group24.jar %numOfPumps% %numOfTills% %ProbP% %ProbQ% %enableTrucks% %seed% %ticks% %ptf% %debug% %ptfcsv%
 
 set choice=
 echo ""

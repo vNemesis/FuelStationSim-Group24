@@ -1,0 +1,4 @@
+Number of pumps,Number of Tills,Probability of P,Probability of Q,Trucks Enabled,Seed
+3,2,0.05,0.05,true,10
+Number of Gallons Fueled,Number of Customers Served,Number of Small Cars,Number of Sedans,Number of Motorbikes,Number of Trucks,Number of Customers Lost,Profit,Loss
+1141,155,60,22,73,0,83,1344.00,3126.00
