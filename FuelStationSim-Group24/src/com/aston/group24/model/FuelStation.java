@@ -233,10 +233,21 @@ public class FuelStation implements Logger{
 	
 	/**
 	 * Returns total amount this station has provided
+	 * @return Returns int for gallons of fuel pumped
 	 */
 	protected int getGallonsFueled()
 	{
 		return gallonsFueled;
+	}
+	
+	/**
+	 * get number of pumps
+	 * @return returns int for size of pumps list
+	 */
+	protected int numberOfPumps()
+	{
+		return pumps.size();
+		
 	}
 	
 	/**
@@ -279,42 +290,4 @@ public class FuelStation implements Logger{
 		}
 		return returnPeople;
 	}
-	
-	//------------------------------------------------------------------DEBUGGING--------------------------------------------------------------------
-	
-	/*
-	 * For testing purposes
-	 * 
-	 */
-	protected void testing(Person v1, Person v2, Person v3)
-	{
-		
-		pumps.get(0).addPerson(v1); //1.5
-		pumps.get(2).addPerson(v2); //1
-		pumps.get(2).addPerson(v3); //1.5
-		
-		//pump 0 = 2.0 free space
-		//pump 1 = 3.0 free space
-		//pump 2 - 1.0 free space
-	}
-	
-	protected int numberOfPumps()
-	{
-		return pumps.size();
-		
-	}
-	
-	public String pumpsCSA()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		for(FuelPump fp : pumps)
-		{
-			sb.append(fp.getCSA());
-			sb.append("\n");
-		}
-		
-		return sb.toString();
-	}
-
 }
