@@ -32,7 +32,7 @@ import com.aston.group24.util.StringToFile;
 /**
  * GUI class for the simulation
  * 
- * @version - 03.05.2017/1750
+ * @version 03.05.2017/1750
  * @author HarmanU
  */
 public class FuelStationSimGUI {

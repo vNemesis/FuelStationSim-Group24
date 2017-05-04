@@ -6,7 +6,7 @@ import com.aston.group24.model.Simulation;
 /**
  * Class to run simulation and display GUI
  * 
- * @version - 03.05.2017/1750
+ * @version 03.05.2017/1750
  * @author HarmanU, HuzaifahR
  */
 public class SimulationApplication {

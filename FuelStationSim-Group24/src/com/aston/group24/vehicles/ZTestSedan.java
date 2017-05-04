@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * Test class for Sedan
  * @see Sedan
- * @version - 03.05.2017/1750 
+ * @version 03.05.2017/1750 
  * @author HarmanU
  */
 

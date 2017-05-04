@@ -9,6 +9,17 @@ import org.junit.Test;
 import com.aston.group24.people.Person;
 import com.aston.group24.people.SmallCarDriver;
 
+
+/**
+ * Fuel Station Test Class
+ * 
+ * This class will test the Fuel Station class
+ * 
+ * @see FuelStation
+ * 
+ * @version 03.05.2017/1752
+ * @author HarmanU
+ */
 public class FuelStationTest {
 	
 	private FuelStation fs;

@@ -6,6 +6,16 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Simulation Test Class
+ * 
+ * This class will test the Simulation class
+ * 
+ * @see Simulation
+ * 
+ * @version 03.05.2017/1752
+ * @author HarmanU, JShorthouse
+ */
 public class SimulationTest {
 
 	Simulation sim;

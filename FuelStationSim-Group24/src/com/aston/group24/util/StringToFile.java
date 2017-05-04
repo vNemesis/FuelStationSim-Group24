@@ -8,10 +8,17 @@ import java.io.IOException;
  * This class sends a String to a text file in the local directory
  * 
  * @author HarmanU
- *@version 02.05.2017/2350
+ * @version 02.05.2017/2350
  */
 public class StringToFile {
 	
+	/**
+	 * Send String to a text file in the local directory
+	 * 
+	 * @param text Text to send to file
+	 * @param nameOfFile Name of the file to be generated
+	 * @throws IOException If it cannot write the file, throws an exception
+	 */
 	public static void sendToFile(String text, String nameOfFile) throws IOException
 	{
 		FileWriter writer = null;
@@ -27,7 +34,7 @@ public class StringToFile {
 			 }
 			 catch (Exception e) 
 			 {
-				 
+				 System.out.print("Could not print file");
 			 }
 		 }
 	}

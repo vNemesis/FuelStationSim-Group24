@@ -8,6 +8,7 @@ import com.aston.group24.people.Person;;
 /**
  * This class models a fuel pump
  * 
+ * @version 03.05.2017/2200
  * @author HarmanU
  *
  */
