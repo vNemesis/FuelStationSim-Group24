@@ -4,14 +4,12 @@
 
 package com.aston.group24.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
 import com.aston.group24.people.Person;
 import com.aston.group24.util.Logger;
-import com.aston.group24.vehicles.Vehicle;
 
 /**
  * Fuel Station
