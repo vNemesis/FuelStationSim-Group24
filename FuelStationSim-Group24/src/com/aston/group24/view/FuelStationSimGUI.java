@@ -13,9 +13,6 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -361,7 +358,7 @@ public class FuelStationSimGUI {
 							}
 							
 							BigDecimal averageProfit = totalProfit.divide(new BigDecimal(numRuns));
-							BigDecimal averageLoss = totalProfit.divide(new BigDecimal(numRuns));
+							BigDecimal averageLoss = totalLoss.divide(new BigDecimal(numRuns));
 														
 							output.append(pValues[p] + "," + qValues[q] + "," + numPumps[pumps] + "," + numTills[tills] + "," + trucks[truck] + "," + averageProfit + "," + averageLoss + "\n");
 						}
